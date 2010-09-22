@@ -13,6 +13,9 @@
 #define DISPLAY_WIDTH	640
 #define DISPLAY_HEIGHT	480
 
+
+#define LOG_WRITE(__msg_format, ...) { char __final_msg[1024]; sprintf_s(__final_msg, 1024, __msg_format "\r\n", __VA_ARGS__); World::theWorld->log.LogWrite(__final_msg); }
+
 using namespace std;
 
 class World

@@ -18,7 +18,7 @@ void GameObject::Update(double delta_time)
 	//blit
 	if(_bitmap != NULL)
 	{
-		al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 2, 2, 0, 0);
+		al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
 		//al_draw_bitmap(_bitmap, rel_pos[0], rel_pos[1], 0);
 	}
 }

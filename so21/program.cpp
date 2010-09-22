@@ -111,9 +111,8 @@ int main(int argc, char *argv[]) {
 			ticks = nowticks;
 
 			double timepassed = diffticks * (1.0 / 1000.0);
-			char msg[100];
-			sprintf_s(msg, 100, "Time passed: %f - FPS: %f", timepassed, 1.0/timepassed);
-			world.log.LogWrite(msg);
+
+			LOG_WRITE("Time passed: %f - FPS: %f", timepassed, 1.0/timepassed)
 
 			redraw = false;
 			world.Update();

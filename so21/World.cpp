@@ -1,5 +1,6 @@
 #include "World.h"
 #include <stdio.h>
+#include "player.h"
 
 World* World::theWorld = NULL;
 
@@ -30,14 +31,15 @@ bool World::Initialize()
 
 	log.Initialize();
 
-	log.LogWrite("Starting ...");
+	LOG_WRITE("Starting...");
 
 	if(!_fonts.Initialize())
 		return false;
 
-	GameObject *gameObj = new GameObject("Resources/probe-sprite.png", 0, 0);
-	gameObj->Initialize();
-	_gameObjects.push_back(gameObj);
+	Player *player = new Player("Resources/probe-sprite.png", 0, 0);
+	//GameObject *gameObj = new GameObject("Resources/probe-sprite.png", 0, 0);
+	player->Initialize();
+	_gameObjects.push_back(player);
 
 	return true;
 }
@@ -80,7 +82,6 @@ void World::MoveCamera(double delta)
 	static const double speed = 20;
 	double amount = speed * delta;
 	cameraPosition[0] += amount;
-	char msg[100];
-	sprintf_s(msg, 100, "camera pos: %f", cameraPosition[0]);
-	log.LogWrite(msg);
+
+	LOG_WRITE("camera pos: %f", cameraPosition[0]);
 }

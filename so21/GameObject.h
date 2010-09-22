@@ -8,7 +8,7 @@ class GameObject
 {
 public:
 	GameObject(const char* filename, double x, double y);
-	~GameObject(void);
+	virtual ~GameObject(void);
 
 	void Initialize();
 	void Update(double delta_time);
