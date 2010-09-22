@@ -7,7 +7,7 @@ class Log
 public:
 	Log(void);
 	void Initialize();
-	void LogWrite(char * msg);
+	void LogWrite(const char * msg);
 	void DestroyLog();
 	~Log(void);
 	

@@ -1,4 +1,6 @@
 #include "GameObject.h"
+#include "World.h"
+#include <allegro5/allegro.h>
 
 
 GameObject::GameObject(const char* filename, double x, double y)
@@ -10,9 +12,14 @@ GameObject::GameObject(const char* filename, double x, double y)
 
 void GameObject::Update(double delta_time)
 {
+	//find relative position to viewport
+	Vec2 rel_pos = World::theWorld->TranslateToScreen(_position);
+
+	//blit
 	if(_bitmap != NULL)
 	{
-		al_draw_bitmap(_bitmap, _position[0], _position[1], 0);
+		al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 2, 2, 0, 0);
+		//al_draw_bitmap(_bitmap, rel_pos[0], rel_pos[1], 0);
 	}
 }
 

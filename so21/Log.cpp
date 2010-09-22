@@ -25,9 +25,11 @@ void Log::Initialize()
 #endif
 }
 
-void Log::LogWrite(char * msg)
+void Log::LogWrite(const char * msg)
 {
 #if (defined(_DEBUG) || defined(USE_LOG))
 	al_fputs(_logFile, msg);
+	al_fputs(_logFile, "\r\n");
+	//al_fflush(_logFile);
 #endif
 }

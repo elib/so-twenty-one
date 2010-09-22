@@ -172,26 +172,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath=".\Fonts.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\GameObject.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Log.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\program.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\World.cpp"
-				>
-			</File>
 			<Filter
 				Name="SVL"
 				>
@@ -204,6 +184,38 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="System"
+				>
+				<File
+					RelativePath=".\Log.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\program.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Game"
+				>
+				<File
+					RelativePath=".\GameObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\World.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Display"
+				>
+				<File
+					RelativePath=".\Fonts.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -211,34 +223,50 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Fonts.h"
+				RelativePath=".\resource.h"
 				>
 			</File>
-			<File
-				RelativePath=".\GameObject.h"
+			<Filter
+				Name="System"
 				>
-			</File>
-			<File
-				RelativePath=".\Log.h"
+				<File
+					RelativePath=".\Log.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Display"
 				>
-			</File>
-			<File
-				RelativePath=".\World.h"
+				<File
+					RelativePath=".\Fonts.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Game"
 				>
-			</File>
+				<File
+					RelativePath=".\GameObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\World.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
+			<File
+				RelativePath=".\SoTwentyOne.rc"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resources"
-			>
-		</Filter>
-		<Filter
-			Name="NewFilter1"
 			>
 		</Filter>
 	</Files>

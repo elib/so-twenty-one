@@ -7,6 +7,12 @@
 #include "GameObject.h"
 #include "Log.h"
 
+#include "svl/svl.h"
+
+
+#define DISPLAY_WIDTH	640
+#define DISPLAY_HEIGHT	480
+
 using namespace std;
 
 class World
@@ -15,17 +21,21 @@ public:
 	World(void);
 	~World(void);
 
-	bool Initialize(ALLEGRO_TIMER *timer);
+	bool Initialize();
 	void Update();
+
+	Vec2 TranslateToScreen(Vec2 _position);
 
 	static World *theWorld;
 	
 	Log log;
 
+	Vec2 cameraPosition;
+
 private:
-	ALLEGRO_TIMER *_timer;
-	double _timer_speed;
-	int64_t _tick_count;
+	DWORD _last_tick_count;
+
+	void MoveCamera(double delta);
 
 	void RemoveGameObjects();
 

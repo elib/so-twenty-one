@@ -31,7 +31,16 @@ int main(int argc, char *argv[]) {
 	fprintf(stderr, "failed to create timer!\n");
 
 	// Create a window to display things on: 640x480 pixels
-	data.display = al_create_display(640, 480);
+	al_set_new_display_flags(ALLEGRO_OPENGL_3_0 | ALLEGRO_NOFRAME);
+
+	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_REQUIRE);
+	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_REQUIRE);
+	al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_REQUIRE);
+	al_set_new_display_option(ALLEGRO_SWAP_METHOD, 2, ALLEGRO_REQUIRE);
+	
+	
+	
+	data.display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 	if(!data.display) {
 		printf("Error creating display.\n");
 		return 1;
@@ -42,6 +51,8 @@ int main(int argc, char *argv[]) {
 		printf("Error installing keyboard.\n");
 		return 1;
 	}
+
+	DWORD ticks = GetTickCount();
 
 	data.timer = al_create_timer(1.0 / FPS);
 	if(!data.timer) {
@@ -54,7 +65,7 @@ int main(int argc, char *argv[]) {
 
 	//build world
 	World world;
-	if(!world.Initialize(data.timer))
+	if(!world.Initialize())
 		return -1;
 
 	// Make and set a color to draw with
@@ -95,6 +106,15 @@ int main(int argc, char *argv[]) {
 
 		if(redraw && al_event_queue_is_empty(data.queue))
 		{
+			DWORD nowticks = GetTickCount();
+			DWORD diffticks = nowticks - ticks;
+			ticks = nowticks;
+
+			double timepassed = diffticks * (1.0 / 1000.0);
+			char msg[100];
+			sprintf_s(msg, 100, "Time passed: %f - FPS: %f", timepassed, 1.0/timepassed);
+			world.log.LogWrite(msg);
+
 			redraw = false;
 			world.Update();
 			al_flip_display();
