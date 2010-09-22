@@ -8,6 +8,7 @@
 #include "Log.h"
 
 #include "svl/svl.h"
+#include "player.h"
 
 
 #define DISPLAY_WIDTH	640
@@ -35,7 +36,10 @@ public:
 
 	Vec2 cameraPosition;
 
-private:
+protected:
+
+	Player *_player;
+
 	DWORD _last_tick_count;
 
 	void MoveCamera(double delta);

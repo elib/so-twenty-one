@@ -11,10 +11,12 @@ World::World(void)
 	theWorld = this;
 	cameraPosition = Vec2(0.0,0.0);
 	_last_tick_count = GetTickCount();
+	_player = NULL;
 }
 
 World::~World(void)
 {
+	//player is in this list as well, no need to release
 	RemoveGameObjects();
 }
 
@@ -23,6 +25,8 @@ void World::RemoveGameObjects()
 	unsigned int i;
 	for(i = 0; i < _gameObjects.size(); i++)
 		delete (_gameObjects.at(i));
+
+	_player = NULL;
 }
 
 
@@ -36,10 +40,10 @@ bool World::Initialize()
 	if(!_fonts.Initialize())
 		return false;
 
-	Player *player = new Player(0, 0);
+	_player = new Player(0, 0);
 	//GameObject *gameObj = new GameObject("Resources/probe-sprite.png", 0, 0);
-	player->Initialize();
-	_gameObjects.push_back(player);
+	_player->Initialize();
+	_gameObjects.push_back(_player);
 
 	return true;
 }
@@ -82,6 +86,8 @@ void World::MoveCamera(double delta)
 	static const double speed = 20;
 	double amount = speed * delta;
 	cameraPosition[0] += amount;
+
+	
 
 	//LOG_WRITE("camera pos: %f", cameraPosition[0]);
 }
