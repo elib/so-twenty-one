@@ -12,8 +12,7 @@ public:
 
 	void Initialize();
 	void Update(double delta_time);
-
-private:
+protected:
 	void DestroyBitmap();
 
 	char _filename[1024];
