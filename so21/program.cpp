@@ -38,6 +38,8 @@ int main(int argc, char *argv[]) {
 
 	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_REQUIRE);
 	al_set_new_display_option(ALLEGRO_VSYNC, 0, ALLEGRO_REQUIRE);
+
+	
 	//al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_REQUIRE);
 	//al_set_new_display_option(ALLEGRO_SWAP_METHOD, 2, ALLEGRO_REQUIRE);
 
@@ -47,6 +49,8 @@ int main(int argc, char *argv[]) {
 		printf("Error creating display.\n");
 		return 1;
 	}
+
+	al_hide_mouse_cursor(data.display);
 
 	// Install the keyboard handler
 	if(!al_install_keyboard()) {

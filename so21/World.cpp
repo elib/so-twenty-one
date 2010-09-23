@@ -88,6 +88,10 @@ void World::Update()
 	{
 		((GameObject*)_gameObjects.at(i))->Update(delta);
 	}
+
+
+	//at the end, update keyboard state to ready for next frame
+	Keys.Update();
 }
 
 Vec2 World::TranslateToScreen(Vec2 _position)
