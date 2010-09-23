@@ -13,6 +13,7 @@
 #include "player.h"
 
 #include "Map.h"
+#include "MusicProvider.h"
 
 #define EPSILON (1E-6)
 
@@ -31,7 +32,7 @@ public:
 	World(void);
 	~World(void);
 
-	bool Initialize(ALLEGRO_DISPLAY *display);
+	bool Initialize();
 	void Update();
 
 	Vec2 TranslateToScreen(Vec2 _position);
@@ -49,7 +50,8 @@ protected:
 
 	Player *_player;
 
-	DWORD _last_tick_count;
+	LARGE_INTEGER _performance_freq;
+	LARGE_INTEGER _last_tick_count;
 
 	void MoveCamera(double delta);
 

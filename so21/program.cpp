@@ -6,7 +6,6 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include <stdio.h>
 
 #include "World.h"
 
@@ -23,21 +22,26 @@ struct Data {
 const float FPS = 60;
 
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
+	//construct world - including logger.
+	World world;
+
 	// Initialize Allegro 5 and the font routines
 	al_init();
 	al_init_font_addon();
 
-	fprintf(stderr, "failed to create timer!\n");
-
 	// Create a window to display things on: 640x480 pixels
-	al_set_new_display_flags(ALLEGRO_OPENGL | ALLEGRO_NOFRAME); 
+	al_set_new_display_flags(ALLEGRO_OPENGL ); 
+
+		//I like this:
+		//| ALLEGRO_NOFRAME
 
 		//fullscreen is surprisingly good-looking
 		// | ALLEGRO_FULLSCREEN);
 
-	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_REQUIRE);
-	al_set_new_display_option(ALLEGRO_VSYNC, 0, ALLEGRO_REQUIRE);
+	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_SUGGEST);
+	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
 
 	
 	//al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_REQUIRE);
@@ -46,23 +50,25 @@ int main(int argc, char *argv[]) {
 	
 	data.display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 	if(!data.display) {
-		printf("Error creating display.\n");
-		return 1;
+		LOG_WRITE("Display failed!!");
+		return -1;
 	}
 
 	al_hide_mouse_cursor(data.display);
 
 	// Install the keyboard handler
-	if(!al_install_keyboard()) {
-		printf("Error installing keyboard.\n");
-		return 1;
+	if(!al_install_keyboard())
+	{
+		LOG_WRITE("Keyboard failed!!");
+		return -1;
 	}
 
 	DWORD ticks = GetTickCount();
 
 	data.timer = al_create_timer(1.0 / FPS);
-	if(!data.timer) {
-		fprintf(stderr, "failed to create timer!\n");
+	if(!data.timer)
+	{
+		LOG_WRITE("Timer failed!!");
 		return -1;
 	}
 
@@ -70,9 +76,11 @@ int main(int argc, char *argv[]) {
 	al_init_image_addon();
 
 	//build world
-	World world;
-	if(!world.Initialize(data.display))
+	if(!world.Initialize())
 		return -1;
+
+	MusicProvider musicProvider;
+	musicProvider.Initialize(data.display);
 
 	//al_set_blender(ALLEGRO_DEST_MINUS_SRC, ALLEGRO_ALPHA, ALLEGRO_ONE);
 

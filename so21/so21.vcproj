@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="allegro-4.9.21-mt-debug.lib allegro_font-4.9.21-mt-debug.lib allegro_ttf-4.9.21-mt-debug.lib allegro_image-4.9.21-mt-debug.lib"
+				AdditionalDependencies="allegro-4.9.21-mt-debug.lib allegro_font-4.9.21-mt-debug.lib allegro_ttf-4.9.21-mt-debug.lib allegro_image-4.9.21-mt-debug.lib bass.lib"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -117,7 +117,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;D:\projects\svl-1.5\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__CMATH__"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__CMATH__;USE_LOG;SHOW_FPS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -135,7 +135,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="allegro-4.9.21-mt.lib allegro_font-4.9.21-mt.lib allegro_ttf-4.9.21-mt.lib allegro_image-4.9.21-mt.lib"
+				AdditionalDependencies="allegro-4.9.21-mt.lib allegro_font-4.9.21-mt.lib allegro_ttf-4.9.21-mt.lib allegro_image-4.9.21-mt.lib bass.lib"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
@@ -250,6 +250,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Sound"
+				>
+				<File
+					RelativePath=".\MusicProvider.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -309,6 +317,14 @@
 				</File>
 				<File
 					RelativePath=".\World.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="Sound"
+				>
+				<File
+					RelativePath=".\MusicProvider.h"
 					>
 				</File>
 			</Filter>

@@ -84,29 +84,14 @@ void Map::LoadAvailableTiles()
 	int tiles_high = big_height / _tileHeight;
 	int i, j;
 
-//	int flags = al_get_bitmap_format(largeBitmap);
-
 	//note backwards - this loads the tiles in the same order as the tiled program
 	for(j = 0; j < tiles_high; j++)
 	{
 		for(i = 0; i < tiles_wide; i++)
 		{
-			////chop up the large one
-			//al_set_new_bitmap_format(flags);
-
-			//ALLEGRO_BITMAP *subBitMap = al_create_bitmap(_tileWidth, _tileHeight);
-			//al_set_target_bitmap(subBitMap);
-
-			//al_draw_bitmap_region(largeBitmap, i*_tileWidth, j*_tileHeight, _tileWidth, _tileHeight, 0, 0, 0);
 			_tile_origins.push_back(Vec2(i*_tileWidth, j*_tileHeight));
-
-			//make sure to relinquish redraw command to main display
-			//al_set_target_backbuffer(World::TheDisplay);
 		}
 	}
-
-	//clean up big bitmap
-	//al_destroy_bitmap(largeBitmap);
 }
 
 void Map::Destroy()
@@ -118,10 +103,6 @@ void Map::Destroy()
 	}
 	_tileObjects.clear();
 
-	//for(i = 0; i < _tile_bitmaps.size(); i++)
-	//{
-	//	al_destroy_bitmap(_tile_bitmaps.at(i));
-	//}
 	_tile_origins.clear();
 
 	al_destroy_bitmap(_largeBitmap);

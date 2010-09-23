@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "player.h"
 
+
 World* World::theWorld = NULL;
 ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
@@ -18,8 +19,11 @@ World::World(void)
 	//static member
 	theWorld = this;
 
+	//before anything else - even in constructor!
+	log.Initialize();
+
 	cameraPosition = Vec2(0.0,0.0);
-	_last_tick_count = 0;
+	//_last_tick_count = 0;
 	_player = NULL;
 }
 
@@ -35,18 +39,14 @@ void World::RemoveGameObjects()
 	for(i = 0; i < _gameObjects.size(); i++)
 		delete (_gameObjects.at(i));
 
+	//player already deleted in above loop
 	_player = NULL;
 }
 
 
-bool World::Initialize(ALLEGRO_DISPLAY *display)
+bool World::Initialize()
 {
-	//this next line is horrible =(
-	TheDisplay = display;
-
 	Keys.Initialize();
-
-	log.Initialize();
 
 	LOG_WRITE("Starting...");
 
@@ -61,7 +61,9 @@ bool World::Initialize(ALLEGRO_DISPLAY *display)
 	_map.Initialize(-DISPLAY_WIDTH/2, -DISPLAY_HEIGHT/2);
 
 	//start from 0 now
-	_last_tick_count = GetTickCount();
+	//_last_tick_count = GetTickCount();
+	QueryPerformanceFrequency(&_performance_freq);
+	QueryPerformanceCounter(&_last_tick_count);
 
 	return true;
 }
@@ -69,12 +71,13 @@ bool World::Initialize(ALLEGRO_DISPLAY *display)
 void World::Update()
 {
 	//get this frame's tick
-	DWORD current_tick = GetTickCount();
-	DWORD ticks_diff = current_tick - _last_tick_count;
+	LARGE_INTEGER current_tick;
+	QueryPerformanceCounter(&current_tick);
+	LONGLONG ticks_diff = current_tick.QuadPart - _last_tick_count.QuadPart;
 
 	//delta holds the frame's time in seconds.
-	double delta = ticks_diff * SECONDS_PER_TICK;
-	_last_tick_count = current_tick;
+	double delta = ticks_diff / ((double) _performance_freq.QuadPart);
+	_last_tick_count.QuadPart = current_tick.QuadPart;
 
 	//start frame
 	al_clear_to_color(al_map_rgba(10, 10, 50, 255));
@@ -113,7 +116,7 @@ Vec2 World::TranslateToScreen(Vec2 _position)
 void World::MoveCamera(double delta)
 {
 	//moving right constantly
-	static const double speed = 20;
+	static const double speed = 25;
 	double amount = speed * delta;
 	cameraPosition[0] += amount;
 }

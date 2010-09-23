@@ -7,7 +7,7 @@ void Player::Initialize()
 	GameObject::Initialize();
 
 	max_velocity = 160;
-	damping = 200;
+	damping = 400;
 }
 
 
@@ -15,7 +15,7 @@ void Player::Update(double delta_time)
 {
 	bool move_ver = false;
 	bool move_hor = false;
-	static const double accel = 700;
+	static const double accel = 850;
 
 	//accept input for player sprite
 	if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_W])
