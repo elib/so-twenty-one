@@ -31,7 +31,10 @@ int main(int argc, char *argv[]) {
 	fprintf(stderr, "failed to create timer!\n");
 
 	// Create a window to display things on: 640x480 pixels
-	al_set_new_display_flags(ALLEGRO_OPENGL_3_0 | ALLEGRO_NOFRAME);
+	al_set_new_display_flags(ALLEGRO_OPENGL_3_0 | ALLEGRO_NOFRAME); 
+
+		//fullscreen is surprisingly good-looking
+		// | ALLEGRO_FULLSCREEN);
 
 	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_REQUIRE);
 	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_REQUIRE);

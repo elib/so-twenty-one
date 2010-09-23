@@ -41,7 +41,6 @@ bool World::Initialize()
 		return false;
 
 	_player = new Player(0, 0);
-	//GameObject *gameObj = new GameObject("Resources/probe-sprite.png", 0, 0);
 	_player->Initialize();
 	_gameObjects.push_back(_player);
 
@@ -86,8 +85,4 @@ void World::MoveCamera(double delta)
 	static const double speed = 20;
 	double amount = speed * delta;
 	cameraPosition[0] += amount;
-
-	
-
-	//LOG_WRITE("camera pos: %f", cameraPosition[0]);
 }
