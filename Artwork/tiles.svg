@@ -14,7 +14,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.0 r9654"
-   sodipodi:docname="tiles.svg">
+   sodipodi:docname="tiles.svg"
+   inkscape:export-filename="D:\Projects\allegro\projects\so21\Artwork\tiles.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -24,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.2"
-     inkscape:cx="51.141947"
-     inkscape:cy="146.70983"
+     inkscape:zoom="3.959798"
+     inkscape:cx="73.137936"
+     inkscape:cy="114.56439"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
