@@ -38,6 +38,8 @@ bool World::Initialize(ALLEGRO_DISPLAY *display)
 	//this next line is horrible =(
 	TheDisplay = display;
 
+	Keys.Initialize();
+
 	log.Initialize();
 
 	LOG_WRITE("Starting...");

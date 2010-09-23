@@ -7,6 +7,8 @@
 #include "GameObject.h"
 #include "Log.h"
 
+#include "Keyboard.h"
+
 #include "svl/svl.h"
 #include "player.h"
 
@@ -38,6 +40,8 @@ public:
 	Log log;
 
 	Vec2 cameraPosition;
+
+	Keyboard Keys;
 
 protected:
 

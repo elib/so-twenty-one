@@ -102,14 +102,21 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
+		if(event.type == ALLEGRO_EVENT_KEY_DOWN)
+		{
+			world.Keys.ConsumeKeyDown(event.keyboard);
+		}
+		else if(event.type == ALLEGRO_EVENT_KEY_UP)
+		{
+			world.Keys.ConsumeKeyUp(event.keyboard);
+		}
+
 		if(redraw && al_event_queue_is_empty(data.queue))
 		{
 			//DWORD nowticks = GetTickCount();
 			//DWORD diffticks = nowticks - ticks;
 			//ticks = nowticks;
-
 			//double timepassed = diffticks * (1.0 / 1000.0);
-
 			//LOG_WRITE("Time passed: %f - FPS: %f", timepassed, 1.0/timepassed)
 
 			redraw = false;
