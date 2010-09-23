@@ -11,12 +11,16 @@ public:
 	GameObject(ALLEGRO_BITMAP *bitmap, double x, double y);
 	virtual ~GameObject(void);
 
-	void Initialize();
-	void Update(double delta_time);
+	virtual void Initialize();
+	virtual void Update(double delta_time);
+
+	Vec2 acceleration;
+	Vec2 velocity;
+	Vec2 position;
+
 protected:
 	void DestroyBitmap();
 
 	char _filename[1024];
 	ALLEGRO_BITMAP *_bitmap;
-	Vec2 _position;
 };

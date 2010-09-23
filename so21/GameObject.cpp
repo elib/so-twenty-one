@@ -7,20 +7,25 @@ GameObject::GameObject(const char* filename, double x, double y)
 {
 	_bitmap = NULL;
 	strcpy_s(_filename, 1024, filename);
-	_position = Vec2(x, y);
+	position = Vec2(x, y);
 }
 
 GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
 {
-	_position = Vec2(x, y);
+	position = Vec2(x, y);
 	strcpy_s(_filename, 1024, "[MEMORY]");
 	_bitmap = bitmap;
 }
 
 void GameObject::Update(double delta_time)
 {
+
+	//"physics" time!
+	velocity += acceleration * delta_time;
+	position += velocity * delta_time;
+
 	//find relative position to viewport
-	Vec2 rel_pos = World::theWorld->TranslateToScreen(_position);
+	Vec2 rel_pos = World::theWorld->TranslateToScreen(position);
 
 	//blit
 	if(_bitmap != NULL)
@@ -32,14 +37,19 @@ void GameObject::Update(double delta_time)
 
 void GameObject::Initialize()
 {
-	//load bitmap here
-	LOG_WRITE("Creating bitmap: %s.", _filename);
-	_bitmap = al_load_bitmap(_filename);
+	acceleration = velocity = Vec2(0.0, 0.0);
 
+	//load bitmap here
 	if(!_bitmap)
 	{
-		int err = al_get_errno();
-		LOG_WRITE("Error creating bitmap! Filename: %s, error number: %d.", _filename, err);
+		LOG_WRITE("Creating bitmap: %s.", _filename);
+		_bitmap = al_load_bitmap(_filename);
+
+		if(!_bitmap)
+		{
+			int err = al_get_errno();
+			LOG_WRITE("Error creating bitmap! Filename: %s, error number: %d.", _filename, err);
+		}
 	}
 }
 

@@ -65,6 +65,7 @@ bool Map::Initialize(int offset_x, int offset_y)
 				int x_ = origin[0];
 				int y_ = origin[1];
 				GameObject *obj = new GameObject(subbitmap, i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
+				obj->Initialize();
 				_tileObjects.push_back(obj);
 			}
 			cur_element = cur_element->NextSiblingElement();

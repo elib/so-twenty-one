@@ -7,6 +7,12 @@ ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
 #define SECONDS_PER_TICK (1.0 / 1000.0)
 
+#ifdef _DEBUG
+#ifndef SHOW_FPS
+#define SHOW_FPS
+#endif
+#endif
+
 World::World(void)
 {
 	//static member
@@ -70,25 +76,29 @@ void World::Update()
 	double delta = ticks_diff * SECONDS_PER_TICK;
 	_last_tick_count = current_tick;
 
-	al_clear_to_color(al_map_rgba(100, 100, 150, 255));
+	//start frame
+	al_clear_to_color(al_map_rgba(10, 10, 50, 255));
 
-	float fps = (1.0 / delta);
-	//print framerate
-	char rate[50];
-	sprintf_s(rate, 50, "FPS %f", fps);
-	al_draw_text(_fonts.SmallFont, al_map_rgba_f(0.5, 1.0, 0.5, 1.0), 0, 0, -1, rate );
-
+	//update "camera"
 	MoveCamera(delta);
 
 	//update map
 	_map.Update(delta);
 
+	//update all subservient objects
 	unsigned int i;
 	for(i = 0; i < _gameObjects.size(); i++)
 	{
 		((GameObject*)_gameObjects.at(i))->Update(delta);
 	}
 
+#ifdef SHOW_FPS
+	//print framerate
+	float fps = (1.0 / delta);
+	char rate[50];
+	sprintf_s(rate, 50, "FPS %f", fps);
+	al_draw_text(_fonts.SmallFont, al_map_rgba_f(0.5, 1.0, 0.5, 1.0), 0, 0, -1, rate );
+#endif
 
 	//at the end, update keyboard state to ready for next frame
 	Keys.Update();
@@ -102,6 +112,7 @@ Vec2 World::TranslateToScreen(Vec2 _position)
 
 void World::MoveCamera(double delta)
 {
+	//moving right constantly
 	static const double speed = 20;
 	double amount = speed * delta;
 	cameraPosition[0] += amount;
