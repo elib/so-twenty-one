@@ -23,8 +23,10 @@ protected:
 	
 	//objects and their bitmaps
 	vector<GameObject*> _tileObjects;
-	vector<ALLEGRO_BITMAP*> _tile_bitmaps;
+	vector<Vec2> _tile_origins;
 	Vec2 _offset;
+
+	ALLEGRO_BITMAP *_largeBitmap;
 
 	//map info
 	int _width, _height, _tileWidth, _tileHeight;

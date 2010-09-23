@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="192"
-   height="192"
+   width="256"
+   height="256"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.0 r9654"
    sodipodi:docname="tiles.svg"
-   inkscape:export-filename="D:\Projects\allegro\projects\so21\Artwork\tiles.png"
+   inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\tiles.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="73.137936"
-     inkscape:cy="114.56439"
+     inkscape:zoom="1.4"
+     inkscape:cx="166.54099"
+     inkscape:cy="191.81483"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -64,15 +64,24 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-860.36217)">
+     transform="translate(0,-796.36217)">
     <rect
-       style="fill:#26a062;fill-opacity:1;stroke:none;stroke-width:0.30000000999999998;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#26a062;fill-opacity:1;stroke:none"
        id="rect2987"
        width="32"
        height="32"
        x="32"
        y="32"
-       transform="translate(0,860.36217)"
+       rx="5.3296795"
+       ry="5.3296795"
+       transform="translate(0,860.36217)" />
+    <rect
+       style="fill:#4026a0;fill-opacity:1;stroke:none"
+       id="rect2987-3"
+       width="32"
+       height="32"
+       x="64"
+       y="892.36218"
        rx="5.3296795"
        ry="5.3296795" />
   </g>

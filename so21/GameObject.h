@@ -19,6 +19,4 @@ protected:
 	char _filename[1024];
 	ALLEGRO_BITMAP *_bitmap;
 	Vec2 _position;
-
-	bool _memory_bitmap;
 };

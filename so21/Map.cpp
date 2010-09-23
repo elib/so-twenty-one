@@ -60,7 +60,11 @@ bool Map::Initialize(int offset_x, int offset_y)
 			if(gid > 0)
 			{
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
-				GameObject *obj = new GameObject(_tile_bitmaps.at(gid), i*_tileWidth + _offset[0], j*_tileHeight + _offset[1]);
+				Vec2 origin = ((Vec2)_tile_origins.at(gid -1 ));
+				ALLEGRO_BITMAP* subbitmap = al_create_sub_bitmap(_largeBitmap, origin[0], origin[1], _tileWidth, _tileHeight);
+				int x_ = origin[0];
+				int y_ = origin[1];
+				GameObject *obj = new GameObject(subbitmap, i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
 				_tileObjects.push_back(obj);
 			}
 			cur_element = cur_element->NextSiblingElement();
@@ -72,36 +76,36 @@ bool Map::Initialize(int offset_x, int offset_y)
 void Map::LoadAvailableTiles()
 {
 	LOG_WRITE("Loading tile bitmaps from path: %s", _tileImageSourceFile);
-	ALLEGRO_BITMAP *largeBitmap = al_load_bitmap(_tileImageSourceFile);
-	int big_width = al_get_bitmap_width(largeBitmap);
-	int big_height = al_get_bitmap_height(largeBitmap);
+	_largeBitmap = al_load_bitmap(_tileImageSourceFile);
+	int big_width = al_get_bitmap_width(_largeBitmap);
+	int big_height = al_get_bitmap_height(_largeBitmap);
 	int tiles_wide = big_width / _tileWidth;
 	int tiles_high = big_height / _tileHeight;
 	int i, j;
 
-	int flags = al_get_bitmap_format(largeBitmap);
+//	int flags = al_get_bitmap_format(largeBitmap);
 
 	//note backwards - this loads the tiles in the same order as the tiled program
 	for(j = 0; j < tiles_high; j++)
 	{
 		for(i = 0; i < tiles_wide; i++)
 		{
-			//chop up the large one
-			al_set_new_bitmap_format(flags);
+			////chop up the large one
+			//al_set_new_bitmap_format(flags);
 
-			ALLEGRO_BITMAP *subBitMap = al_create_bitmap(_tileWidth, _tileHeight);
-			al_set_target_bitmap(subBitMap);
+			//ALLEGRO_BITMAP *subBitMap = al_create_bitmap(_tileWidth, _tileHeight);
+			//al_set_target_bitmap(subBitMap);
 
 			//al_draw_bitmap_region(largeBitmap, i*_tileWidth, j*_tileHeight, _tileWidth, _tileHeight, 0, 0, 0);
-			_tile_bitmaps.push_back(subBitMap);
+			_tile_origins.push_back(Vec2(i*_tileWidth, j*_tileHeight));
 
 			//make sure to relinquish redraw command to main display
-			al_set_target_backbuffer(World::TheDisplay);
+			//al_set_target_backbuffer(World::TheDisplay);
 		}
 	}
 
 	//clean up big bitmap
-	al_destroy_bitmap(largeBitmap);
+	//al_destroy_bitmap(largeBitmap);
 }
 
 void Map::Destroy()
@@ -113,11 +117,13 @@ void Map::Destroy()
 	}
 	_tileObjects.clear();
 
-	for(i = 0; i < _tile_bitmaps.size(); i++)
-	{
-		al_destroy_bitmap(_tile_bitmaps.at(i));
-	}
-	_tile_bitmaps.clear();
+	//for(i = 0; i < _tile_bitmaps.size(); i++)
+	//{
+	//	al_destroy_bitmap(_tile_bitmaps.at(i));
+	//}
+	_tile_origins.clear();
+
+	al_destroy_bitmap(_largeBitmap);
 }
 
 void Map::Update(double delta_time)
