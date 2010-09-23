@@ -97,7 +97,7 @@ void World::Update()
 	float fps = (1.0 / delta);
 	char rate[50];
 	sprintf_s(rate, 50, "FPS %f", fps);
-	al_draw_text(_fonts.SmallFont, al_map_rgba_f(0.5, 1.0, 0.5, 1.0), 0, 0, -1, rate );
+	al_draw_text(_fonts.SmallFont, al_map_rgba_f(0.9, 1.0, 0.2, 1.0), 0, 0, -1, rate );
 #endif
 
 	//at the end, update keyboard state to ready for next frame

@@ -14,6 +14,8 @@
 
 #include "Map.h"
 
+#define EPSILON (1E-6)
+
 
 #define DISPLAY_WIDTH	640
 #define DISPLAY_HEIGHT	480

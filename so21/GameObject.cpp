@@ -19,10 +19,22 @@ GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
 
 void GameObject::Update(double delta_time)
 {
-
 	//"physics" time!
-	velocity += acceleration * delta_time;
+	Vec2 calculation_accel = acceleration;
+	if(sqrlen(velocity) > EPSILON)
+	{
+		calculation_accel -= norm(velocity) * damping;
+	}
+
+	velocity += calculation_accel * delta_time;
+
+	if(sqrlen(velocity) > sqr(max_velocity))
+	{
+		velocity = norm(velocity) * max_velocity;
+	}
+
 	position += velocity * delta_time;
+	
 
 	//find relative position to viewport
 	Vec2 rel_pos = World::theWorld->TranslateToScreen(position);
@@ -38,6 +50,8 @@ void GameObject::Update(double delta_time)
 void GameObject::Initialize()
 {
 	acceleration = velocity = Vec2(0.0, 0.0);
+	max_velocity = 100;
+	damping = 0.1;
 
 	//load bitmap here
 	if(!_bitmap)

@@ -7,5 +7,6 @@ class Player :
 public:
 	Player(double x, double y) : GameObject("Resources/probe-sprite.png", x, y) {}
 
+	virtual void Initialize();
 	virtual void Update(double delta_time);
 };

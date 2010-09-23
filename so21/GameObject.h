@@ -17,6 +17,8 @@ public:
 	Vec2 acceleration;
 	Vec2 velocity;
 	Vec2 position;
+	double max_velocity;
+	double damping;
 
 protected:
 	void DestroyBitmap();
