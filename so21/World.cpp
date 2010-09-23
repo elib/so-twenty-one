@@ -3,14 +3,17 @@
 #include "player.h"
 
 World* World::theWorld = NULL;
+ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
 #define SECONDS_PER_TICK (1.0 / 1000.0)
 
 World::World(void)
 {
+	//static member
 	theWorld = this;
+
 	cameraPosition = Vec2(0.0,0.0);
-	_last_tick_count = GetTickCount();
+	_last_tick_count = 0;
 	_player = NULL;
 }
 
@@ -30,8 +33,10 @@ void World::RemoveGameObjects()
 }
 
 
-bool World::Initialize()
+bool World::Initialize(ALLEGRO_DISPLAY *display)
 {
+	//this next line is horrible =(
+	TheDisplay = display;
 
 	log.Initialize();
 
@@ -43,6 +48,12 @@ bool World::Initialize()
 	_player = new Player(0, 0);
 	_player->Initialize();
 	_gameObjects.push_back(_player);
+
+	//place map in correct location
+	_map.Initialize(-DISPLAY_WIDTH/2, -DISPLAY_HEIGHT/2);
+
+	//start from 0 now
+	_last_tick_count = GetTickCount();
 
 	return true;
 }
@@ -66,6 +77,9 @@ void World::Update()
 	al_draw_text(_fonts.SmallFont, al_map_rgba_f(0.5, 1.0, 0.5, 1.0), 0, 0, -1, rate );
 
 	MoveCamera(delta);
+
+	//update map
+	_map.Update(delta);
 
 	unsigned int i;
 	for(i = 0; i < _gameObjects.size(); i++)

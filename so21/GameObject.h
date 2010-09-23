@@ -8,6 +8,7 @@ class GameObject
 {
 public:
 	GameObject(const char* filename, double x, double y);
+	GameObject(ALLEGRO_BITMAP *bitmap, double x, double y);
 	virtual ~GameObject(void);
 
 	void Initialize();
@@ -18,4 +19,6 @@ protected:
 	char _filename[1024];
 	ALLEGRO_BITMAP *_bitmap;
 	Vec2 _position;
+
+	bool _memory_bitmap;
 };

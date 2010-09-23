@@ -195,12 +195,36 @@
 					RelativePath=".\program.cpp"
 					>
 				</File>
+				<Filter
+					Name="xml"
+					>
+					<File
+						RelativePath=".\tinystr.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\tinyxml.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\tinyxmlerror.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\tinyxmlparser.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Game"
 				>
 				<File
 					RelativePath=".\GameObject.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Map.cpp"
 					>
 				</File>
 				<File
@@ -226,10 +250,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\resource.h"
-				>
-			</File>
 			<Filter
 				Name="System"
 				>
@@ -237,6 +257,22 @@
 					RelativePath=".\Log.h"
 					>
 				</File>
+				<File
+					RelativePath=".\resource.h"
+					>
+				</File>
+				<Filter
+					Name="xml"
+					>
+					<File
+						RelativePath=".\tinystr.h"
+						>
+					</File>
+					<File
+						RelativePath=".\tinyxml.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Display"
@@ -251,6 +287,10 @@
 				>
 				<File
 					RelativePath=".\GameObject.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Map.h"
 					>
 				</File>
 				<File

@@ -40,8 +40,7 @@ int main(int argc, char *argv[]) {
 	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_REQUIRE);
 	al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_REQUIRE);
 	al_set_new_display_option(ALLEGRO_SWAP_METHOD, 2, ALLEGRO_REQUIRE);
-	
-	
+
 	
 	data.display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);
 	if(!data.display) {
@@ -68,11 +67,9 @@ int main(int argc, char *argv[]) {
 
 	//build world
 	World world;
-	if(!world.Initialize())
+	if(!world.Initialize(data.display))
 		return -1;
 
-	// Make and set a color to draw with
-	data.bright_green = al_map_rgba_f(0.5, 1.0, 0.5, 1.0);
 	//al_set_blender(ALLEGRO_DEST_MINUS_SRC, ALLEGRO_ALPHA, ALLEGRO_ONE);
 
 	// Make the backbuffer visible
@@ -84,8 +81,6 @@ int main(int argc, char *argv[]) {
 	al_register_event_source(data.queue, al_get_display_event_source(data.display));
 	al_register_event_source(data.queue, al_get_timer_event_source(data.timer));
 	al_start_timer(data.timer);
-
-
 
 	// Wait until the user presses escape
 	bool redraw = true;
@@ -109,13 +104,13 @@ int main(int argc, char *argv[]) {
 
 		if(redraw && al_event_queue_is_empty(data.queue))
 		{
-			DWORD nowticks = GetTickCount();
-			DWORD diffticks = nowticks - ticks;
-			ticks = nowticks;
+			//DWORD nowticks = GetTickCount();
+			//DWORD diffticks = nowticks - ticks;
+			//ticks = nowticks;
 
-			double timepassed = diffticks * (1.0 / 1000.0);
+			//double timepassed = diffticks * (1.0 / 1000.0);
 
-			LOG_WRITE("Time passed: %f - FPS: %f", timepassed, 1.0/timepassed)
+			//LOG_WRITE("Time passed: %f - FPS: %f", timepassed, 1.0/timepassed)
 
 			redraw = false;
 			world.Update();

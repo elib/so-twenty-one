@@ -7,7 +7,16 @@ GameObject::GameObject(const char* filename, double x, double y)
 {
 	_bitmap = NULL;
 	strcpy_s(_filename, 1024, filename);
+	_memory_bitmap = false;
 	_position = Vec2(x, y);
+}
+
+GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
+{
+	_position = Vec2(x, y);
+	strcpy_s(_filename, 1024, "[MEMORY]");
+	_bitmap = bitmap;
+	_memory_bitmap = true;
 }
 
 void GameObject::Update(double delta_time)
@@ -24,9 +33,16 @@ void GameObject::Update(double delta_time)
 
 void GameObject::Initialize()
 {
-	//load bitmap here
-	LOG_WRITE("Creating bitmap: %s.", _filename);
-	_bitmap = al_load_bitmap(_filename);
+	if(_memory_bitmap)
+	{
+		LOG_WRITE("Sprite bitmap already loaded (from memory).");
+	}
+	else
+	{
+		//load bitmap here
+		LOG_WRITE("Creating bitmap: %s.", _filename);
+		_bitmap = al_load_bitmap(_filename);
+	}
 	if(!_bitmap)
 	{
 		int err = al_get_errno();
@@ -36,11 +52,19 @@ void GameObject::Initialize()
 
 void GameObject::DestroyBitmap()
 {
-	if(_bitmap != NULL)
+	if(_memory_bitmap)
 	{
-		LOG_WRITE("Destroying bitmap: %s.", _filename);
-		al_destroy_bitmap(_bitmap);
+		//nothing to do
 	}
+	else
+	{
+		if(_bitmap != NULL)
+		{
+			LOG_WRITE("Destroying bitmap: %s.", _filename);
+			al_destroy_bitmap(_bitmap);
+		}
+	}
+
 	_bitmap = NULL;
 }
 

@@ -29,5 +29,6 @@ void Log::LogWrite(const char * msg)
 {
 #if (defined(_DEBUG) || defined(USE_LOG))
 	al_fputs(_logFile, msg);
+	al_fflush(_logFile);
 #endif
 }

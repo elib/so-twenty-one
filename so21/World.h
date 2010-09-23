@@ -10,6 +10,8 @@
 #include "svl/svl.h"
 #include "player.h"
 
+#include "Map.h"
+
 
 #define DISPLAY_WIDTH	640
 #define DISPLAY_HEIGHT	480
@@ -25,12 +27,13 @@ public:
 	World(void);
 	~World(void);
 
-	bool Initialize();
+	bool Initialize(ALLEGRO_DISPLAY *display);
 	void Update();
 
 	Vec2 TranslateToScreen(Vec2 _position);
 
 	static World *theWorld;
+	static ALLEGRO_DISPLAY *TheDisplay;
 	
 	Log log;
 
@@ -49,5 +52,7 @@ protected:
 	Fonts _fonts;
 
 	vector<GameObject*> _gameObjects;
+
+	Map _map;
 
 };
