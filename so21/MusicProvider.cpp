@@ -40,30 +40,50 @@ void MusicProvider::DestroyMusic()
 	LOG_WRITE("Destroying song");
 	BASS_StreamFree(_stream);
 
-#ifdef IS_RECORDING
-	_recording_xml_doc->SaveFile();
-	delete _recording_xml_doc;
-#endif
+//#ifdef IS_RECORDING
+//	_recording_xml_doc->SaveFile();
+//	delete _recording_xml_doc;
+//#endif
 }
 
 void MusicProvider::OpenEventXml()
 {
-	_recording_xml_doc = new TiXmlDocument(_xml_file);
+	TiXmlDocument doc(_xml_file);
+	if(!doc.LoadFile())
+	{
+		LOG_WRITE("Could not load music event XML! Error: %s", doc.ErrorDesc());
+		return;
+	}
 
-	TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "");  
-	_recording_xml_doc->LinkEndChild( decl );
+	TiXmlElement *datael = doc.FirstChildElement();
+	TiXmlElement *curobj = datael->FirstChildElement();
+	while(curobj != NULL)
+	{
+		MusicEvent event;
+		event.bytestamp = atol(curobj->Attribute("position"));
+		curobj->QueryIntAttribute("type", &event.type);
+		_musicEvents.push_back(event);
 
-	_recording_events_element = new TiXmlElement("events");
-	_recording_xml_doc->LinkEndChild(_recording_events_element);
+		curobj = curobj->NextSiblingElement();
+	}
+
+	//_recording_xml_doc = new TiXmlDocument(_xml_file);
+
+	//TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "");  
+	//_recording_xml_doc->LinkEndChild( decl );
+
+	//_recording_events_element = new TiXmlElement("events");
+	//_recording_xml_doc->LinkEndChild(_recording_events_element);
 }
 
 
 void MusicProvider::Initialize(ALLEGRO_DISPLAY *display)
 {
+	OpenEventXml();
 #ifdef IS_RECORDING
 	//make recording XML
 	LOG_WRITE("Recording mode active!!!");
-	OpenEventXml();
+	_newMusicEvents = _musicEvents;
 #endif
 
 	HWND hwnd = al_get_win_window_handle(display);
@@ -97,10 +117,10 @@ void MusicProvider::Update()
 
 	if(World::theWorld->Keys.keys_just_down[ALLEGRO_KEY_PAD_0])
 	{
-		//mark this frame as recorded
-		TiXmlElement *singleevent = new TiXmlElement("event");
-		singleevent->SetAttribute("position", currentPosition);
-		_recording_events_element->LinkEndChild(singleevent);
+		////mark this frame as recorded
+		//TiXmlElement *singleevent = new TiXmlElement("event");
+		//singleevent->SetAttribute("position", currentPosition);
+		//_recording_events_element->LinkEndChild(singleevent);
 	}
 #endif
 }

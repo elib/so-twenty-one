@@ -7,6 +7,20 @@
 
 #include "TinyXml.h"
 
+#include <vector>
+using namespace std;
+
+typedef struct MUSICEVENT
+{
+	MUSICEVENT()
+	{
+		type = bytestamp = 0;
+	}
+
+	int type;
+	long bytestamp;
+} MusicEvent;
+
 class MusicProvider
 {
 public:
@@ -26,11 +40,16 @@ public:
 	void OpenEventXml();
 
 protected:
+	//files
 	static const char* _music_file;
 	static const char* _xml_file;
 	static const char* _out_xml_file;
+	
+	//the music stream
 	HSTREAM _stream;
 
-	TiXmlElement *_recording_events_element;
-	TiXmlDocument *_recording_xml_doc;
+	//reading existing ones:
+	vector<MusicEvent> _musicEvents;
+	//for recordings:
+	vector<MusicEvent> _newMusicEvents;
 };
