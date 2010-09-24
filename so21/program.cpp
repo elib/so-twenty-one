@@ -42,7 +42,6 @@ int main(int argc, char *argv[])
 
 	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_SUGGEST);
 	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
-
 	
 	//al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_REQUIRE);
 	//al_set_new_display_option(ALLEGRO_SWAP_METHOD, 2, ALLEGRO_REQUIRE);
@@ -97,9 +96,21 @@ int main(int argc, char *argv[])
 	// Wait until the user presses escape
 	bool redraw = true;
 	ALLEGRO_EVENT event;
+
 	while(1)
 	{
 		al_wait_for_event(data.queue, &event);
+
+		if(event.type == ALLEGRO_EVENT_DISPLAY_SWITCH_IN)
+		{
+			world.hasfocus = true;
+			musicProvider.PlayMusic();
+		}
+		else if (event.type == ALLEGRO_EVENT_DISPLAY_SWITCH_OUT)
+		{
+			world.hasfocus = false;
+			musicProvider.StopMusic();
+		}
 
 		if(event.type == ALLEGRO_EVENT_TIMER)
 		{
@@ -132,7 +143,14 @@ int main(int argc, char *argv[])
 			//LOG_WRITE("Time passed: %f - FPS: %f", timepassed, 1.0/timepassed)
 
 			redraw = false;
+
+			if(world.hasfocus)
+			{
+				musicProvider.Update();
+			}
+
 			world.Update();
+
 			al_flip_display();
 		}
 	}

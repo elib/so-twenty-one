@@ -46,6 +46,10 @@ public:
 
 	Keyboard Keys;
 
+	Fonts fonts;
+
+	bool hasfocus;
+
 protected:
 
 	Player *_player;
@@ -56,8 +60,6 @@ protected:
 	void MoveCamera(double delta);
 
 	void RemoveGameObjects();
-
-	Fonts _fonts;
 
 	vector<GameObject*> _gameObjects;
 

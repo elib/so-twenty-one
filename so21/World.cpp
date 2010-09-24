@@ -18,6 +18,7 @@ World::World(void)
 {
 	//static member
 	theWorld = this;
+	hasfocus = true;
 
 	//before anything else - even in constructor!
 	log.Initialize();
@@ -50,7 +51,7 @@ bool World::Initialize()
 
 	LOG_WRITE("Starting...");
 
-	if(!_fonts.Initialize())
+	if(!fonts.Initialize())
 		return false;
 
 	_player = new Player(0, 0);
@@ -82,29 +83,32 @@ void World::Update()
 	//start frame
 	al_clear_to_color(al_map_rgba(10, 10, 50, 255));
 
-	//update "camera"
-	MoveCamera(delta);
-
-	//update map
-	_map.Update(delta);
-
-	//update all subservient objects
-	unsigned int i;
-	for(i = 0; i < _gameObjects.size(); i++)
+	if(hasfocus)
 	{
-		((GameObject*)_gameObjects.at(i))->Update(delta);
-	}
+		//update "camera"
+		MoveCamera(delta);
+
+		//update map
+		_map.Update(delta);
+
+		//update all subservient objects
+		unsigned int i;
+		for(i = 0; i < _gameObjects.size(); i++)
+		{
+			((GameObject*)_gameObjects.at(i))->Update(delta);
+		}
 
 #ifdef SHOW_FPS
-	//print framerate
-	float fps = (1.0 / delta);
-	char rate[50];
-	sprintf_s(rate, 50, "FPS %f", fps);
-	al_draw_text(_fonts.SmallFont, al_map_rgba_f(0.9, 1.0, 0.2, 1.0), 0, 0, -1, rate );
+		//print framerate
+		float fps = (1.0 / delta);
+		char rate[50];
+		sprintf_s(rate, 50, "FPS %f", fps);
+		al_draw_text(fonts.SmallFont, al_map_rgba_f(0.9, 1.0, 0.2, 1.0), 0, 0, -1, rate );
 #endif
 
-	//at the end, update keyboard state to ready for next frame
-	Keys.Update();
+		//at the end, update keyboard state to ready for next frame
+		Keys.Update();
+	}
 }
 
 Vec2 World::TranslateToScreen(Vec2 _position)
