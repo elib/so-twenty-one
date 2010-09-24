@@ -15,6 +15,8 @@
 #include "Map.h"
 #include "MusicProvider.h"
 
+#include "textlayer.h"
+
 #define EPSILON (1E-6)
 
 
@@ -49,6 +51,8 @@ public:
 	Fonts fonts;
 
 	bool hasfocus;
+
+	TextLayer textLayer;
 
 protected:
 

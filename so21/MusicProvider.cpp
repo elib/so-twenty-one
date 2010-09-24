@@ -3,6 +3,7 @@
 
 const char* MusicProvider::_music_file = "Resources/03_Sleepy_Town_Manufacture_-_So_Twenty_One.mp3";
 const char* MusicProvider::_xml_file = "Resources/recording.xml";
+const char* MusicProvider::_out_xml_file = "Resources/out_recording.xml";
 
 #define IS_RECORDING
 
@@ -61,6 +62,7 @@ void MusicProvider::Initialize(ALLEGRO_DISPLAY *display)
 {
 #ifdef IS_RECORDING
 	//make recording XML
+	LOG_WRITE("Recording mode active!!!");
 	OpenEventXml();
 #endif
 
@@ -83,16 +85,15 @@ void MusicProvider::Update()
 	//set current position for this frame
 	currentPosition = BASS_ChannelGetPosition(_stream, BASS_POS_BYTE);
 
-	al_draw_text(World::theWorld->fonts.SmallFont,
-			al_map_rgba_f(1, 0, 0, 1.0), DISPLAY_WIDTH/2, 0, ALLEGRO_ALIGN_CENTRE, "RECORDING!" );
-
 #ifdef IS_RECORDING
 
+	World::theWorld->textLayer.AddText("RECORDING!", World::theWorld->fonts.SmallFont,
+			al_map_rgba_f(1, 0, 0, 1.0), DISPLAY_WIDTH/2, 0, ALLEGRO_ALIGN_CENTRE);
 	char postext[1024];
 	sprintf_s(postext, 1024, "position: %d", currentPosition);
 
-	al_draw_text(World::theWorld->fonts.SmallFont,
-		al_map_rgba_f(1, 1, 1, 1.0), DISPLAY_WIDTH/2, 15, ALLEGRO_ALIGN_CENTRE, postext );
+	World::theWorld->textLayer.AddText(postext, World::theWorld->fonts.SmallFont,
+		al_map_rgba_f(1, 1, 1, 1.0), DISPLAY_WIDTH/2, 15, ALLEGRO_ALIGN_CENTRE);
 
 	if(World::theWorld->Keys.keys_just_down[ALLEGRO_KEY_PAD_0])
 	{

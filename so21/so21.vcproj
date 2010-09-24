@@ -249,6 +249,10 @@
 					RelativePath=".\Fonts.cpp"
 					>
 				</File>
+				<File
+					RelativePath=".\TextLayer.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Sound"
@@ -297,6 +301,10 @@
 				>
 				<File
 					RelativePath=".\Fonts.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TextLayer.h"
 					>
 				</File>
 			</Filter>

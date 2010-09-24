@@ -28,6 +28,7 @@ public:
 protected:
 	static const char* _music_file;
 	static const char* _xml_file;
+	static const char* _out_xml_file;
 	HSTREAM _stream;
 
 	TiXmlElement *_recording_events_element;

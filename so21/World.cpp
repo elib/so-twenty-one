@@ -3,6 +3,8 @@
 #include "player.h"
 
 
+
+
 World* World::theWorld = NULL;
 ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
@@ -22,9 +24,10 @@ World::World(void)
 
 	//before anything else - even in constructor!
 	log.Initialize();
+	textLayer.Initialize();
 
 	cameraPosition = Vec2(0.0,0.0);
-	//_last_tick_count = 0;
+	_last_tick_count.QuadPart = 0;
 	_player = NULL;
 }
 
@@ -103,8 +106,11 @@ void World::Update()
 		float fps = (1.0 / delta);
 		char rate[50];
 		sprintf_s(rate, 50, "FPS %f", fps);
-		al_draw_text(fonts.SmallFont, al_map_rgba_f(0.9, 1.0, 0.2, 1.0), 0, 0, -1, rate );
+		textLayer.AddText(rate, fonts.SmallFont, al_map_rgba_f(0.9, 1.0, 0.2, 1.0), 0, 0, ALLEGRO_ALIGN_LEFT);
 #endif
+
+		//draw texts
+		textLayer.Update();
 
 		//at the end, update keyboard state to ready for next frame
 		Keys.Update();
