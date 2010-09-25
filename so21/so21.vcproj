@@ -174,10 +174,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath=".\StarField.cpp"
-				>
-			</File>
 			<Filter
 				Name="SVL"
 				>
@@ -252,6 +248,10 @@
 						RelativePath=".\Player.cpp"
 						>
 					</File>
+					<File
+						RelativePath=".\StarField.cpp"
+						>
+					</File>
 				</Filter>
 			</Filter>
 			<Filter
@@ -280,18 +280,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath=".\QuickMax.h"
-				>
-			</File>
-			<File
-				RelativePath=".\StarField.h"
-				>
-			</File>
-			<File
-				RelativePath="..\VersionInfo.h"
-				>
-			</File>
 			<Filter
 				Name="System"
 				>
@@ -304,7 +292,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\QuickMax.h"
+					>
+				</File>
+				<File
 					RelativePath=".\resource.h"
+					>
+				</File>
+				<File
+					RelativePath="..\VersionInfo.h"
 					>
 				</File>
 				<Filter
@@ -356,6 +352,10 @@
 					</File>
 					<File
 						RelativePath=".\Player.h"
+						>
+					</File>
+					<File
+						RelativePath=".\StarField.h"
 						>
 					</File>
 				</Filter>
