@@ -11,9 +11,17 @@ ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 #define SECONDS_PER_TICK (1.0 / 1000.0)
 
 #ifdef _DEBUG
+
+//when debugging, always show fps
 #ifndef SHOW_FPS
 #define SHOW_FPS
 #endif
+
+//when debugging, always debug recording
+#ifndef DEBUG_RECORDING
+#define DEBUG_RECORDING
+#endif
+
 #endif
 
 World::World(void)
@@ -63,6 +71,12 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_player->Initialize();
 	_gameObjects.push_back(_player);
 
+	_debugCircle = new GameObject("Resources/debug_circle.png", DISPLAY_WIDTH - 32, 0);
+	_debugCircle->Initialize();
+	_debugCircle->scrollFactor = Vec2(0.0, 0.0);
+	_gameObjects.push_back(_debugCircle);
+
+
 	musicProvider.Initialize(_display);
 
 	//place map in correct location
@@ -100,6 +114,17 @@ void World::Update()
 		//update map
 		_map.Update(delta);
 
+#ifdef DEBUG_RECORDING
+		if(musicProvider.eventsForCurrentFrame.size() > 0)
+		{
+			_debugCircle->visible = true;
+		}
+		else
+		{
+			_debugCircle->visible = false;
+		}
+#endif
+
 		//update all subservient objects
 		unsigned int i;
 		for(i = 0; i < _gameObjects.size(); i++)
@@ -136,10 +161,14 @@ void World::SwitchOut()
 }
 
 
-Vec2 World::TranslateToScreen(Vec2 _position)
+Vec2 World::TranslateToScreen(Vec2 _position, Vec2 _scrollfactor)
 {
 	static const Vec2 half_screen(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2);
-	return _position - cameraPosition + half_screen;
+	Vec2 modifiedCamPos = cameraPosition - half_screen;
+	modifiedCamPos[0] *= _scrollfactor[0];
+	modifiedCamPos[1] *= _scrollfactor[1];
+
+	return _position - modifiedCamPos;
 }
 
 void World::MoveCamera(double delta)

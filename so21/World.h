@@ -19,7 +19,6 @@
 
 #define EPSILON (1E-6)
 
-
 #define DISPLAY_WIDTH	640
 #define DISPLAY_HEIGHT	480
 
@@ -37,7 +36,7 @@ public:
 	bool Initialize(ALLEGRO_DISPLAY * display);
 	void Update();
 
-	Vec2 TranslateToScreen(Vec2 _position);
+	Vec2 TranslateToScreen(Vec2 _position, Vec2 _scrollfactor);
 
 	static World *theWorld;
 	static ALLEGRO_DISPLAY *TheDisplay;
@@ -73,6 +72,8 @@ protected:
 	void RemoveGameObjects();
 
 	vector<GameObject*> _gameObjects;
+
+	GameObject *_debugCircle;
 
 	Map _map;
 

@@ -20,6 +20,9 @@ public:
 	double max_velocity;
 	double damping;
 
+	bool visible;
+	Vec2 scrollFactor;
+
 protected:
 	void DestroyBitmap();
 

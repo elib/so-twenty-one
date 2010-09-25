@@ -37,13 +37,16 @@ void GameObject::Update(double delta_time)
 	
 
 	//find relative position to viewport
-	Vec2 rel_pos = World::theWorld->TranslateToScreen(position);
+	Vec2 rel_pos = World::theWorld->TranslateToScreen(position, scrollFactor);
 
 	//blit
 	if(_bitmap != NULL)
 	{
-		//al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
-		al_draw_bitmap(_bitmap, rel_pos[0], rel_pos[1], 0);
+		if(visible)
+		{
+			//al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
+			al_draw_bitmap(_bitmap, rel_pos[0], rel_pos[1], 0);
+		}
 	}
 }
 
@@ -52,6 +55,9 @@ void GameObject::Initialize()
 	acceleration = velocity = Vec2(0.0, 0.0);
 	max_velocity = 100;
 	damping = 0.1;
+
+	visible = true;
+	scrollFactor = Vec2(1.0, 1.0);
 
 	//load bitmap here
 	if(!_bitmap)

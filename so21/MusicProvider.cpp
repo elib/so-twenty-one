@@ -114,7 +114,7 @@ void MusicProvider::Initialize(ALLEGRO_DISPLAY *display)
 	//zero all interesting things
 	currentPosition = 0;
 	_currentRecordingType = 0;
-	eventForCurrentFrame = NULL;
+	eventsForCurrentFrame.clear();
 	_nextEventIndex = 0;
 
 	//read events from file
@@ -145,7 +145,20 @@ void MusicProvider::Update()
 	//set current position for this frame
 	currentPosition = BASS_ChannelGetPosition(_stream, BASS_POS_BYTE);
 
-	//set current event for external consumption
+	//clear current events for this frame
+	eventsForCurrentFrame.clear();
+	//set current events for external consumption
+	int i = 0;
+	while(((_nextEventIndex + i) < _musicEvents.size())
+		&& (_musicEvents[_nextEventIndex + i].bytestamp < currentPosition))
+	{
+		eventsForCurrentFrame.push_back(_musicEvents[_nextEventIndex + i]);
+		i++;
+	}
+
+	//place ourselves in the next event domain
+	//if any events were taken, we're at least 1 ahead
+	_nextEventIndex += i;
 
 
 #ifdef IS_RECORDING
@@ -161,7 +174,7 @@ void MusicProvider::Update()
 	World::theWorld->textLayer.AddText(postext, World::theWorld->fonts.SmallFont,
 		al_map_rgba_f(1, 1, 1, 1.0), DISPLAY_WIDTH/2, 15, ALLEGRO_ALIGN_CENTRE);
 
-	//done with pretty reminder
+	//end pretty reminder
 
 	if(World::theWorld->Keys.keys_just_down[ALLEGRO_KEY_PAD_0])
 	{

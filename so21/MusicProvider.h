@@ -38,7 +38,7 @@ public:
 
 	void Update();
 
-	MusicEvent *eventForCurrentFrame;
+	vector<MusicEvent> eventsForCurrentFrame;
 
 	QWORD currentPosition;
 
