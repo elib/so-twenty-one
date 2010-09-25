@@ -9,13 +9,11 @@
 
 #include "World.h"
 
-struct Data {
-	
+struct Data
+{
 	ALLEGRO_DISPLAY *display;
 	ALLEGRO_EVENT_QUEUE *queue;
 	ALLEGRO_TIMER *timer;
-
-	ALLEGRO_COLOR bright_green;
 } data;
 
 
@@ -75,11 +73,11 @@ int main(int argc, char *argv[])
 	al_init_image_addon();
 
 	//build world
-	if(!world.Initialize())
+	if(!world.Initialize(data.display))
 		return -1;
 
-	MusicProvider musicProvider;
-	musicProvider.Initialize(data.display);
+	//MusicProvider musicProvider;
+	//musicProvider.Initialize(data.display);
 
 	//al_set_blender(ALLEGRO_DEST_MINUS_SRC, ALLEGRO_ALPHA, ALLEGRO_ONE);
 
@@ -103,13 +101,11 @@ int main(int argc, char *argv[])
 
 		if(event.type == ALLEGRO_EVENT_DISPLAY_SWITCH_IN)
 		{
-			world.hasfocus = true;
-			musicProvider.PlayMusic();
+			world.SwitchIn();
 		}
 		else if (event.type == ALLEGRO_EVENT_DISPLAY_SWITCH_OUT)
 		{
-			world.hasfocus = false;
-			musicProvider.StopMusic();
+			world.SwitchOut();
 		}
 
 		if(event.type == ALLEGRO_EVENT_TIMER)
@@ -144,11 +140,6 @@ int main(int argc, char *argv[])
 
 			redraw = false;
 
-			if(world.hasfocus)
-			{
-				musicProvider.Update();
-			}
-
 			world.Update();
 
 			al_flip_display();
@@ -156,6 +147,7 @@ int main(int argc, char *argv[])
 	}
 
 	al_destroy_timer(data.timer);
+	al_destroy_display(data.display);
 
 	return 0;
 }

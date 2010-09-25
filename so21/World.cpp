@@ -48,8 +48,10 @@ void World::RemoveGameObjects()
 }
 
 
-bool World::Initialize()
+bool World::Initialize(ALLEGRO_DISPLAY * display)
 {
+	_display = display;
+
 	Keys.Initialize();
 
 	LOG_WRITE("Starting...");
@@ -60,6 +62,8 @@ bool World::Initialize()
 	_player = new Player(0, 0);
 	_player->Initialize();
 	_gameObjects.push_back(_player);
+
+	musicProvider.Initialize(_display);
 
 	//place map in correct location
 	_map.Initialize(-DISPLAY_WIDTH/2, -DISPLAY_HEIGHT/2);
@@ -88,6 +92,8 @@ void World::Update()
 
 	if(hasfocus)
 	{
+		musicProvider.Update();
+
 		//update "camera"
 		MoveCamera(delta);
 
@@ -105,7 +111,7 @@ void World::Update()
 		//print framerate
 		float fps = (1.0 / delta);
 		char rate[50];
-		sprintf_s(rate, 50, "FPS %f", fps);
+		sprintf_s(rate, "FPS %f", fps);
 		textLayer.AddText(rate, fonts.SmallFont, al_map_rgba_f(0.9, 1.0, 0.2, 1.0), 0, 0, ALLEGRO_ALIGN_LEFT);
 #endif
 
@@ -116,6 +122,19 @@ void World::Update()
 		Keys.Update();
 	}
 }
+
+void World::SwitchIn()
+{
+	hasfocus = true;
+	musicProvider.PlayMusic();
+}
+
+void World::SwitchOut()
+{
+	hasfocus = false;
+	musicProvider.StopMusic();
+}
+
 
 Vec2 World::TranslateToScreen(Vec2 _position)
 {

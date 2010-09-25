@@ -8,6 +8,9 @@ Fonts::Fonts(void)
 
 Fonts::~Fonts(void)
 {
+	al_destroy_font(MediumFont);
+	al_destroy_font(HugeFont);
+	al_destroy_font(SmallFont);
 }
 
 bool Fonts::Initialize()

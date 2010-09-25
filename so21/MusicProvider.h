@@ -5,8 +5,6 @@
 
 #include "Bass.h"
 
-#include "TinyXml.h"
-
 #include <vector>
 using namespace std;
 
@@ -17,8 +15,15 @@ typedef struct MUSICEVENT
 		type = bytestamp = 0;
 	}
 
+
+	int operator < (MUSICEVENT &other)
+	{
+		return (this->bytestamp < other.bytestamp);
+	}
+
 	int type;
-	long bytestamp;
+	QWORD bytestamp;
+
 } MusicEvent;
 
 class MusicProvider
@@ -33,13 +38,20 @@ public:
 
 	void Update();
 
+	MusicEvent *eventForCurrentFrame;
+
 	QWORD currentPosition;
 
 	void Initialize(ALLEGRO_DISPLAY *display);
 
-	void OpenEventXml();
-
 protected:
+
+	//read/write
+	void OpenEventXml();
+	void WriteNewEventXml();
+
+	int _nextEventIndex;
+
 	//files
 	static const char* _music_file;
 	static const char* _xml_file;
@@ -52,4 +64,5 @@ protected:
 	vector<MusicEvent> _musicEvents;
 	//for recordings:
 	vector<MusicEvent> _newMusicEvents;
+	int _currentRecordingType;
 };

@@ -24,7 +24,7 @@
 #define DISPLAY_HEIGHT	480
 
 
-#define LOG_WRITE(__msg_format, ...) { char __final_msg[1024]; sprintf_s(__final_msg, 1024, __msg_format "\r\n", __VA_ARGS__); World::theWorld->log.LogWrite(__final_msg); }
+#define LOG_WRITE(__msg_format, ...) { char __final_msg[1024]; sprintf_s(__final_msg, __msg_format "\r\n", __VA_ARGS__); World::theWorld->log.LogWrite(__final_msg); }
 
 using namespace std;
 
@@ -34,13 +34,16 @@ public:
 	World(void);
 	~World(void);
 
-	bool Initialize();
+	bool Initialize(ALLEGRO_DISPLAY * display);
 	void Update();
 
 	Vec2 TranslateToScreen(Vec2 _position);
 
 	static World *theWorld;
 	static ALLEGRO_DISPLAY *TheDisplay;
+
+	void SwitchIn();
+	void SwitchOut();
 	
 	Log log;
 
@@ -54,9 +57,13 @@ public:
 
 	TextLayer textLayer;
 
+	MusicProvider musicProvider;
+
 protected:
 
 	Player *_player;
+
+	ALLEGRO_DISPLAY * _display;
 
 	LARGE_INTEGER _performance_freq;
 	LARGE_INTEGER _last_tick_count;
