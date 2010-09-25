@@ -74,6 +74,7 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_debugCircle = new GameObject("Resources/debug_circle.png", DISPLAY_WIDTH - 32, 0);
 	_debugCircle->Initialize();
 	_debugCircle->scrollFactor = Vec2(0.0, 0.0);
+	_debugCircle->visible = false;
 	_gameObjects.push_back(_debugCircle);
 
 

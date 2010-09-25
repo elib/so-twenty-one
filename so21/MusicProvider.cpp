@@ -8,7 +8,11 @@ const char* MusicProvider::_music_file = "Resources/03_Sleepy_Town_Manufacture_-
 const char* MusicProvider::_xml_file = "Resources/script.xml";
 const char* MusicProvider::_out_xml_file = "Resources/out_recording.xml";
 
+#ifdef _DEBUG
+#ifndef IS_RECORDING
 #define IS_RECORDING
+#endif
+#endif
 
 MusicProvider::MusicProvider(void)
 {

@@ -117,7 +117,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="&quot;D:\projects\svl-1.5\include&quot;"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__CMATH__;USE_LOG;SHOW_FPS"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;__CMATH__;USE_LOG;SHOW_FPS;DEBUG_RECORDING"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
