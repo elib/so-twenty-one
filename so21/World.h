@@ -17,11 +17,14 @@
 
 #include "textlayer.h"
 
+#include "Fader.h"
+
 #define EPSILON (1E-6)
 
 #define DISPLAY_WIDTH	640
 #define DISPLAY_HEIGHT	480
 
+#define NUM_DEBUG_CIRCLES 10
 
 #define LOG_WRITE(__msg_format, ...) { char __final_msg[1024]; sprintf_s(__final_msg, __msg_format "\r\n", __VA_ARGS__); World::theWorld->log.LogWrite(__final_msg); }
 
@@ -73,7 +76,7 @@ protected:
 
 	vector<GameObject*> _gameObjects;
 
-	GameObject *_debugCircle;
+	Fader *_debugCircles[NUM_DEBUG_CIRCLES];
 
 	Map _map;
 

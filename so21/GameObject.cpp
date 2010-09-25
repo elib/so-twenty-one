@@ -2,6 +2,8 @@
 #include "World.h"
 #include <allegro5/allegro.h>
 
+#include "quickmax.h"
+
 
 GameObject::GameObject(const char* filename, double x, double y)
 {
@@ -39,13 +41,29 @@ void GameObject::Update(double delta_time)
 	//find relative position to viewport
 	Vec2 rel_pos = World::theWorld->TranslateToScreen(position, scrollFactor);
 
+	alpha = MAX(alpha, 0.0);
+	alpha = MIN(alpha, 1.0);
+
 	//blit
 	if(_bitmap != NULL)
 	{
 		if(visible)
 		{
-			//al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
-			al_draw_bitmap(_bitmap, rel_pos[0], rel_pos[1], 0);
+			//don't draw if alpha is very small
+			if(alpha > EPSILON)
+			{
+				//if alpha is about 1, draw regularly
+				if(alpha > (1.0 - EPSILON)) //not sure if this does what I think it does
+				{
+					//al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
+					al_draw_bitmap(_bitmap, rel_pos[0], rel_pos[1], 0);
+				}
+				else
+				{
+					al_draw_tinted_bitmap(_bitmap, al_map_rgba_f(1.0, 1.0, 1.0, alpha),
+						rel_pos[0], rel_pos[1], 0);
+				}
+			}
 		}
 	}
 }
@@ -55,6 +73,8 @@ void GameObject::Initialize()
 	acceleration = velocity = Vec2(0.0, 0.0);
 	max_velocity = 100;
 	damping = 0.1;
+
+	alpha = 1.0;
 
 	visible = true;
 	scrollFactor = Vec2(1.0, 1.0);

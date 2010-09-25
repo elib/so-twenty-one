@@ -54,7 +54,8 @@ int main(int argc, char *argv[])
 	}
 
 
-	al_set_window_title(data.display, "So Twenty-One v." VERSION_STRING);
+	al_set_window_title(data.display, "So Twenty-One v" VERSION_STRING);
+	LOG_WRITE("Running So Twenty-One v" VERSION_STRING);
 
 	al_hide_mouse_cursor(data.display);
 

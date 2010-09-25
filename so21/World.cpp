@@ -51,8 +51,14 @@ void World::RemoveGameObjects()
 	for(i = 0; i < _gameObjects.size(); i++)
 		delete (_gameObjects.at(i));
 
+
 	//player already deleted in above loop
 	_player = NULL;
+
+	for(i = 0; i < NUM_DEBUG_CIRCLES; i++)
+	{
+		delete _debugCircles[i];
+	}
 }
 
 
@@ -71,12 +77,17 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_player->Initialize();
 	_gameObjects.push_back(_player);
 
-	_debugCircle = new GameObject("Resources/debug_circle.png", DISPLAY_WIDTH - 32, 0);
-	_debugCircle->Initialize();
-	_debugCircle->scrollFactor = Vec2(0.0, 0.0);
-	_debugCircle->visible = false;
-	_gameObjects.push_back(_debugCircle);
-
+	unsigned int i;
+	for(i = 0; i < NUM_DEBUG_CIRCLES; i++)
+	{
+		double x = DISPLAY_WIDTH/2 - 32;
+		double y = -DISPLAY_HEIGHT;
+		y = y/2;
+		y = y + (32* i);
+		_debugCircles[i] = new Fader(x, y);
+		_debugCircles[i]->Initialize();
+		_debugCircles[i]->scrollFactor = Vec2(0.0, 0.0);
+	}
 
 	musicProvider.Initialize(_display);
 
@@ -93,6 +104,8 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 
 void World::Update()
 {
+	unsigned int i;
+
 	//get this frame's tick
 	LARGE_INTEGER current_tick;
 	QueryPerformanceCounter(&current_tick);
@@ -115,23 +128,30 @@ void World::Update()
 		//update map
 		_map.Update(delta);
 
-#ifdef DEBUG_RECORDING
-		if(musicProvider.eventsForCurrentFrame.size() > 0)
-		{
-			_debugCircle->visible = true;
-		}
-		else
-		{
-			_debugCircle->visible = false;
-		}
-#endif
-
 		//update all subservient objects
-		unsigned int i;
 		for(i = 0; i < _gameObjects.size(); i++)
 		{
 			((GameObject*)_gameObjects.at(i))->Update(delta);
 		}
+
+
+#ifdef DEBUG_RECORDING
+		for(i = 0; i < musicProvider.eventsForCurrentFrame.size(); i++)
+		{
+			unsigned int type = musicProvider.eventsForCurrentFrame[i].type;
+			if(type < 10)
+			{
+				_debugCircles[type]->Pulse();
+			}
+		}
+
+		//update all debug circles
+		for(i = 0; i < NUM_DEBUG_CIRCLES; i++)
+		{
+			_debugCircles[i]->Update(delta);
+		}
+#endif
+
 
 #ifdef SHOW_FPS
 		//print framerate
@@ -165,11 +185,11 @@ void World::SwitchOut()
 Vec2 World::TranslateToScreen(Vec2 _position, Vec2 _scrollfactor)
 {
 	static const Vec2 half_screen(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2);
-	Vec2 modifiedCamPos = cameraPosition - half_screen;
+	Vec2 modifiedCamPos = cameraPosition;
 	modifiedCamPos[0] *= _scrollfactor[0];
 	modifiedCamPos[1] *= _scrollfactor[1];
 
-	return _position - modifiedCamPos;
+	return _position - modifiedCamPos + half_screen;
 }
 
 void World::MoveCamera(double delta)

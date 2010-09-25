@@ -226,21 +226,29 @@
 				Name="Game"
 				>
 				<File
-					RelativePath=".\GameObject.cpp"
-					>
-				</File>
-				<File
 					RelativePath=".\Map.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\Player.cpp"
 					>
 				</File>
 				<File
 					RelativePath=".\World.cpp"
 					>
 				</File>
+				<Filter
+					Name="Objects"
+					>
+					<File
+						RelativePath=".\Fader.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\GameObject.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\Player.cpp"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Display"
@@ -268,6 +276,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\QuickMax.h"
+				>
+			</File>
 			<File
 				RelativePath="..\VersionInfo.h"
 				>
@@ -316,21 +328,29 @@
 				Name="Game"
 				>
 				<File
-					RelativePath=".\GameObject.h"
-					>
-				</File>
-				<File
 					RelativePath=".\Map.h"
-					>
-				</File>
-				<File
-					RelativePath=".\Player.h"
 					>
 				</File>
 				<File
 					RelativePath=".\World.h"
 					>
 				</File>
+				<Filter
+					Name="Objects"
+					>
+					<File
+						RelativePath=".\Fader.h"
+						>
+					</File>
+					<File
+						RelativePath=".\GameObject.h"
+						>
+					</File>
+					<File
+						RelativePath=".\Player.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Sound"

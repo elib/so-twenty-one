@@ -152,7 +152,7 @@ void MusicProvider::Update()
 	//clear current events for this frame
 	eventsForCurrentFrame.clear();
 	//set current events for external consumption
-	int i = 0;
+	unsigned int i = 0;
 	while(((_nextEventIndex + i) < _musicEvents.size())
 		&& (_musicEvents[_nextEventIndex + i].bytestamp < currentPosition))
 	{

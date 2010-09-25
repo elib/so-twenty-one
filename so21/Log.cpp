@@ -27,7 +27,7 @@ void Log::Initialize()
 {
 #ifdef USE_LOG
 	_logFile = al_fopen("debug.log", "w+");
-	LogWrite("Log file open.");
+	LogWrite("Log file open.\r\n");
 #endif
 }
 
