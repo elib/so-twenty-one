@@ -24,6 +24,9 @@ const float FPS = 60;
 
 int main(int argc, char *argv[])
 {
+
+	srand(GetTickCount());
+
 	//construct world - including logger.
 	World world;
 

@@ -26,10 +26,16 @@ public:
 	double alpha;
 	bool visible;
 	Vec2 scrollFactor;
+	
+	bool LeftScreen();
+
+	Vec2 size;
 
 protected:
 	void DestroyBitmap();
 
 	char _filename[1024];
 	ALLEGRO_BITMAP *_bitmap;
+
+	bool _leftscreen;
 };

@@ -21,6 +21,8 @@ GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
 
 void GameObject::Update(double delta_time)
 {
+	_leftscreen = false;
+
 	//"physics" time!
 	Vec2 calculation_accel = acceleration;
 	if(sqrlen(velocity) > EPSILON)
@@ -40,6 +42,8 @@ void GameObject::Update(double delta_time)
 
 	//find relative position to viewport
 	Vec2 rel_pos = World::theWorld->TranslateToScreen(position, scrollFactor);
+	if(rel_pos[0] + size[0] < 0)
+		_leftscreen = true;
 
 	alpha = MAX(alpha, 0.0);
 	alpha = MIN(alpha, 1.0);
@@ -79,6 +83,8 @@ void GameObject::Initialize()
 	visible = true;
 	scrollFactor = Vec2(1.0, 1.0);
 
+	_leftscreen = false;
+
 	//load bitmap here
 	if(!_bitmap)
 	{
@@ -91,6 +97,9 @@ void GameObject::Initialize()
 			LOG_WRITE("Error creating bitmap! Filename: %s, error number: %d.", _filename, err);
 		}
 	}
+
+	size[0] = al_get_bitmap_width(_bitmap);
+	size[1] = al_get_bitmap_height(_bitmap);
 }
 
 void GameObject::DestroyBitmap()
@@ -106,4 +115,9 @@ void GameObject::DestroyBitmap()
 GameObject::~GameObject(void)
 {
 	DestroyBitmap();
+}
+
+bool GameObject::LeftScreen()
+{
+	return _leftscreen;
 }

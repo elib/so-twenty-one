@@ -73,17 +73,15 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	if(!fonts.Initialize())
 		return false;
 
-	_player = new Player(0, 0);
+	_player = new Player(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2);
 	_player->Initialize();
 	_gameObjects.push_back(_player);
 
 	unsigned int i;
 	for(i = 0; i < NUM_DEBUG_CIRCLES; i++)
 	{
-		double x = DISPLAY_WIDTH/2 - 32;
-		double y = -DISPLAY_HEIGHT;
-		y = y/2;
-		y = y + (32* i);
+		double x = DISPLAY_WIDTH - 32;
+		double y = (32* i);
 		_debugCircles[i] = new Fader(x, y);
 		_debugCircles[i]->Initialize();
 		_debugCircles[i]->scrollFactor = Vec2(0.0, 0.0);
@@ -92,7 +90,9 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	musicProvider.Initialize(_display);
 
 	//place map in correct location
-	_map.Initialize(-DISPLAY_WIDTH/2, -DISPLAY_HEIGHT/2);
+	_map.Initialize(0, 0);
+
+	_starfield.Initialize();
 
 	//start from 0 now
 	//_last_tick_count = GetTickCount();
@@ -124,6 +124,8 @@ void World::Update()
 
 		//update "camera"
 		MoveCamera(delta);
+
+		_starfield.Update(delta);
 
 		//update map
 		_map.Update(delta);
@@ -184,12 +186,11 @@ void World::SwitchOut()
 
 Vec2 World::TranslateToScreen(Vec2 _position, Vec2 _scrollfactor)
 {
-	static const Vec2 half_screen(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2);
 	Vec2 modifiedCamPos = cameraPosition;
 	modifiedCamPos[0] *= _scrollfactor[0];
 	modifiedCamPos[1] *= _scrollfactor[1];
 
-	return _position - modifiedCamPos + half_screen;
+	return _position - modifiedCamPos;
 }
 
 void World::MoveCamera(double delta)

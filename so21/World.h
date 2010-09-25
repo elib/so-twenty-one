@@ -19,6 +19,8 @@
 
 #include "Fader.h"
 
+#include "StarField.h"
+
 #define EPSILON (1E-6)
 
 #define DISPLAY_WIDTH	640
@@ -79,5 +81,7 @@ protected:
 	Fader *_debugCircles[NUM_DEBUG_CIRCLES];
 
 	Map _map;
+
+	StarField _starfield;
 
 };
