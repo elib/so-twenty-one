@@ -3,6 +3,8 @@
 
 #define ALLEGRO_USE_CONSOLE
 
+#include "../VersionInfo.h"
+
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
@@ -50,6 +52,9 @@ int main(int argc, char *argv[])
 		LOG_WRITE("Display failed!!");
 		return -1;
 	}
+
+
+	al_set_window_title(data.display, "So Twenty-One v." VERSION_STRING);
 
 	al_hide_mouse_cursor(data.display);
 
@@ -148,6 +153,7 @@ int main(int argc, char *argv[])
 
 	al_destroy_timer(data.timer);
 	al_destroy_display(data.display);
+	al_destroy_event_queue(data.queue);
 
 	return 0;
 }
