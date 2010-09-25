@@ -107,6 +107,13 @@ void StarField::Destroy()
 		al_destroy_bitmap(_availableBitmaps[i]);
 	}
 
+	//IT CRASHES, THAT'S WHAT
+	//for(i = 0; i < _starLayer.size(); i++)
+	//{
+
+	//	delete _starLayer[i];
+	//}
+
 	//destroy parent too
 	al_destroy_bitmap(_largeBitmap);
 }
