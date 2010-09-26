@@ -15,9 +15,9 @@
    version="1.1"
    inkscape:version="0.48.0 r9654"
    sodipodi:docname="probe-sprite.svg"
-   inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\probe-sprite.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\icon.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45">
   <defs
      id="defs3820">
     <linearGradient
@@ -41,7 +41,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="22.627417"
      inkscape:cx="9.0474527"
-     inkscape:cy="20.897871"
+     inkscape:cy="17.362337"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"

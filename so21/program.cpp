@@ -33,6 +33,9 @@ int main(int argc, char *argv[])
 	// Initialize Allegro 5 and the font routines
 	al_init();
 	al_init_font_addon();
+	
+	//initialize the image addon
+	al_init_image_addon();
 
 	// Create a window to display things on: 640x480 pixels
 	al_set_new_display_flags(ALLEGRO_OPENGL ); 
@@ -60,6 +63,9 @@ int main(int argc, char *argv[])
 	al_set_window_title(data.display, "So Twenty-One v" VERSION_STRING);
 	LOG_WRITE("Running So Twenty-One v" VERSION_STRING);
 
+	ALLEGRO_BITMAP *iconbitmap = al_load_bitmap("Resources/probe-sprite.png");
+	al_set_display_icon(data.display, iconbitmap);
+
 	al_hide_mouse_cursor(data.display);
 
 	// Install the keyboard handler
@@ -77,9 +83,6 @@ int main(int argc, char *argv[])
 		LOG_WRITE("Timer failed!!");
 		return -1;
 	}
-
-	//initialize the image addon
-	al_init_image_addon();
 
 	//build world
 	if(!world.Initialize(data.display))
@@ -157,6 +160,7 @@ int main(int argc, char *argv[])
 
 	al_destroy_timer(data.timer);
 	al_destroy_display(data.display);
+	al_destroy_bitmap(iconbitmap);
 	al_destroy_event_queue(data.queue);
 
 	return 0;

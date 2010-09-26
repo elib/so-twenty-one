@@ -121,3 +121,7 @@ bool GameObject::LeftScreen()
 {
 	return _leftscreen;
 }
+
+void GameObject::Collide(GameObject *otherobj)
+{
+}

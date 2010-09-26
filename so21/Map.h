@@ -14,6 +14,10 @@ public:
 	void Destroy();
 	void Update(double delta_time);
 
+	void Collide(GameObject *otherobj);
+
+	void OnHit();
+
 protected:
 	//resources:
 	static const char *_mapSourceFile;

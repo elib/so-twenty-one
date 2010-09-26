@@ -116,3 +116,12 @@ void Map::Update(double delta_time)
 		((GameObject*)_tileObjects.at(i))->Update(delta_time);
 	}
 }
+
+void Map::Collide(GameObject *otherobj)
+{
+	unsigned int i;
+	for(i = 0; i < _tileObjects.size(); i++)
+	{
+		_tileObjects[i]->Collide(otherobj);
+	}
+}

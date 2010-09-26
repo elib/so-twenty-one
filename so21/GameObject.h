@@ -31,6 +31,8 @@ public:
 
 	Vec2 size;
 
+	void Collide(GameObject *otherobj);
+
 protected:
 	void DestroyBitmap();
 

@@ -1212,7 +1212,7 @@
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
-   <tile gid="0"/>
+   <tile gid="13"/>
    <tile gid="0"/>
    <tile gid="0"/>
    <tile gid="0"/>
@@ -3007,8 +3007,5 @@
    <tile gid="0"/>
   </data>
  </layer>
- <objectgroup name="Objects" width="200" height="15">
-  <object name="A thing" x="521" y="286" width="125" height="88"/>
-  <object name="" x="346" y="200"/>
- </objectgroup>
+ <objectgroup name="Objects" width="200" height="15"/>
 </map>
