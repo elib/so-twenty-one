@@ -4,7 +4,6 @@
 
 #include "quickmax.h"
 
-
 GameObject::GameObject(const char* filename, double x, double y)
 {
 	_bitmap = NULL;
@@ -17,6 +16,34 @@ GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
 	position = Vec2(x, y);
 	strcpy_s(_filename, 1024, "[MEMORY]");
 	_bitmap = bitmap;
+}
+
+void GameObject::GenerateMaskByAlpha()
+{
+	//call this once, before using the collision mask.
+	//it should copy the alpha mask to the bit mask.
+
+	bitmask_clear(_mask);
+
+	ALLEGRO_LOCKED_REGION *lock = al_lock_bitmap(_bitmap,
+		ALLEGRO_PIXEL_FORMAT_ARGB_8888, ALLEGRO_LOCK_READONLY);
+
+	unsigned int i, j;
+	for(i = 0; i < size[0]; i++)
+	{
+		for(j = 0; j < size[1]; j++)
+		{
+			ALLEGRO_COLOR col = al_get_pixel(_bitmap, i, j);
+			if(col.a < 0.2)
+			{
+				bitmask_setbit(_mask, i, j);
+			}
+		}
+	}
+
+	al_unlock_bitmap(_bitmap);
+
+	
 }
 
 void GameObject::Update(double delta_time)
@@ -100,6 +127,8 @@ void GameObject::Initialize()
 
 	size[0] = al_get_bitmap_width(_bitmap);
 	size[1] = al_get_bitmap_height(_bitmap);
+
+	_mask = bitmask_create(size[0], size[1]);
 }
 
 void GameObject::DestroyBitmap()
@@ -115,6 +144,9 @@ void GameObject::DestroyBitmap()
 GameObject::~GameObject(void)
 {
 	DestroyBitmap();
+
+	bitmask_free(_mask);
+	_mask = NULL;
 }
 
 bool GameObject::LeftScreen()

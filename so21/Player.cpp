@@ -8,6 +8,9 @@ void Player::Initialize()
 
 	max_velocity = 160;
 	damping = 400;
+
+	//make alpha bitmask!
+	GenerateMaskByAlpha();
 }
 
 
