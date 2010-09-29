@@ -190,17 +190,20 @@ void GameObject::Collide(GameObject *otherobj)
 	{
 		double x_overlap = ((a.width + b.width) / 2) - fabs(a.x - b.x);
 		double y_overlap = ((a.height + b.height) / 2) - fabs(a.y - b.y);
+
+		Vec2 correction = Vec2(0.0, 0.0);
+
 		if(x_overlap < y_overlap)
 		{
 			//determine if we're on left or right
 			if((b.x - a.x) > 0)
 			{
 				//moving left moves away
-				this->position[0] += x_overlap;
+				correction[0] = x_overlap;
 			}
 			else
 			{
-				this->position[0] -= x_overlap;
+				correction[0] = - x_overlap;
 			}
 			
 		}
@@ -210,14 +213,15 @@ void GameObject::Collide(GameObject *otherobj)
 			if((b.y - a.y) > 0)
 			{
 				//moving up moves away
-				this->position[1] += y_overlap;
+				correction[1] = y_overlap;
 			}
 			else
 			{
-				this->position[1] -= y_overlap;
+				correction[1] = - y_overlap;
 			}
-			
 		}
+
+		this->position += correction;
 	
 		//LOG_WRITE("Collision at (%f, %f) - overlap is (%f, %f)", offset[0], offset[1], x_overlap, y_overlap);
 	}
