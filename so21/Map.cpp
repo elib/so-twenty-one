@@ -62,7 +62,6 @@ bool Map::Initialize(int offset_x, int offset_y)
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
 				GameObject *obj = new GameObject(_availableBitmaps[gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
 				obj->Initialize();
-				//obj->GenerateMaskByAlpha();
 				_tileObjects.push_back(obj);
 			}
 			cur_element = cur_element->NextSiblingElement();

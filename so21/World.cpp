@@ -73,6 +73,8 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	if(!fonts.Initialize())
 		return false;
 
+	
+
 	_player = new Player(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2);
 	_player->Initialize();
 	_gameObjects.push_back(_player);

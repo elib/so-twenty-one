@@ -6,11 +6,10 @@
 
 #include "quickmax.h"
 
-//#include "bitmask-1.6a/bitmask.h"
-
 class GameObject
 {
 public:
+	GameObject(double x, double y);
 	GameObject(const char* filename, double x, double y);
 	GameObject(ALLEGRO_BITMAP *bitmap, double x, double y);
 	virtual ~GameObject(void);
@@ -30,21 +29,15 @@ public:
 	double alpha;
 	bool visible;
 	Vec2 scrollFactor;
-	
+
+	//determine if we have just left the screen (off of left side)
 	bool LeftScreen();
 
-	Vec2 size;
-
-	double sqrradius;
-
-	Rect bounding_box;
-
+	//collisions and physical properties
 	void Collide(GameObject *otherobj);
-
-	//void GenerateMaskByAlpha();
-
-
-	//bitmask_t *bitMask;
+	Vec2 size;
+	double sqrradius;
+	Rect bounding_box;
 
 protected:
 	void DestroyBitmap();
@@ -53,4 +46,8 @@ protected:
 	ALLEGRO_BITMAP *_bitmap;
 
 	bool _leftscreen;
+
+	bool _has_bitmap;
+
+	Vec2 _frame_rel_pos;
 };

@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	al_init_image_addon();
 
 	// Create a window to display things on: 640x480 pixels
-	al_set_new_display_flags(ALLEGRO_OPENGL ); 
+	al_set_new_display_flags(ALLEGRO_OPENGL_3_0 ); 
 
 		//I like this:
 		//| ALLEGRO_NOFRAME
@@ -49,8 +49,8 @@ int main(int argc, char *argv[])
 	al_set_new_display_option(ALLEGRO_AUX_BUFFERS, 3, ALLEGRO_SUGGEST);
 	al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_SUGGEST);
 	
-	//al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_REQUIRE);
-	//al_set_new_display_option(ALLEGRO_SWAP_METHOD, 2, ALLEGRO_REQUIRE);
+	al_set_new_display_option(ALLEGRO_SINGLE_BUFFER, 0, ALLEGRO_SUGGEST);
+	al_set_new_display_option(ALLEGRO_SWAP_METHOD, 2, ALLEGRO_SUGGEST);
 
 	
 	data.display = al_create_display(DISPLAY_WIDTH, DISPLAY_HEIGHT);

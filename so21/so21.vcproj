@@ -274,14 +274,6 @@
 					>
 				</File>
 			</Filter>
-			<Filter
-				Name="bitmask"
-				>
-				<File
-					RelativePath=".\bitmask-1.6a\bitmask.c"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -373,14 +365,6 @@
 				>
 				<File
 					RelativePath=".\MusicProvider.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="bitmask"
-				>
-				<File
-					RelativePath=".\bitmask-1.6a\bitmask.h"
 					>
 				</File>
 			</Filter>

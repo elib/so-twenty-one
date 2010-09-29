@@ -35,6 +35,6 @@ void Log::LogWrite(const char * msg)
 {
 #ifdef USE_LOG
 	al_fputs(_logFile, msg);
-	al_fflush(_logFile);
+	//al_fflush(_logFile);
 #endif
 }

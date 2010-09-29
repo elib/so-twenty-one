@@ -10,13 +10,9 @@ void Player::Initialize()
 	damping = 400;
 
 	bounding_box.x = -1;
-	bounding_box.y = 0;
+	bounding_box.y = 7;
 	bounding_box.width = 34;
 	bounding_box.height = 19;
-
-
-	//make alpha bitmask!
-	//GenerateMaskByAlpha();
 }
 
 
@@ -27,23 +23,27 @@ void Player::Update(double delta_time)
 	static const double accel = 850;
 
 	//accept input for player sprite
-	if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_W])
+	if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_W]
+		|| World::theWorld->Keys.keys_down[ALLEGRO_KEY_UP])
 	{
 		this->acceleration[1] = -1;
 		move_ver = true;
 	}
-	else if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_S])
+	else if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_S]
+		|| World::theWorld->Keys.keys_down[ALLEGRO_KEY_DOWN])
 	{
 		this->acceleration[1] = 1;
 		move_ver = true;
 	}
 
-	if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_A])
+	if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_A]
+		|| World::theWorld->Keys.keys_down[ALLEGRO_KEY_LEFT])
 	{
 		this->acceleration[0] = -1;
 		move_hor = true;
 	}
-	else if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_D])
+	else if(World::theWorld->Keys.keys_down[ALLEGRO_KEY_D]
+		|| World::theWorld->Keys.keys_down[ALLEGRO_KEY_RIGHT])
 	{
 		this->acceleration[0] = 1;
 		move_hor = true;
@@ -66,4 +66,18 @@ void Player::Update(double delta_time)
 	}
 
 	GameObject::Update(delta_time);
+
+	//now, check we are inside the bounds of the screen
+
+	//X
+	if(_frame_rel_pos[0] + bounding_box.x < 0)
+		position[0] -= _frame_rel_pos[0] + bounding_box.x;
+	if(_frame_rel_pos[0] + bounding_box.x + bounding_box.width > DISPLAY_WIDTH)
+		position[0] -= _frame_rel_pos[0] + bounding_box.x + bounding_box.width - DISPLAY_WIDTH;
+
+	//Y
+	if(_frame_rel_pos[1] + bounding_box.y < 0)
+		position[1] -= _frame_rel_pos[1] + bounding_box.y;
+	if(_frame_rel_pos[1] + bounding_box.y + bounding_box.height > DISPLAY_HEIGHT)
+		position[1] -= _frame_rel_pos[1] + bounding_box.y + bounding_box.height - DISPLAY_HEIGHT;
 }
