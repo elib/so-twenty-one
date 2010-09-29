@@ -136,6 +136,8 @@ void World::Update()
 			((GameObject*)_gameObjects.at(i))->Update(delta);
 		}
 
+		_map.Collide(_player);
+
 
 #ifdef DEBUG_RECORDING
 		for(i = 0; i < musicProvider.eventsForCurrentFrame.size(); i++)
@@ -168,7 +170,8 @@ void World::Update()
 
 		//at the end, update keyboard state to ready for next frame
 		Keys.Update();
-	}
+
+	} //END hasfocus
 }
 
 void World::SwitchIn()

@@ -27,7 +27,7 @@ protected:
 	
 	//objects and their bitmaps
 	vector<GameObject*> _tileObjects;
-	vector<Vec2> _tile_origins;
+	vector<ALLEGRO_BITMAP*> _availableBitmaps;
 	Vec2 _offset;
 
 	ALLEGRO_BITMAP *_largeBitmap;

@@ -101,18 +101,17 @@ void StarField::Destroy()
 
 	LOG_WRITE("Destroying star map images");
 
-	//what happens when I destroy the game objects as well?? :S
+	for(i = 0; i < _starLayer.size(); i++)
+	{
+
+		delete _starLayer[i];
+	}
+
+
 	for(i = 0; i < _availableBitmaps.size(); i++)
 	{
 		al_destroy_bitmap(_availableBitmaps[i]);
 	}
-
-	//IT CRASHES, THAT'S WHAT
-	//for(i = 0; i < _starLayer.size(); i++)
-	//{
-
-	//	delete _starLayer[i];
-	//}
 
 	//destroy parent too
 	al_destroy_bitmap(_largeBitmap);

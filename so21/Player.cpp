@@ -10,7 +10,7 @@ void Player::Initialize()
 	damping = 400;
 
 	//make alpha bitmask!
-	GenerateMaskByAlpha();
+	//GenerateMaskByAlpha();
 }
 
 

@@ -60,12 +60,9 @@ bool Map::Initialize(int offset_x, int offset_y)
 			if(gid > 0)
 			{
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
-				Vec2 origin = ((Vec2)_tile_origins.at(gid -1 ));
-				ALLEGRO_BITMAP* subbitmap = al_create_sub_bitmap(_largeBitmap, origin[0], origin[1], _tileWidth, _tileHeight);
-				int x_ = origin[0];
-				int y_ = origin[1];
-				GameObject *obj = new GameObject(subbitmap, i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
+				GameObject *obj = new GameObject(_availableBitmaps[gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
 				obj->Initialize();
+				//obj->GenerateMaskByAlpha();
 				_tileObjects.push_back(obj);
 			}
 			cur_element = cur_element->NextSiblingElement();
@@ -89,7 +86,9 @@ void Map::LoadAvailableTiles()
 	{
 		for(i = 0; i < tiles_wide; i++)
 		{
-			_tile_origins.push_back(Vec2(i*_tileWidth, j*_tileHeight));
+			ALLEGRO_BITMAP* subbitmap = al_create_sub_bitmap(_largeBitmap, i*_tileWidth, j*_tileHeight,
+					_tileWidth, _tileHeight);
+			_availableBitmaps.push_back(subbitmap);
 		}
 	}
 }
@@ -103,7 +102,10 @@ void Map::Destroy()
 	}
 	_tileObjects.clear();
 
-	_tile_origins.clear();
+	for(i = 0; i < _availableBitmaps.size(); i++)
+	{
+		al_destroy_bitmap(_availableBitmaps[i]);
+	}
 
 	al_destroy_bitmap(_largeBitmap);
 }
@@ -122,6 +124,6 @@ void Map::Collide(GameObject *otherobj)
 	unsigned int i;
 	for(i = 0; i < _tileObjects.size(); i++)
 	{
-		_tileObjects[i]->Collide(otherobj);
+		otherobj->Collide(_tileObjects[i]);
 	}
 }

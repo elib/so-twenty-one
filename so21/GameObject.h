@@ -4,7 +4,9 @@
 #include <allegro5/allegro_image.h>
 #include "svl/svl.h"
 
-#include "bitmask-1.6a/bitmask.h"
+#include "quickmax.h"
+
+//#include "bitmask-1.6a/bitmask.h"
 
 class GameObject
 {
@@ -33,12 +35,16 @@ public:
 
 	Vec2 size;
 
+	double sqrradius;
+
+	Rect bounding_box;
+
 	void Collide(GameObject *otherobj);
 
-	void GenerateMaskByAlpha();
+	//void GenerateMaskByAlpha();
 
 
-	bitmask_t *_mask;
+	//bitmask_t *bitMask;
 
 protected:
 	void DestroyBitmap();
