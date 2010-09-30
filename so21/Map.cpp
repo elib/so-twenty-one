@@ -3,16 +3,16 @@
 #include "tinyxml.h"
 
 const char* Map::_mapSourceFile = "Resources/map.tmx";
-const char* Map::_tileImageSourceFile[2] = {"Resources/tiles.png", "Resources/tiles_background.png"};
+const char* Map::_tileImageSourceFile[2] = {"Resources/tiles_background.png", "Resources/tiles.png"};
 
-const int Map::BackgroundLayer = 1;
-const int Map::ForegroundLayer = 0;
+const int Map::BackgroundLayer = 0;
+const int Map::ForegroundLayer = 1;
 
 #define XML_TYPE_SPAWN	1
 
 Map::Map(void)
 {
-	_width = _height = _tileWidth = _tileHeight = 0;
+	_width = _height = _tileWidth = _tileHeight = _big_tiles_wide = _big_tiles_high = 0;
 }
 
 Map::~Map(void)
@@ -32,7 +32,7 @@ void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
 			int gid;
 			cur_element->QueryIntAttribute("gid", &gid);
 			//each layer starts with a new base GID
-			gid = gid - _height*_width*index;
+			gid = (gid % (_big_tiles_wide*_big_tiles_high));
 			if(gid > 0)
 			{
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
@@ -139,14 +139,14 @@ void Map::LoadAvailableTiles(int index)
 	_largeBitmap[index] = al_load_bitmap(_tileImageSourceFile[index]);
 	int big_width = al_get_bitmap_width(_largeBitmap[index]);
 	int big_height = al_get_bitmap_height(_largeBitmap[index]);
-	int tiles_wide = big_width / _tileWidth;
-	int tiles_high = big_height / _tileHeight;
+	_big_tiles_wide = big_width / _tileWidth;
+	_big_tiles_high = big_height / _tileHeight;
 	int i, j;
 
 	//note backwards - this loads the tiles in the same order as the tiled program
-	for(j = 0; j < tiles_high; j++)
+	for(j = 0; j < _big_tiles_wide; j++)
 	{
-		for(i = 0; i < tiles_wide; i++)
+		for(i = 0; i < _big_tiles_high; i++)
 		{
 			ALLEGRO_BITMAP* subbitmap = al_create_sub_bitmap(_largeBitmap[index], i*_tileWidth, j*_tileHeight,
 					_tileWidth, _tileHeight);

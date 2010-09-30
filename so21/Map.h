@@ -44,4 +44,8 @@ protected:
 
 	//map info
 	int _width, _height, _tileWidth, _tileHeight;
+
+	//big bitmap info - how many tiles is it?
+	int _big_tiles_wide;
+	int _big_tiles_high;
 };
