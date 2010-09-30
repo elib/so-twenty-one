@@ -73,12 +73,6 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	if(!fonts.Initialize())
 		return false;
 
-	
-
-	_player = new Player(DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2);
-	_player->Initialize();
-	_gameObjects.push_back(_player);
-
 	unsigned int i;
 	for(i = 0; i < NUM_DEBUG_CIRCLES; i++)
 	{
@@ -93,6 +87,16 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 
 	//place map in correct location
 	_map.Initialize(0, 0);
+
+	//we know where to put the player after initializing the map
+	_player = new Player(_map.spawnPointLocation[0], _map.spawnPointLocation[1]);
+	_player->Initialize();
+	_gameObjects.push_back(_player);
+
+	//map has loaded spawn point, so add that too
+	_spawnpoint = new SpawnPoint(_map.spawnPointLocation[0], _map.spawnPointLocation[1]);
+	_spawnpoint->Initialize();
+	_gameObjects.push_back(_spawnpoint);
 
 	_starfield.Initialize();
 

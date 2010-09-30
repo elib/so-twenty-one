@@ -5,6 +5,8 @@
 const char* Map::_mapSourceFile = "Resources/map.tmx";
 const char* Map::_tileImageSourceFile = "Resources/tiles.png";
 
+#define XML_TYPE_SPAWN	1
+
 Map::Map(void)
 {
 	_width = _height = _tileWidth = _tileHeight = 0;
@@ -18,6 +20,8 @@ Map::~Map(void)
 bool Map::Initialize(int offset_x, int offset_y)
 {
 	LOG_WRITE("Loading map data from path: %s", _mapSourceFile);
+
+	spawnPointLocation = Vec2(0.0, 0.0);
 
 	_offset = Vec2(offset_x, offset_y);
 
@@ -40,7 +44,7 @@ bool Map::Initialize(int offset_x, int offset_y)
 	//now we take a break from XML and load bitmaps
 	LoadAvailableTiles();
 
-	//back to XML - now load all objects
+	//back to XML - now load all tiles and place them in our vector
 	TiXmlElement *layer_element = root->FirstChildElement("layer");
 	if(!layer_element)
 	{
@@ -67,6 +71,48 @@ bool Map::Initialize(int offset_x, int offset_y)
 			cur_element = cur_element->NextSiblingElement();
 		}
 	}
+	
+	//now load all objects
+	TiXmlElement *object_element = root->FirstChildElement("objectgroup");
+	if(!object_element)
+	{
+		LOG_WRITE("Missing ObjectGroup element in XML!");
+		return false;
+	}
+
+	/*
+	get objects - this one is the spawn point
+	<objectgroup name="Objects" width="200" height="15">
+		<object name="" x="276" y="209"/>
+	</objectgroup>*/
+
+	//run through elements
+	cur_element = object_element->FirstChildElement();
+	while(cur_element != NULL)
+	{
+		int type, x, y;
+		cur_element->QueryIntAttribute("type", &type);
+		cur_element->QueryIntAttribute("x", &x);
+		cur_element->QueryIntAttribute("y", &y);
+
+		switch(type)
+		{
+		case XML_TYPE_SPAWN:
+			{
+				//resolve to tile-width positions
+				x = x / _tileWidth;
+				x = x * _tileWidth;
+				y = y / _tileHeight;
+				y = y * _tileHeight;
+
+				spawnPointLocation = Vec2(x, y);
+				LOG_WRITE("Spawnpoint at (%d,%d)", x, y);
+			}
+		}
+		cur_element = cur_element->NextSiblingElement();
+	}
+
+
 	return true;
 }
 

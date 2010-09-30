@@ -18,6 +18,9 @@ public:
 
 	void OnHit();
 
+	
+	Vec2 spawnPointLocation;
+
 protected:
 	//resources:
 	static const char *_mapSourceFile;
