@@ -49,13 +49,27 @@ void GameObject::Update(double delta_time)
 
 	position += velocity * delta_time;
 
+	alpha = MAX(alpha, 0.0);
+	alpha = MIN(alpha, 1.0);
+
 	//find relative position to viewport
 	_frame_rel_pos = World::theWorld->TranslateToScreen(position, scrollFactor);
 	if(_frame_rel_pos[0] + size[0] < 0)
+	{
+		//we have disappeared off the screen to the left
 		_leftscreen = true;
+		return;
+	}
 
-	alpha = MAX(alpha, 0.0);
-	alpha = MIN(alpha, 1.0);
+	//more "easy outs" before rendering
+	if(_frame_rel_pos[0] > DISPLAY_WIDTH)
+		return;
+
+	if(_frame_rel_pos[1] + size[1] < 0)
+		return;
+
+	if(_frame_rel_pos[1] > DISPLAY_HEIGHT)
+		return;
 
 	//blit
 	if(!_has_bitmap)
