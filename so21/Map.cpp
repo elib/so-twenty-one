@@ -3,7 +3,10 @@
 #include "tinyxml.h"
 
 const char* Map::_mapSourceFile = "Resources/map.tmx";
-const char* Map::_tileImageSourceFile = "Resources/tiles.png";
+const char* Map::_tileImageSourceFile[2] = {"Resources/tiles.png", "Resources/tiles_background.png"};
+
+const int Map::BackgroundLayer = 1;
+const int Map::ForegroundLayer = 0;
 
 #define XML_TYPE_SPAWN	1
 
@@ -15,6 +18,31 @@ Map::Map(void)
 Map::~Map(void)
 {
 	Destroy();
+}
+
+void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
+{
+	TiXmlElement *datael = layer_element->FirstChildElement();
+	TiXmlElement *cur_element = datael->FirstChildElement();
+	int i, j;
+	for(j = 0; j < _height; j++)
+	{
+		for(i = 0; i < _width; i++)
+		{
+			int gid;
+			cur_element->QueryIntAttribute("gid", &gid);
+			//each layer starts with a new base GID
+			gid = gid - _height*_width*index;
+			if(gid > 0)
+			{
+				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
+				GameObject *obj = new GameObject(_availableBitmaps[index][gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
+				obj->Initialize();
+				_tileObjects[index].push_back(obj);
+			}
+			cur_element = cur_element->NextSiblingElement();
+		}
+	}
 }
 
 bool Map::Initialize(int offset_x, int offset_y)
@@ -42,7 +70,8 @@ bool Map::Initialize(int offset_x, int offset_y)
 	LOG_WRITE("Map size: (%d x %d), tile size: (%d x %d)", _width, _height, _tileWidth, _tileHeight);
 
 	//now we take a break from XML and load bitmaps
-	LoadAvailableTiles();
+	LoadAvailableTiles(BackgroundLayer);
+	LoadAvailableTiles(ForegroundLayer);
 
 	//back to XML - now load all tiles and place them in our vector
 	TiXmlElement *layer_element = root->FirstChildElement("layer");
@@ -52,25 +81,12 @@ bool Map::Initialize(int offset_x, int offset_y)
 		return false;
 	}
 
-	TiXmlElement *datael = layer_element->FirstChildElement();
-	TiXmlElement *cur_element = datael->FirstChildElement();
-	int i, j;
-	for(j = 0; j < _height; j++)
-	{
-		for(i = 0; i < _width; i++)
-		{
-			int gid;
-			cur_element->QueryIntAttribute("gid", &gid);
-			if(gid > 0)
-			{
-				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
-				GameObject *obj = new GameObject(_availableBitmaps[gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
-				obj->Initialize();
-				_tileObjects.push_back(obj);
-			}
-			cur_element = cur_element->NextSiblingElement();
-		}
-	}
+	LoadTilesForLayer(layer_element, ForegroundLayer);
+
+	//get background ones
+	layer_element = layer_element->NextSiblingElement("layer");
+
+	LoadTilesForLayer(layer_element, BackgroundLayer);
 	
 	//now load all objects
 	TiXmlElement *object_element = root->FirstChildElement("objectgroup");
@@ -82,12 +98,13 @@ bool Map::Initialize(int offset_x, int offset_y)
 
 	/*
 	get objects - this one is the spawn point
+
 	<objectgroup name="Objects" width="200" height="15">
 		<object name="" x="276" y="209"/>
 	</objectgroup>*/
 
 	//run through elements
-	cur_element = object_element->FirstChildElement();
+	TiXmlElement *cur_element = object_element->FirstChildElement();
 	while(cur_element != NULL)
 	{
 		int type, x, y;
@@ -116,12 +133,12 @@ bool Map::Initialize(int offset_x, int offset_y)
 	return true;
 }
 
-void Map::LoadAvailableTiles()
+void Map::LoadAvailableTiles(int index)
 {
-	LOG_WRITE("Loading tile bitmaps from path: %s", _tileImageSourceFile);
-	_largeBitmap = al_load_bitmap(_tileImageSourceFile);
-	int big_width = al_get_bitmap_width(_largeBitmap);
-	int big_height = al_get_bitmap_height(_largeBitmap);
+	LOG_WRITE("Loading tile bitmaps from path: %s", _tileImageSourceFile[index]);
+	_largeBitmap[index] = al_load_bitmap(_tileImageSourceFile[index]);
+	int big_width = al_get_bitmap_width(_largeBitmap[index]);
+	int big_height = al_get_bitmap_height(_largeBitmap[index]);
 	int tiles_wide = big_width / _tileWidth;
 	int tiles_high = big_height / _tileHeight;
 	int i, j;
@@ -131,44 +148,50 @@ void Map::LoadAvailableTiles()
 	{
 		for(i = 0; i < tiles_wide; i++)
 		{
-			ALLEGRO_BITMAP* subbitmap = al_create_sub_bitmap(_largeBitmap, i*_tileWidth, j*_tileHeight,
+			ALLEGRO_BITMAP* subbitmap = al_create_sub_bitmap(_largeBitmap[index], i*_tileWidth, j*_tileHeight,
 					_tileWidth, _tileHeight);
-			_availableBitmaps.push_back(subbitmap);
+			_availableBitmaps[index].push_back(subbitmap);
 		}
 	}
 }
 
 void Map::Destroy()
 {
-	unsigned int i;
-	for(i = 0; i < _tileObjects.size(); i++)
-	{
-		delete (_tileObjects.at(i));
-	}
-	_tileObjects.clear();
+	LOG_WRITE("Destroying map bitmaps and objects.");
 
-	for(i = 0; i < _availableBitmaps.size(); i++)
+	unsigned int i, j;
+	for(j = 0; j < 2; j++)
 	{
-		al_destroy_bitmap(_availableBitmaps[i]);
+		for(i = 0; i < _tileObjects[j].size(); i++)
+		{
+			delete (_tileObjects[j][i]);
+		}
+		_tileObjects[j].clear();
+
+		for(i = 0; i < _availableBitmaps[j].size(); i++)
+		{
+			al_destroy_bitmap(_availableBitmaps[j][i]);
+		}
+
+		al_destroy_bitmap(_largeBitmap[j]);
 	}
 
-	al_destroy_bitmap(_largeBitmap);
 }
 
-void Map::Update(double delta_time)
+void Map::Update(double delta_time, int index)
 {
 	unsigned int i;
-	for(i = 0; i < _tileObjects.size(); i++)
+	for(i = 0; i < _tileObjects[index].size(); i++)
 	{
-		((GameObject*)_tileObjects.at(i))->Update(delta_time);
+		_tileObjects[index][i]->Update(delta_time);
 	}
 }
 
 void Map::Collide(GameObject *otherobj)
 {
 	unsigned int i;
-	for(i = 0; i < _tileObjects.size(); i++)
+	for(i = 0; i < _tileObjects[ForegroundLayer].size(); i++)
 	{
-		otherobj->Collide(_tileObjects[i]);
+		otherobj->Collide(_tileObjects[ForegroundLayer][i]);
 	}
 }
