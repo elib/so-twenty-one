@@ -143,6 +143,7 @@ void World::Update()
 		}
 
 		_map.Collide(_player);
+		_spawnpoint->Collide(_player);
 
 
 #ifdef DEBUG_RECORDING

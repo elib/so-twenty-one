@@ -117,7 +117,7 @@ void GameObject::Initialize()
 	}
 	else //no bitmap
 	{
-		size[0] = size[1] = 1.0;
+		size[0] = size[1] = 32.0;
 	}
 
 
@@ -147,9 +147,6 @@ void GameObject::DestroyBitmap()
 GameObject::~GameObject(void)
 {
 	DestroyBitmap();
-
-	//bitmask_free(bitMask);
-	//bitMask = NULL;
 }
 
 bool GameObject::LeftScreen()
@@ -162,7 +159,7 @@ void GameObject::Collide(GameObject *otherobj)
 	Vec2 offset(otherobj->position - this->position);
 
 	//check proximity
-	if(sqrlen(offset) > MAX(this->sqrradius, otherobj->sqrradius))
+	if(sqrlen(offset) >  1.2 * MAX(this->sqrradius, otherobj->sqrradius))
 		return;
 
 	//copy rects for comfort
