@@ -36,7 +36,12 @@ World::World(void)
 
 	cameraPosition = Vec2(0.0,0.0);
 	_last_tick_count.QuadPart = 0;
+	_total_time = 0;
 	_player = NULL;
+
+	_camera_speed = 0;
+	_target_camera_speed_time = 0;
+	_camera_accel = 0;
 }
 
 World::~World(void)
@@ -126,6 +131,9 @@ void World::Update()
 
 	if(hasfocus)
 	{
+		//add this to time
+		_total_time += delta;
+
 		musicProvider.Update();
 
 		//update "camera"
@@ -209,7 +217,23 @@ Vec2 World::TranslateToScreen(Vec2 _position, Vec2 _scrollfactor)
 void World::MoveCamera(double delta)
 {
 	//moving right constantly
-	static const double speed = 25;
-	double amount = speed * delta;
+	//static const double speed = 25;
+	if(_total_time < _target_camera_speed_time)
+	{
+		_camera_speed = _camera_speed + _camera_accel * delta;
+	}
+
+	double amount = _camera_speed * delta;
 	cameraPosition[0] += amount;
+}
+
+void World::PlayerLeftSpawn()
+{
+	if(_target_camera_speed_time == 0)
+	{
+		double time_to_loop_end = musicProvider.DoNotLoop();
+		_target_camera_speed_time = _total_time + time_to_loop_end;
+
+		_camera_accel = 50 / time_to_loop_end;
+	}
 }

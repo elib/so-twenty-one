@@ -65,6 +65,9 @@ public:
 
 	MusicProvider musicProvider;
 
+	//"EVENT"!
+	void PlayerLeftSpawn();
+
 protected:
 
 	Player *_player;
@@ -86,5 +89,11 @@ protected:
 	SpawnPoint *_spawnpoint;
 
 	StarField _starfield;
+
+	double _camera_speed;
+	double _total_time;
+
+	double _target_camera_speed_time;
+	double _camera_accel;
 
 };

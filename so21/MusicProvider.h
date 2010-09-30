@@ -44,6 +44,8 @@ public:
 
 	void Initialize(ALLEGRO_DISPLAY *display);
 
+	double DoNotLoop();
+
 protected:
 
 	//read/write
@@ -65,4 +67,10 @@ protected:
 	//for recordings:
 	vector<MusicEvent> _newMusicEvents;
 	int _currentRecordingType;
+
+
+	//beginning loop
+	bool _loop_next_time;
+	QWORD _loop_start_pos;
+	QWORD _loop_end_pos;
 };

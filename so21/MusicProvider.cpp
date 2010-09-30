@@ -14,9 +14,12 @@ const char* MusicProvider::_out_xml_file = "Resources/out_recording.xml";
 #endif
 #endif
 
+#define BEGINNING_LOOP_END_SEC		 8.30523
+#define BEGINNING_LOOP_START_SEC	 2.78332
+
 MusicProvider::MusicProvider(void)
 {
-
+	_loop_next_time = true;
 }
 
 MusicProvider::~MusicProvider(void)
@@ -141,13 +144,40 @@ void MusicProvider::Initialize(ALLEGRO_DISPLAY *display)
 		return;
 	}
 
+	_loop_end_pos = BASS_ChannelSeconds2Bytes(_stream, BEGINNING_LOOP_END_SEC);
+	_loop_start_pos = BASS_ChannelSeconds2Bytes(_stream, BEGINNING_LOOP_START_SEC);
+
 	PlayMusic();
 }
+
+double MusicProvider::DoNotLoop()
+{
+	//turn off loop
+	_loop_next_time = false;
+	QWORD bytesleft = _loop_end_pos - currentPosition;
+	return BASS_ChannelBytes2Seconds(_stream, bytesleft);
+}
+
 
 void MusicProvider::Update()
 {
 	//set current position for this frame
 	currentPosition = BASS_ChannelGetPosition(_stream, BASS_POS_BYTE);
+
+	if(_loop_next_time)
+	{
+		if(currentPosition >= _loop_end_pos)
+		{
+			if(!BASS_ChannelSetPosition(_stream, _loop_start_pos, BASS_POS_BYTE))
+			{
+				int err = BASS_ErrorGetCode();
+				LOG_WRITE("Error setting stream position: %d", err);
+			}
+			
+		}
+
+		//return;
+	}
 
 	//clear current events for this frame
 	eventsForCurrentFrame.clear();

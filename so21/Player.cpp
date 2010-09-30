@@ -67,6 +67,15 @@ void Player::Update(double delta_time)
 
 	GameObject::Update(delta_time);
 
+	if(!_notifiedPlayerLeftSpawn)
+	{
+		if((position[0] - _starting_location[0]) > 20)
+		{
+			World::theWorld->PlayerLeftSpawn();
+			_notifiedPlayerLeftSpawn = true;
+		}
+	}
+
 	//now, check we are inside the bounds of the screen
 
 	//X
