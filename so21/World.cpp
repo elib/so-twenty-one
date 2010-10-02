@@ -2,11 +2,11 @@
 #include <stdio.h>
 #include "player.h"
 
-
-
-
 World* World::theWorld = NULL;
 ALLEGRO_DISPLAY* World::TheDisplay = NULL;
+
+//fadeout time in seconds - when dying
+#define FADEOUT_TIME	4.0
 
 #define SECONDS_PER_TICK (1.0 / 1000.0)
 
@@ -71,6 +71,8 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 {
 	_display = display;
 	_game_over = false;
+	_quitgame = false;
+	_screenFade.Initialize();
 
 	Keys.Initialize();
 
@@ -111,10 +113,12 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	QueryPerformanceFrequency(&_performance_freq);
 	QueryPerformanceCounter(&_last_tick_count);
 
+	musicProvider.PlayMusic();
+
 	return true;
 }
 
-void World::Update()
+bool World::Update()
 {
 	unsigned int i;
 
@@ -198,10 +202,17 @@ void World::Update()
 
 		if(_game_over)
 		{
-			screenFade.Update(_total_time);
+			_screenFade.Update(_total_time);
 		}
 
 	} //END hasfocus
+
+	al_flip_display();
+
+	if(_quitgame)
+		return false;
+
+	return true;
 }
 
 void World::SwitchIn()
@@ -255,7 +266,12 @@ void World::LoseGame()
 	if(!_game_over)
 	{
 		_game_over = true;
-		screenFade.Initialize();
-		screenFade.StartFade(_total_time, _total_time + 3);
+		_screenFade.StartFade(_total_time, _total_time + FADEOUT_TIME);
+		musicProvider.Fadeout(FADEOUT_TIME);
 	}
+}
+
+void World::Quit()
+{
+	_quitgame = true;
 }

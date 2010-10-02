@@ -42,7 +42,7 @@ public:
 	~World(void);
 
 	bool Initialize(ALLEGRO_DISPLAY * display);
-	void Update();
+	bool Update();
 
 	Vec2 TranslateToScreen(Vec2 _position, Vec2 _scrollfactor);
 
@@ -70,6 +70,8 @@ public:
 	void PlayerLeftSpawn();
 
 	void LoseGame();
+
+	void Quit();
 
 protected:
 
@@ -100,7 +102,7 @@ protected:
 	double _camera_accel;
 
 	bool _game_over;
+	bool _quitgame;
 
-	ScreenFade screenFade;
-
+	ScreenFade _screenFade;
 };

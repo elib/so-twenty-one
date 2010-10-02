@@ -45,6 +45,8 @@ public:
 	void Initialize(ALLEGRO_DISPLAY *display);
 
 	double DoNotLoop();
+	void DoLoop();
+	void Fadeout(double time);
 
 protected:
 

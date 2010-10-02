@@ -43,7 +43,10 @@ void ScreenFade::Update(double current_time)
 	_tint_color.a = alpha;
 
 	if(alpha == 1)
+	{
 		al_draw_scaled_bitmap(_bitmap, 0, 0, _wid, _hei, 0,0, DISPLAY_WIDTH, DISPLAY_HEIGHT, 0);
+		World::theWorld->Quit();
+	}
 	else
 		al_draw_tinted_scaled_bitmap(_bitmap, _tint_color, 0, 0, _wid, _hei, 0,0, DISPLAY_WIDTH, DISPLAY_HEIGHT, 0);
 }

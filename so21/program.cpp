@@ -152,9 +152,8 @@ int main(int argc, char *argv[])
 
 			redraw = false;
 
-			world.Update();
-
-			al_flip_display();
+			if(!world.Update())
+				break;
 		}
 	}
 

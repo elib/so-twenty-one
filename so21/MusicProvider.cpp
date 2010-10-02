@@ -14,8 +14,20 @@ const char* MusicProvider::_out_xml_file = "Resources/out_recording.xml";
 #endif
 #endif
 
-#define BEGINNING_LOOP_END_SEC		 8.30523
-#define BEGINNING_LOOP_START_SEC	 2.78332
+#define BEGINNING_LOOP_START_SEC	 4.473628
+#define BEGINNING_LOOP_END_SEC		 7.752834
+
+//audacity:
+//start		4.473628
+//end		7.752834
+
+
+void CALLBACK HitLoopPosition(
+							  HSYNC handle,
+							  DWORD channel,
+							  DWORD data,
+							  void *user
+							  );
 
 MusicProvider::MusicProvider(void)
 {
@@ -145,9 +157,13 @@ void MusicProvider::Initialize(ALLEGRO_DISPLAY *display)
 	}
 
 	_loop_end_pos = BASS_ChannelSeconds2Bytes(_stream, BEGINNING_LOOP_END_SEC);
+	_loop_end_pos += 16 * 1;
 	_loop_start_pos = BASS_ChannelSeconds2Bytes(_stream, BEGINNING_LOOP_START_SEC);
+	_loop_start_pos -= 16 * 3;
 
-	PlayMusic();
+	//LOG_WRITE("Calculated start pos: %lu bytes, barf %d, end pos: %lu bytes", _loop_start_pos, _loop_end_pos, _loop_end_pos);
+
+	BASS_ChannelSetSync(_stream, BASS_SYNC_POS, _loop_end_pos, HitLoopPosition, (void*)this);
 }
 
 double MusicProvider::DoNotLoop()
@@ -163,21 +179,6 @@ void MusicProvider::Update()
 {
 	//set current position for this frame
 	currentPosition = BASS_ChannelGetPosition(_stream, BASS_POS_BYTE);
-
-	if(_loop_next_time)
-	{
-		if(currentPosition >= _loop_end_pos)
-		{
-			if(!BASS_ChannelSetPosition(_stream, _loop_start_pos, BASS_POS_BYTE))
-			{
-				int err = BASS_ErrorGetCode();
-				LOG_WRITE("Error setting stream position: %d", err);
-			}
-			
-		}
-
-		//return;
-	}
 
 	//clear current events for this frame
 	eventsForCurrentFrame.clear();
@@ -200,10 +201,11 @@ void MusicProvider::Update()
 	//draw pretty reminder at top of screen - we are recording.
 	char rectext[1024];
 	sprintf_s(rectext, "RECORDING TYPE %d !!!!", _currentRecordingType);
+	double seconds = BASS_ChannelBytes2Seconds(_stream, currentPosition);
 	World::theWorld->textLayer.AddText(rectext, World::theWorld->fonts.SmallFont,
 			al_map_rgba_f(1, 0, 0, 1.0), DISPLAY_WIDTH/2, 0, ALLEGRO_ALIGN_CENTRE);
 	char postext[1024];
-	sprintf_s(postext, "position: %d", currentPosition);
+	sprintf_s(postext, "time (sec): %3.3f", seconds);
 
 	World::theWorld->textLayer.AddText(postext, World::theWorld->fonts.SmallFont,
 		al_map_rgba_f(1, 1, 1, 1.0), DISPLAY_WIDTH/2, 15, ALLEGRO_ALIGN_CENTRE);
@@ -230,4 +232,39 @@ void MusicProvider::Update()
 	}
 
 #endif
+}
+
+void MusicProvider::Fadeout(double time)
+{
+	//fade out a bit sooner than requested
+	BASS_ChannelSlideAttribute(_stream, BASS_ATTRIB_VOL, 0, (time * 1000) - 0.5);  
+}
+
+
+void MusicProvider::DoLoop()
+{
+	if(_loop_next_time)
+	{
+		if(!BASS_ChannelSetPosition(_stream, _loop_start_pos, BASS_POS_BYTE))
+		{
+			int err = BASS_ErrorGetCode();
+			LOG_WRITE("Error setting stream position: %d", err);
+		}
+
+		BASS_ChannelUpdate(_stream, 0);
+	}
+}
+
+
+
+void CALLBACK HitLoopPosition(
+							  HSYNC handle,
+							  DWORD channel,
+							  DWORD data,
+							  void *user
+							  )
+{
+
+	MusicProvider *provider = (MusicProvider*)user;
+	provider->DoLoop();
 }
