@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   id="svg3093"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="keyhelp.svg"
+   inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\keyhelp.png"
+   inkscape:export-xdpi="180"
+   inkscape:export-ydpi="180">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.098901"
+     inkscape:cx="29.101126"
+     inkscape:cy="33.11868"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:window-width="1280"
+     inkscape:window-height="972"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3103"
+       empspacing="4"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs3095">
+    <marker
+       inkscape:stockid="Arrow2Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Mend"
+       style="overflow:visible;">
+      <path
+         id="path3796"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2Lend"
+       style="overflow:visible;">
+      <path
+         id="path3790"
+         style="font-size:12.0;fill-rule:evenodd;stroke-width:0.62500000;stroke-linejoin:round;"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(1.1) rotate(180) translate(1,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2MendK"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2MendK"
+       style="overflow:visible;">
+      <path
+         id="path4403"
+         style="stroke-linejoin:round;font-size:12.0;fill-rule:evenodd;stroke:#686868;stroke-width:0.62500000;fill:#686868"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow2MendKU"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow2MendKU"
+       style="overflow:visible;">
+      <path
+         id="path4478"
+         style="stroke-linejoin:round;font-size:12.0;fill-rule:evenodd;stroke:#cdcdcd;stroke-width:0.62500000;fill:#cdcdcd"
+         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
+         transform="scale(0.6) rotate(180) translate(0,0)" />
+    </marker>
+  </defs>
+  <metadata
+     id="metadata3098">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     transform="translate(0,48)">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3756"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:Bitstream Vera Sans;font-style:normal;font-weight:normal;font-size:4;line-height:125%;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion3758"><rect
+           id="rect3760"
+           width="15.290309"
+           height="15.799986"
+           x="4.0774159"
+           y="20.040361" /></flowRegion><flowPara
+         id="flowPara3762" /></flowRoot>    <g
+       transform="translate(2,1)"
+       id="g4441">
+      <rect
+         ry="2"
+         y="-28"
+         x="4"
+         height="16"
+         width="16"
+         id="rect2986"
+         style="fill:#000000;stroke:#cdcdcd;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;fill-opacity:0.58510636999999999;stroke-linejoin:miter"
+         inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\rect2986.png"
+         inkscape:export-xdpi="180"
+         inkscape:export-ydpi="180" />
+      <path
+         transform="translate(0,-48)"
+         inkscape:connector-curvature="0"
+         id="path3764"
+         d="M 16,28 8,28"
+         style="fill:none;stroke:#cdcdcd;stroke-width:1;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker-end:url(#Arrow2MendKU)" />
+    </g>
+    <use
+       height="64"
+       width="64"
+       transform="matrix(0,1,-1,0,13,-51)"
+       id="use4445"
+       xlink:href="#g4441"
+       y="0"
+       x="0" />
+    <use
+       height="64"
+       width="64"
+       transform="matrix(0,-1,1,0,51,-5)"
+       id="use4447"
+       xlink:href="#g4441"
+       y="0"
+       x="0" />
+    <use
+       height="64"
+       width="64"
+       transform="matrix(-1,0,0,-1,64,-38)"
+       id="use4449"
+       xlink:href="#g4441"
+       y="0"
+       x="0" />
+    <path
+       style="fill:none;stroke:#c2d8d7;stroke-width:1;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 57,-7 20,-7 11,1 4,1"
+       id="path4514"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+  </g>
+</svg>
