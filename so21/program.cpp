@@ -88,10 +88,10 @@ int main(int argc, char *argv[])
 	if(!world.Initialize(data.display))
 		return -1;
 
-	//MusicProvider musicProvider;
-	//musicProvider.Initialize(data.display);
-
 	//al_set_blender(ALLEGRO_DEST_MINUS_SRC, ALLEGRO_ALPHA, ALLEGRO_ONE);
+	//al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_ALPHA);
+	//al_set_separate_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA,
+	//	ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_ZERO);
 
 	// Make the backbuffer visible
 	al_flip_display();

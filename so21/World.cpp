@@ -70,6 +70,7 @@ void World::RemoveGameObjects()
 bool World::Initialize(ALLEGRO_DISPLAY * display)
 {
 	_display = display;
+	_game_over = false;
 
 	Keys.Initialize();
 
@@ -134,6 +135,12 @@ void World::Update()
 		//add this to time
 		_total_time += delta;
 
+		if(_game_over)
+		{
+			//freeze everything, keep working
+			delta = 0;
+		}
+
 		musicProvider.Update();
 
 		//update "camera"
@@ -189,6 +196,11 @@ void World::Update()
 		//at the end, update keyboard state to ready for next frame
 		Keys.Update();
 
+		if(_game_over)
+		{
+			screenFade.Update(_total_time);
+		}
+
 	} //END hasfocus
 }
 
@@ -235,5 +247,15 @@ void World::PlayerLeftSpawn()
 		_target_camera_speed_time = _total_time + time_to_loop_end;
 
 		_camera_accel = 50 / time_to_loop_end;
+	}
+}
+
+void World::LoseGame()
+{
+	if(!_game_over)
+	{
+		_game_over = true;
+		screenFade.Initialize();
+		screenFade.StartFade(_total_time, _total_time + 3);
 	}
 }

@@ -90,3 +90,16 @@ void Player::Update(double delta_time)
 	if(_frame_rel_pos[1] + bounding_box.y + bounding_box.height > DISPLAY_HEIGHT)
 		position[1] -= _frame_rel_pos[1] + bounding_box.y + bounding_box.height - DISPLAY_HEIGHT;
 }
+
+
+void Player::Collide(GameObject *otherobj)
+{
+	GameObject::Collide(otherobj);
+
+	//after collision calculations, check where we stand
+	if(_frame_rel_pos[0] <= (-size[0] / 2))
+	{
+		LOG_WRITE("KILL!!! KILL!!!!!");
+		World::theWorld->LoseGame();
+	}
+}

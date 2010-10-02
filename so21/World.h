@@ -22,6 +22,7 @@
 #include "StarField.h"
 
 #include "SpawnPoint.h"
+#include "ScreenFade.h"
 
 #define EPSILON (1E-6)
 
@@ -68,6 +69,8 @@ public:
 	//"EVENT"!
 	void PlayerLeftSpawn();
 
+	void LoseGame();
+
 protected:
 
 	Player *_player;
@@ -95,5 +98,9 @@ protected:
 
 	double _target_camera_speed_time;
 	double _camera_accel;
+
+	bool _game_over;
+
+	ScreenFade screenFade;
 
 };
