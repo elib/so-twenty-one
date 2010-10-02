@@ -182,18 +182,22 @@ void MusicProvider::Update()
 
 	//clear current events for this frame
 	eventsForCurrentFrame.clear();
-	//set current events for external consumption
-	unsigned int i = 0;
-	while(((_nextEventIndex + i) < _musicEvents.size())
-		&& (_musicEvents[_nextEventIndex + i].bytestamp < currentPosition))
-	{
-		eventsForCurrentFrame.push_back(_musicEvents[_nextEventIndex + i]);
-		i++;
-	}
 
-	//place ourselves in the next event domain
-	//if any events were taken, we're at least 1 ahead
-	_nextEventIndex += i;
+	if(!_loop_next_time)
+	{
+		//set current events for external consumption
+		unsigned int i = 0;
+		while(((_nextEventIndex + i) < _musicEvents.size())
+			&& (_musicEvents[_nextEventIndex + i].bytestamp < currentPosition))
+		{
+			eventsForCurrentFrame.push_back(_musicEvents[_nextEventIndex + i]);
+			i++;
+		}
+
+		//place ourselves in the next event domain
+		//if any events were taken, we're at least 1 ahead
+		_nextEventIndex += i;
+	}
 
 
 #ifdef IS_RECORDING
