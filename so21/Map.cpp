@@ -41,7 +41,7 @@ void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
 				if(index == BackgroundLayer)
 				{
 					//make it lag 
-					obj->scrollFactor[0] = 0.5;
+					obj->scrollFactor[0] = 0.3;
 				}
 				_tileObjects[index].push_back(obj);
 			}

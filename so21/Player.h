@@ -1,5 +1,6 @@
 #pragma once
 #include "gameobject.h"
+#include "VisualMessage.h"
 
 class Player :
 	public GameObject
@@ -17,4 +18,5 @@ public:
 protected:
 	Vec2 _starting_location;
 	bool _notifiedPlayerLeftSpawn;
+	VisualMessage _playermessage;
 };

@@ -5,6 +5,7 @@
 void Player::Initialize()
 {
 	GameObject::Initialize();
+	_playermessage.Initialize();
 
 	max_velocity = 160;
 	damping = 400;
@@ -75,6 +76,10 @@ void Player::Update(double delta_time)
 			_notifiedPlayerLeftSpawn = true;
 		}
 	}
+
+	_playermessage.UpdatePosition(position);
+
+	_playermessage.Update(delta_time);
 
 	//now, check we are inside the bounds of the screen
 

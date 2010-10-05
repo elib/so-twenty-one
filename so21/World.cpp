@@ -10,6 +10,8 @@ ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
 #define SECONDS_PER_TICK (1.0 / 1000.0)
 
+#define TARGET_CAMERA_SPEED		(50)
+
 #ifdef _DEBUG
 
 //when debugging, always show fps
@@ -245,6 +247,10 @@ void World::MoveCamera(double delta)
 	{
 		_camera_speed = _camera_speed + _camera_accel * delta;
 	}
+	else if(_camera_accel > 0)
+	{
+		_camera_speed = TARGET_CAMERA_SPEED;
+	}
 
 	double amount = _camera_speed * delta;
 	cameraPosition[0] += amount;
@@ -255,9 +261,13 @@ void World::PlayerLeftSpawn()
 	if(_target_camera_speed_time == 0)
 	{
 		double time_to_loop_end = musicProvider.DoNotLoop();
+		//keep it under wraps
+		time_to_loop_end = MAX(2, time_to_loop_end);
+		time_to_loop_end = MIN(4, time_to_loop_end);
+
 		_target_camera_speed_time = _total_time + time_to_loop_end;
 
-		_camera_accel = 50 / time_to_loop_end;
+		_camera_accel = TARGET_CAMERA_SPEED / time_to_loop_end;
 	}
 }
 
