@@ -10,7 +10,7 @@ ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
 #define SECONDS_PER_TICK (1.0 / 1000.0)
 
-#define TARGET_CAMERA_SPEED		(50)
+#define TARGET_CAMERA_SPEED		(60)
 
 #ifdef _DEBUG
 
@@ -38,12 +38,12 @@ World::World(void)
 
 	cameraPosition = Vec2(0.0,0.0);
 	_last_tick_count.QuadPart = 0;
-	_total_time = 0;
+	total_time = 0;
 	_player = NULL;
 
 	_camera_speed = 0;
 	_target_camera_speed_time = 0;
-	_camera_accel = 0;
+	_camera_speed_start = 0;
 }
 
 World::~World(void)
@@ -139,7 +139,7 @@ bool World::Update()
 	if(hasfocus)
 	{
 		//add this to time
-		_total_time += delta;
+		total_time += delta;
 
 		if(_game_over)
 		{
@@ -204,7 +204,7 @@ bool World::Update()
 
 		if(_game_over)
 		{
-			_screenFade.Update(_total_time);
+			_screenFade.Update(total_time);
 		}
 
 	} //END hasfocus
@@ -243,11 +243,11 @@ void World::MoveCamera(double delta)
 {
 	//moving right constantly
 	//static const double speed = 25;
-	if(_total_time < _target_camera_speed_time)
+	if(total_time < _target_camera_speed_time)
 	{
-		_camera_speed = _camera_speed + _camera_accel * delta;
+		_camera_speed = TARGET_CAMERA_SPEED * ease_in((total_time - _camera_speed_start) / (_target_camera_speed_time - _camera_speed_start));
 	}
-	else if(_camera_accel > 0)
+	else if(_camera_speed_start > 0) //kludge way to know we aren't in initial state
 	{
 		_camera_speed = TARGET_CAMERA_SPEED;
 	}
@@ -262,12 +262,11 @@ void World::PlayerLeftSpawn()
 	{
 		double time_to_loop_end = musicProvider.DoNotLoop();
 		//keep it under wraps
-		time_to_loop_end = MAX(2, time_to_loop_end);
-		time_to_loop_end = MIN(4, time_to_loop_end);
+		time_to_loop_end = MAX(4, time_to_loop_end);
+		time_to_loop_end = MIN(8, time_to_loop_end);
 
-		_target_camera_speed_time = _total_time + time_to_loop_end;
-
-		_camera_accel = TARGET_CAMERA_SPEED / time_to_loop_end;
+		_target_camera_speed_time = total_time + time_to_loop_end;
+		_camera_speed_start = total_time;
 	}
 }
 
@@ -276,7 +275,7 @@ void World::LoseGame()
 	if(!_game_over)
 	{
 		_game_over = true;
-		_screenFade.StartFade(_total_time, _total_time + FADEOUT_TIME);
+		_screenFade.StartFade(total_time, total_time + FADEOUT_TIME);
 		musicProvider.Fadeout(FADEOUT_TIME);
 	}
 }

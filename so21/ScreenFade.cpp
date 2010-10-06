@@ -36,7 +36,7 @@ void ScreenFade::StartFade(double start_time, double end_time)
 
 void ScreenFade::Update(double current_time)
 {
-	double alpha = (current_time - _start_time) / (_end_time - _start_time);
+	double alpha = ease_in((current_time - _start_time) / (_end_time - _start_time));
 	alpha = max(0, alpha);
 	alpha = min(1, alpha);
 

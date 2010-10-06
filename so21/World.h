@@ -60,6 +60,8 @@ public:
 
 	Fonts fonts;
 
+	double total_time;
+
 	bool hasfocus;
 
 	TextLayer textLayer;
@@ -72,6 +74,7 @@ public:
 	void LoseGame();
 
 	void Quit();
+
 
 protected:
 
@@ -96,10 +99,9 @@ protected:
 	StarField _starfield;
 
 	double _camera_speed;
-	double _total_time;
 
 	double _target_camera_speed_time;
-	double _camera_accel;
+	double _camera_speed_start;
 
 	bool _game_over;
 	bool _quitgame;

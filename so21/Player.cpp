@@ -77,10 +77,6 @@ void Player::Update(double delta_time)
 		}
 	}
 
-	_playermessage.UpdatePosition(position);
-
-	_playermessage.Update(delta_time);
-
 	//now, check we are inside the bounds of the screen
 
 	//X
@@ -94,6 +90,17 @@ void Player::Update(double delta_time)
 		position[1] -= _frame_rel_pos[1] + bounding_box.y;
 	if(_frame_rel_pos[1] + bounding_box.y + bounding_box.height > DISPLAY_HEIGHT)
 		position[1] -= _frame_rel_pos[1] + bounding_box.y + bounding_box.height - DISPLAY_HEIGHT;
+
+
+	//check starting location
+	if(!_notifiedPlayerLeftSpawn && World::theWorld->total_time > 4)
+		_playermessage.FadeInMsg(MSG_KEYHELP, 3);
+	else if (_notifiedPlayerLeftSpawn)
+		_playermessage.FadeOutMsg(MSG_KEYHELP, 5);
+
+	_playermessage.UpdatePosition(position);
+
+	_playermessage.Update(delta_time);
 }
 
 
