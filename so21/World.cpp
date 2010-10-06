@@ -265,6 +265,8 @@ void World::PlayerLeftSpawn()
 		time_to_loop_end = MAX(4, time_to_loop_end);
 		time_to_loop_end = MIN(8, time_to_loop_end);
 
+		LOG_WRITE("We're on our way - chosen speedup time is %f", time_to_loop_end);
+
 		_target_camera_speed_time = total_time + time_to_loop_end;
 		_camera_speed_start = total_time;
 	}
