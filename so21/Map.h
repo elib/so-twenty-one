@@ -6,14 +6,20 @@ using namespace std;
 
 #include "TinyXml.h"
 
+enum MapTypes
+{
+	MAP_BACKGROUND,
+	MAP_FOREGROUND,
+	MAP_FOREGROUND_COLLIDING,
+
+	__MAP_TYPE_COUNT
+};
+
 class Map
 {
 public:
 	Map(void);
 	~Map(void);
-
-	static const int BackgroundLayer;
-	static const int ForegroundLayer;
 
 	bool Initialize(int offset_x, int offset_y);
 	void Destroy();
@@ -29,18 +35,18 @@ public:
 protected:
 	//resources:
 	static const char *_mapSourceFile;
-	static const char *_tileImageSourceFile[2];
+	static const char *_tileImageSourceFile[__MAP_TYPE_COUNT];
 
 	void LoadAvailableTiles(int index);
 	void LoadTilesForLayer(TiXmlElement *layer_element, int index);
 	
 	//objects and their bitmaps
-	vector<GameObject*> _tileObjects[2];
+	vector<GameObject*> _tileObjects[__MAP_TYPE_COUNT];
 	//vector<GameObject*> _bgTileObjects;
-	vector<ALLEGRO_BITMAP*> _availableBitmaps[2];
+	vector<ALLEGRO_BITMAP*> _availableBitmaps[__MAP_TYPE_COUNT];
 	Vec2 _offset;
 
-	ALLEGRO_BITMAP *_largeBitmap[2];
+	ALLEGRO_BITMAP *_largeBitmap[__MAP_TYPE_COUNT];
 
 	//map info
 	int _width, _height, _tileWidth, _tileHeight;

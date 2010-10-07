@@ -3,10 +3,10 @@
 #include "tinyxml.h"
 
 const char* Map::_mapSourceFile = "Resources/map.tmx";
-const char* Map::_tileImageSourceFile[2] = {"Resources/tiles_background.png", "Resources/tiles.png"};
-
-const int Map::BackgroundLayer = 0;
-const int Map::ForegroundLayer = 1;
+const char* Map::_tileImageSourceFile[__MAP_TYPE_COUNT] = {
+					"Resources/tiles_background.png",
+					"Resources/tiles_foreground.png",
+					"Resources/tiles.png"};
 
 #define XML_TYPE_SPAWN	1
 
@@ -38,7 +38,7 @@ void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
 				GameObject *obj = new GameObject(_availableBitmaps[index][gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
 				obj->Initialize();
-				if(index == BackgroundLayer)
+				if(index == MAP_BACKGROUND)
 				{
 					//make it lag 
 					obj->scrollFactor[0] = 0.3;
@@ -75,8 +75,9 @@ bool Map::Initialize(int offset_x, int offset_y)
 	LOG_WRITE("Map size: (%d x %d), tile size: (%d x %d)", _width, _height, _tileWidth, _tileHeight);
 
 	//now we take a break from XML and load bitmaps
-	LoadAvailableTiles(BackgroundLayer);
-	LoadAvailableTiles(ForegroundLayer);
+	LoadAvailableTiles(MAP_BACKGROUND);
+	LoadAvailableTiles(MAP_FOREGROUND);
+	LoadAvailableTiles(MAP_FOREGROUND_COLLIDING);
 
 	//back to XML - now load all tiles and place them in our vector
 	TiXmlElement *layer_element = root->FirstChildElement("layer");
@@ -86,12 +87,17 @@ bool Map::Initialize(int offset_x, int offset_y)
 		return false;
 	}
 
-	LoadTilesForLayer(layer_element, ForegroundLayer);
-
 	//get background ones
+	LoadTilesForLayer(layer_element, MAP_BACKGROUND);
+	
+	//foreground
 	layer_element = layer_element->NextSiblingElement("layer");
+	LoadTilesForLayer(layer_element, MAP_FOREGROUND);
 
-	LoadTilesForLayer(layer_element, BackgroundLayer);
+	//foreground colliding
+	layer_element = layer_element->NextSiblingElement("layer");
+	LoadTilesForLayer(layer_element, MAP_FOREGROUND_COLLIDING);
+	
 	
 	//now load all objects
 	TiXmlElement *object_element = root->FirstChildElement("objectgroup");
@@ -165,7 +171,7 @@ void Map::Destroy()
 	LOG_WRITE("Destroying map bitmaps and objects.");
 
 	unsigned int i, j;
-	for(j = 0; j < 2; j++)
+	for(j = 0; j < __MAP_TYPE_COUNT; j++)
 	{
 		for(i = 0; i < _tileObjects[j].size(); i++)
 		{
@@ -195,8 +201,8 @@ void Map::Update(double delta_time, int index)
 void Map::Collide(GameObject *otherobj)
 {
 	unsigned int i;
-	for(i = 0; i < _tileObjects[ForegroundLayer].size(); i++)
+	for(i = 0; i < _tileObjects[MAP_FOREGROUND_COLLIDING].size(); i++)
 	{
-		otherobj->Collide(_tileObjects[ForegroundLayer][i]);
+		otherobj->Collide(_tileObjects[MAP_FOREGROUND_COLLIDING][i]);
 	}
 }

@@ -155,7 +155,7 @@ bool World::Update()
 		_starfield.Update(delta);
 
 		//update map background
-		_map.Update(delta, Map::BackgroundLayer);
+		_map.Update(delta, MAP_BACKGROUND);
 
 		//update all subservient objects
 		for(i = 0; i < _gameObjects.size(); i++)
@@ -164,7 +164,8 @@ bool World::Update()
 		}
 
 		//update map
-		_map.Update(delta, Map::ForegroundLayer);
+		_map.Update(delta, MAP_FOREGROUND);
+		_map.Update(delta, MAP_FOREGROUND_COLLIDING);
 
 		_map.Collide(_player);
 		_spawnpoint->Collide(_player);
