@@ -108,6 +108,10 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_spawnpoint->Initialize();
 	_gameObjects.push_back(_spawnpoint);
 
+	_flashingbomb = new FlashingBomb(300, 100);
+	_flashingbomb->Initialize();
+	_gameObjects.push_back(_flashingbomb);
+
 	_starfield.Initialize();
 
 	//start from 0 now

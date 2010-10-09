@@ -33,21 +33,7 @@ void GameObject::Update(double delta_time)
 	_leftscreen = false;
 	_frame_rel_pos = Vec2(0.0,0.0);
 
-	//"physics" time!
-	Vec2 calculation_accel = acceleration;
-	if(sqrlen(velocity) > EPSILON)
-	{
-		calculation_accel -= norm(velocity) * damping;
-	}
-
-	velocity += calculation_accel * delta_time;
-
-	if(sqrlen(velocity) > sqr(max_velocity))
-	{
-		velocity = norm(velocity) * max_velocity;
-	}
-
-	position += velocity * delta_time;
+	CalculatePhysics(delta_time);
 
 	alpha = MAX(alpha, 0.0);
 	alpha = MIN(alpha, 1.0);
@@ -79,18 +65,31 @@ void GameObject::Update(double delta_time)
 	{
 		if(visible)
 		{
+
+			ALLEGRO_BITMAP *the_bitmap;
+
+			//render animation or not
+			if(_is_animated)
+			{
+				the_bitmap = GetCurrentAnimationFrame();
+			}
+			else
+			{
+				the_bitmap = _bitmap;
+			}
+
 			//don't draw if alpha is very small
 			if(alpha > EPSILON)
 			{
 				//if alpha is about 1, draw regularly
 				if(alpha > (1.0 - EPSILON)) //not sure if this does what I think it does
 				{
-					//al_draw_rotated_scaled_bitmap(_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
-					al_draw_bitmap(_bitmap, _frame_rel_pos[0], _frame_rel_pos[1], 0);
+					//al_draw_rotated_scaled_bitmap(the_bitmap, 0, 0, rel_pos[0], rel_pos[1], 1, 1, 0, 0);
+					al_draw_bitmap(the_bitmap, _frame_rel_pos[0], _frame_rel_pos[1], 0);
 				}
 				else
 				{
-					al_draw_tinted_bitmap(_bitmap, al_map_rgba_f(1.0, 1.0, 1.0, alpha),
+					al_draw_tinted_bitmap(the_bitmap, al_map_rgba_f(1.0, 1.0, 1.0, alpha),
 						_frame_rel_pos[0], _frame_rel_pos[1], 0);
 				}
 			}
@@ -98,8 +97,34 @@ void GameObject::Update(double delta_time)
 	}
 }
 
+void GameObject::CalculatePhysics(double delta_time)
+{
+	//"physics" time!
+	Vec2 calculation_accel = acceleration;
+	if(sqrlen(velocity) > EPSILON)
+	{
+		calculation_accel -= norm(velocity) * damping;
+	}
+
+	velocity += calculation_accel * delta_time;
+
+	if(sqrlen(velocity) > sqr(max_velocity))
+	{
+		velocity = norm(velocity) * max_velocity;
+	}
+
+	position += velocity * delta_time;
+
+	//END PHYSICS
+}
+
 void GameObject::Initialize()
 {
+	//set is_animated to false - you have to change that some other way.
+	_is_animated = false;
+	_animation_time = 0;
+
+
 	acceleration = velocity = Vec2(0.0, 0.0);
 	max_velocity = 100;
 	damping = 0.1;
@@ -133,7 +158,6 @@ void GameObject::Initialize()
 	{
 		size[0] = size[1] = 32.0;
 	}
-
 
 	sqrradius = sqrlen(size);
 
@@ -228,4 +252,26 @@ void GameObject::Collide(GameObject *otherobj)
 	
 		//LOG_WRITE("Collision at (%f, %f) - overlap is (%f, %f)", offset[0], offset[1], x_overlap, y_overlap);
 	}
+}
+
+void GameObject::InitializeAnimation(int frame_width, int fps)
+{
+	//bitmap should already be loaded.
+	unsigned int frame_count = size[0] / frame_width;
+	unsigned int i;
+	for(i = 0; i < frame_count; i++)
+	{
+		ALLEGRO_BITMAP *sub_bitmap = al_create_sub_bitmap(_bitmap, i * frame_width, 0, frame_width, size[1]);
+		_animation_frames.push_back(sub_bitmap);
+	}
+
+	_animation_time = 1/((double) fps);
+	_is_animated = true;
+}
+
+ALLEGRO_BITMAP* GameObject::GetCurrentAnimationFrame()
+{
+	unsigned int frame_index = 
+		((int)(World::theWorld->total_time / _animation_time)) % _animation_frames.size();
+	return _animation_frames[frame_index];
 }

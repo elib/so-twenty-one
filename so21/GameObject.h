@@ -6,6 +6,9 @@
 
 #include "quickmax.h"
 
+#include <vector>
+using namespace std;
+
 class GameObject
 {
 public:
@@ -50,4 +53,15 @@ protected:
 	bool _has_bitmap;
 
 	Vec2 _frame_rel_pos;
+
+	//ANIMATION
+	bool _is_animated;
+	double _animation_time;
+	vector<ALLEGRO_BITMAP*> _animation_frames;
+	void InitializeAnimation(int frame_width, int fps);
+
+	ALLEGRO_BITMAP* GetCurrentAnimationFrame();
+
+private:
+	void CalculatePhysics(double delta_time);
 };

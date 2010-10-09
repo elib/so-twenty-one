@@ -24,6 +24,8 @@
 #include "SpawnPoint.h"
 #include "ScreenFade.h"
 
+#include "FlashingBomb.h"
+
 #define EPSILON (1E-6)
 
 #define DISPLAY_WIDTH	640
@@ -107,4 +109,9 @@ protected:
 	bool _quitgame;
 
 	ScreenFade _screenFade;
+
+
+
+	//test - remove me
+	FlashingBomb *_flashingbomb;
 };
