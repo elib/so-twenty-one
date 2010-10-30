@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;D:\projects\svl-1.5\include&quot;"
+				AdditionalIncludeDirectories="D:\Projects\bass\c;D:\Projects\allegro\include;&quot;D:\projects\svl-1.5\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;__CMATH__"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,6 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="allegro-4.9.21-mt-debug.lib allegro_font-4.9.21-mt-debug.lib allegro_ttf-4.9.21-mt-debug.lib allegro_image-4.9.21-mt-debug.lib bass.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="D:\Projects\bass\c;D:\Projects\allegro\lib"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -174,6 +175,10 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath=".\BombLauncher.cpp"
+				>
+			</File>
 			<File
 				RelativePath=".\FlashingBomb.cpp"
 				>
@@ -296,6 +301,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\BombLauncher.h"
+				>
+			</File>
 			<File
 				RelativePath=".\FlashingBomb.h"
 				>
