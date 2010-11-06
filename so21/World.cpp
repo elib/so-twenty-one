@@ -183,6 +183,10 @@ bool World::Update()
 			if(type < 10)
 			{
 				_debugCircles[type]->Pulse();
+			}
+
+			if(type == 2)
+			{
 				_bomblauncher->LaunchBomb();
 			}
 		}

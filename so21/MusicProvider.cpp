@@ -224,6 +224,9 @@ void MusicProvider::Update()
 		ev.type = _currentRecordingType;
 		//must be sorted later
 		_newMusicEvents.push_back(ev);
+
+		//show this in real time, as well!
+		eventsForCurrentFrame.push_back(ev);
 	}
 	else if(World::theWorld->Keys.keys_just_down[ALLEGRO_KEY_PAD_PLUS])
 	{

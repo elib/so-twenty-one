@@ -57,9 +57,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FlashingBomb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\svl-1.5\src\Basics.cpp">
       <Filter>Source Files\SVL</Filter>
     </ClCompile>
@@ -126,11 +123,11 @@
     <ClCompile Include="BombLauncher.cpp">
       <Filter>Source Files\Game</Filter>
     </ClCompile>
+    <ClCompile Include="FlashingBomb.cpp">
+      <Filter>Source Files\Game\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FlashingBomb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
@@ -190,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="BombLauncher.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="FlashingBomb.h">
+      <Filter>Header Files\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
