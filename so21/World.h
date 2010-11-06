@@ -24,7 +24,7 @@
 #include "SpawnPoint.h"
 #include "ScreenFade.h"
 
-#include "FlashingBomb.h"
+#include "BombLauncher.h"
 
 #define EPSILON (1E-6)
 
@@ -77,6 +77,8 @@ public:
 
 	void Quit();
 
+	Vec2 PlayerPosition();
+
 
 protected:
 
@@ -110,8 +112,5 @@ protected:
 
 	ScreenFade _screenFade;
 
-
-
-	//test - remove me
-	FlashingBomb *_flashingbomb;
+	BombLauncher *_bomblauncher;
 };

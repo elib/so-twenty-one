@@ -47,6 +47,27 @@ void GameObject::Update(double delta_time)
 		return;
 	}
 
+	if(_frame_rel_pos[1] + size[1] < 0)
+	{
+		//we have disappeared to the top
+		_leftscreen = true;
+		return;
+	}
+
+	if(_frame_rel_pos[1] + size[1] < 0)
+	{
+		//we have disappeared to the top
+		_leftscreen = true;
+		return;
+	}
+
+	if(_frame_rel_pos[1] > DISPLAY_HEIGHT)
+	{
+		//we have disappeared to the bottom
+		_leftscreen = true;
+		return;
+	}
+
 	//more "easy outs" before rendering
 	if(_frame_rel_pos[0] > DISPLAY_WIDTH)
 		return;
@@ -123,7 +144,6 @@ void GameObject::Initialize()
 	//set is_animated to false - you have to change that some other way.
 	_is_animated = false;
 	_animation_time = 0;
-
 
 	acceleration = velocity = Vec2(0.0, 0.0);
 	max_velocity = 100;

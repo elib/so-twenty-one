@@ -108,9 +108,8 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_spawnpoint->Initialize();
 	_gameObjects.push_back(_spawnpoint);
 
-	_flashingbomb = new FlashingBomb(300, 100);
-	_flashingbomb->Initialize();
-	_gameObjects.push_back(_flashingbomb);
+	_bomblauncher = new BombLauncher();
+	_bomblauncher->Initialize();
 
 	_starfield.Initialize();
 
@@ -174,6 +173,8 @@ bool World::Update()
 		_map.Collide(_player);
 		_spawnpoint->Collide(_player);
 
+		_bomblauncher->Update(delta);
+
 
 #ifdef DEBUG_RECORDING
 		for(i = 0; i < musicProvider.eventsForCurrentFrame.size(); i++)
@@ -182,6 +183,7 @@ bool World::Update()
 			if(type < 10)
 			{
 				_debugCircles[type]->Pulse();
+				_bomblauncher->LaunchBomb();
 			}
 		}
 
@@ -290,4 +292,9 @@ void World::LoseGame()
 void World::Quit()
 {
 	_quitgame = true;
+}
+
+Vec2 World::PlayerPosition()
+{
+	return _player->position;
 }

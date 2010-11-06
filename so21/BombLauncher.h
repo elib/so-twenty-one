@@ -6,7 +6,11 @@
 #include <vector>
 using namespace std;
 
-#define NUM_BOMBS	20
+#define NUM_BOMBS	30
+
+typedef vector<FlashingBomb*> BombList;
+typedef BombList::iterator BombListIterator;
+typedef BombList::reverse_iterator BombListReverseIterator;
 
 class BombLauncher
 {
@@ -16,15 +20,22 @@ public:
 
 	void Initialize();
 	void Update(double delta_time);
-	//void Collide(
+	void ClearScreenBombs();
+
+	void LaunchBomb();
+
+	void Collide(GameObject *otherobj);
 
 	void SpawnBomb(double X, double Y);
-	
+
+	Vec2 offset_position;
 
 protected:
-	vector<FlashingBomb*> _bombs_in_play;
-	vector<FlashingBomb*> _bombs_available;
+	BombList _bombs_in_play;
+	BombList _bombs_available;
 
 private:
 	void RemoveAllBombs();
+	Vec2 _position;
+	float _speed;
 };
