@@ -6,5 +6,5 @@ class FlashingBomb : public GameObject
 {
 public:
 	FlashingBomb(double X, double Y) : GameObject("Resources/flashing-bomb.png", X, Y) {}
-	void Initialize();
+	virtual void Initialize();
 };

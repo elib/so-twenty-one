@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="256"
+   height="256"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="sleepy town title.svg"
+   inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\title2.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <script
+     xlink:href=""
+     id="script3790" />
+  <script
+     xlink:href=""
+     id="script3788" />
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="127.90757"
+     inkscape:cy="199.12181"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1280"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:snap-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3786"
+       empspacing="32"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer"
+     style="display:none"
+     transform="translate(0,196.2811)">
+    <rect
+       style="fill:#000000;fill-opacity:0.85294118;stroke:none"
+       id="rect3765"
+       width="308.60159"
+       height="176.27162"
+       x="-32.072338"
+       y="-40.538738"
+       rx="15"
+       ry="11.62442" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-25.094901,118.79668)">
+    <text
+       xml:space="preserve"
+       style="font-size:40.8550415px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#da71f4;fill-opacity:0.62352941;stroke:none;font-family:Sans"
+       x="25.650581"
+       y="-74.341652"
+       id="text2985"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\title1.png"
+       inkscape:export-xdpi="93.889999"
+       inkscape:export-ydpi="93.889999"
+       transform="scale(1.0213761,0.97907128)"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="25.650581"
+         y="-74.341652"
+         style="font-size:40px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#da71f4;fill-opacity:0.62352941;font-family:Helvetica LT Std Light;-inkscape-font-specification:'Helvetica LT Std Light, Light'">so twenty-one</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:42.87907028px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#f3d0fb;fill-opacity:1;stroke:none;font-family:Sans"
+       x="25.175877"
+       y="-54.448849"
+       id="text2989"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0719767,0.93285609)"><tspan
+         sodipodi:role="line"
+         x="25.175877"
+         y="-54.448849"
+         id="tspan2993"
+         style="font-size:21px;font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#f3d0fb;fill-opacity:1;font-family:Helvetica LT Std Light;-inkscape-font-specification:'Helvetica LT Std Light, Light'">sleepy town manufacture</tspan></text>
+  </g>
+</svg>

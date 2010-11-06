@@ -26,6 +26,8 @@
 
 #include "BombLauncher.h"
 
+#include "Title.h"
+
 #define EPSILON (1E-6)
 
 #define DISPLAY_WIDTH	640

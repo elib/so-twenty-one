@@ -9,6 +9,7 @@ const char* Map::_tileImageSourceFile[__MAP_TYPE_COUNT] = {
 					"Resources/tiles.png"};
 
 #define XML_TYPE_SPAWN	1
+#define XML_TYPE_TITLE	2
 
 Map::Map(void)
 {
@@ -122,19 +123,20 @@ bool Map::Initialize(int offset_x, int offset_y)
 		cur_element->QueryIntAttribute("type", &type);
 		cur_element->QueryIntAttribute("x", &x);
 		cur_element->QueryIntAttribute("y", &y);
+		ConvertTilesToPositions(x, y);
 
 		switch(type)
 		{
 		case XML_TYPE_SPAWN:
 			{
-				//resolve to tile-width positions
-				x = x / _tileWidth;
-				x = x * _tileWidth;
-				y = y / _tileHeight;
-				y = y * _tileHeight;
-
 				spawnPointLocation = Vec2(x, y);
-				LOG_WRITE("Spawnpoint at (%d,%d)", x, y);
+				LOG_WRITE("Spawnpoint at (%f,%f)", x, y);
+			}
+		case XML_TYPE_TITLE:
+			{
+				//titleLocation
+				titleLocation = Vec2(x, y);
+				LOG_WRITE("Title at (%f, %f)", x, y);
 			}
 		}
 		cur_element = cur_element->NextSiblingElement();
@@ -142,6 +144,15 @@ bool Map::Initialize(int offset_x, int offset_y)
 
 
 	return true;
+}
+
+void Map::ConvertTilesToPositions(int &x, int &y)
+{
+	//resolve to tile-width positions
+	x = x / _tileWidth;
+	x = x * _tileWidth;
+	y = y / _tileHeight;
+	y = y * _tileHeight;
 }
 
 void Map::LoadAvailableTiles(int index)

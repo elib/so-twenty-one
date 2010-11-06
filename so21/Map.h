@@ -31,6 +31,7 @@ public:
 
 	
 	Vec2 spawnPointLocation;
+	Vec2 titleLocation;
 
 protected:
 	//resources:
@@ -39,6 +40,8 @@ protected:
 
 	void LoadAvailableTiles(int index);
 	void LoadTilesForLayer(TiXmlElement *layer_element, int index);
+
+	void ConvertTilesToPositions(int &x, int &y);
 	
 	//objects and their bitmaps
 	vector<GameObject*> _tileObjects[__MAP_TYPE_COUNT];

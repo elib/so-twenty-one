@@ -111,6 +111,10 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_bomblauncher = new BombLauncher();
 	_bomblauncher->Initialize();
 
+	Title* title = new Title(_map.titleLocation[0], _map.titleLocation[1]);
+	title->Initialize();
+	_gameObjects.push_back(title);
+
 	_starfield.Initialize();
 
 	//start from 0 now

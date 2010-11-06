@@ -76,9 +76,9 @@
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>D:\projects\svl-1.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\bass\c;D:\Projects\allegro\include;D:\projects\svl-1.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;__CMATH__;USE_LOG;SHOW_FPS;DEBUG_RECORDING;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <PrecompiledHeader>
       </PrecompiledHeader>
@@ -92,6 +92,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>D:\Projects\bass\c;D:\Projects\allegro\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -108,6 +109,7 @@
     <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ScreenFade.cpp" />
+    <ClCompile Include="Title.cpp" />
     <ClCompile Include="VisualMessage.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Fader.cpp" />
@@ -133,6 +135,7 @@
     <ClInclude Include="TextLayer.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ScreenFade.h" />
+    <ClInclude Include="Title.h" />
     <ClInclude Include="VisualMessage.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Fader.h" />
