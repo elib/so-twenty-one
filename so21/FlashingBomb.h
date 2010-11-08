@@ -1,10 +1,14 @@
 #pragma once
 
-#include "GameObject.h"
+#include "Launchable.h"
 
-class FlashingBomb : public GameObject
+class FlashingBomb : public Launchable
 {
 public:
-	FlashingBomb(double X, double Y) : GameObject("Resources/flashing-bomb.png", X, Y) {}
+	FlashingBomb(double X, double Y) : Launchable("Resources/flashing-bomb.png", X, Y) {}
 	virtual void Initialize();
+	virtual void Launch(double X, double Y);
+
+private:
+	double _speed;
 };

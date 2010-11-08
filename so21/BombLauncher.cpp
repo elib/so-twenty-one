@@ -5,7 +5,6 @@ BombLauncher::BombLauncher(void)
 {
 	//yay for perfect placements
 	offset_position = Vec2(DISPLAY_WIDTH, DISPLAY_HEIGHT/2 - 16);
-	_speed = 80;
 }
 
 void BombLauncher::Initialize()
@@ -49,8 +48,7 @@ void BombLauncher::LaunchBomb()
 		//we can launch one - it's available
 		BombListIterator it = _bombs_available.begin();
 		FlashingBomb* bomb = _bombs_available[0];
-		bomb->position = _position;
-		bomb->velocity = _speed * ((World::theWorld->PlayerPosition() - _position).Normalise());
+		bomb->Launch(_position[0], _position[1]);
 		_bombs_in_play.push_back(bomb);
 		_bombs_available.erase(it);
 	}

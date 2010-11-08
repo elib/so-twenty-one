@@ -26,8 +26,6 @@ public:
 
 	void Collide(GameObject *otherobj);
 
-	void SpawnBomb(double X, double Y);
-
 	Vec2 offset_position;
 
 protected:
@@ -37,5 +35,4 @@ protected:
 private:
 	void RemoveAllBombs();
 	Vec2 _position;
-	float _speed;
 };
