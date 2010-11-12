@@ -108,8 +108,11 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_spawnpoint->Initialize();
 	_gameObjects.push_back(_spawnpoint);
 
-	_bomblauncher = new BombLauncher();
+	_bomblauncher = new BombLauncher(LAUNCHABLE_FLASHING_BOMB);
 	_bomblauncher->Initialize();
+	
+	_laserlauncher = new BombLauncher(LAUNCHABLE_LASER);
+	_laserlauncher->Initialize();
 
 	Title* title = new Title(_map.titleLocation[0], _map.titleLocation[1]);
 	title->Initialize();
@@ -178,6 +181,7 @@ bool World::Update()
 		_spawnpoint->Collide(_player);
 
 		_bomblauncher->Update(delta);
+		_laserlauncher->Update(delta);
 
 
 #ifdef DEBUG_RECORDING
@@ -189,9 +193,14 @@ bool World::Update()
 				_debugCircles[type]->Pulse();
 			}
 
-			if(type == 2)
+			switch(type)
 			{
+			case 2:
 				_bomblauncher->LaunchBomb();
+				break;
+			case 3:
+				_laserlauncher->LaunchBomb();
+				break;
 			}
 		}
 

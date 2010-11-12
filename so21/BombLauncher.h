@@ -8,14 +8,22 @@ using namespace std;
 
 #define NUM_BOMBS	30
 
-typedef vector<FlashingBomb*> BombList;
+enum LaunchableTypes
+{
+	LAUNCHABLE_FLASHING_BOMB,
+	LAUNCHABLE_LASER,
+
+	__LAUNCHABLE_TYPE_COUNT
+};
+
+typedef vector<Launchable*> BombList;
 typedef BombList::iterator BombListIterator;
 typedef BombList::reverse_iterator BombListReverseIterator;
 
 class BombLauncher
 {
 public:
-	BombLauncher(void);
+	BombLauncher(LaunchableTypes launchedtype);
 	~BombLauncher(void);
 
 	void Initialize();
@@ -35,4 +43,6 @@ protected:
 private:
 	void RemoveAllBombs();
 	Vec2 _position;
+
+	LaunchableTypes _type;
 };

@@ -114,5 +114,6 @@ protected:
 
 	ScreenFade _screenFade;
 
-	BombLauncher *_bomblauncher;
+	BombLauncher * _bomblauncher;
+	BombLauncher * _laserlauncher;
 };

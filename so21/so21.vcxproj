@@ -101,6 +101,7 @@
     <ClCompile Include="..\..\..\..\svl-1.5\src\Basics.cpp" />
     <ClCompile Include="..\..\..\..\svl-1.5\src\LibSVL.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Laser.cpp" />
     <ClCompile Include="Launchable.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="program.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="BombLauncher.h" />
     <ClInclude Include="FlashingBomb.h" />
     <ClInclude Include="Keyboard.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="Launchable.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="QuickMax.h" />
