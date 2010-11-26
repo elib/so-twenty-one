@@ -42,6 +42,8 @@ public:
 	double sqrradius;
 	Rect bounding_box;
 
+	bool bounding_box_debug;
+
 protected:
 	void DestroyBitmap();
 

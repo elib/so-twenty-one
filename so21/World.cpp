@@ -65,6 +65,7 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_screenFade.Initialize();
 
 	show_boundingbox = false;
+	player_collide_debug = false;
 
 	Keys.Initialize();
 
@@ -159,6 +160,8 @@ bool World::Update()
 #ifdef BOUNDINGBOX_ALLOW
 		if(Keys.keys_just_down[ALLEGRO_KEY_B])
 			show_boundingbox = !show_boundingbox;
+		if(Keys.keys_just_down[ALLEGRO_KEY_H])
+			player_collide_debug = !player_collide_debug;
 #endif
 
 		//update all subservient objects
@@ -171,8 +174,14 @@ bool World::Update()
 		_map.Update(delta, MAP_FOREGROUND);
 		_map.Update(delta, MAP_FOREGROUND_COLLIDING);
 
-		_map.Collide(_player);
-		_spawnpoint->Collide(_player);
+#ifndef BOUNDINGBOX_ALLOW
+		player_collide_debug = false;
+#endif
+		if(!player_collide_debug)
+		{
+			_map.Collide(_player);
+			_spawnpoint->Collide(_player);
+		}
 
 		_bomblauncher->Update(delta);
 		_laserlauncher->Update(delta);

@@ -8,7 +8,10 @@ void FlashingBomb::Initialize()
 	//width of each frame is 32, and we want 5 frames per second.
 	InitializeAnimation(32, 5);
 	size = Vec2(32, 32);
-	//bounding_box.x = 
+	bounding_box.x = 5;
+	bounding_box.y = 5;
+	bounding_box.height = 22;
+	bounding_box.width = 22;
 
 	_speed = 80;
 }

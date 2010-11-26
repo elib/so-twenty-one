@@ -119,11 +119,11 @@ void GameObject::Update(double delta_time)
 				}
 
 #ifdef BOUNDINGBOX_ALLOW
-				if(World::theWorld->show_boundingbox)
+				if(bounding_box_debug && World::theWorld->show_boundingbox)
 				{
 					Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
 					al_draw_rectangle(bound_origin[0], bound_origin[1], bound_origin[0] + bounding_box.width, bound_origin[1] + bounding_box.height,
-							al_map_rgba_f(1.0, 0, 0, 0.5), 1);
+							al_map_rgba_f(1.0, 0, 0, 0.5), 0);
 				}
 #endif
 			}
@@ -157,6 +157,9 @@ void GameObject::Initialize()
 	//set is_animated to false - you have to change that some other way.
 	_is_animated = false;
 	_animation_time = 0;
+
+	//default: show bounding box
+	bounding_box_debug = true;
 
 	acceleration = velocity = Vec2(0.0, 0.0);
 	max_velocity = 100;

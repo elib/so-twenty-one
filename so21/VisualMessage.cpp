@@ -28,6 +28,7 @@ void VisualMessage::Initialize()
 	{
 		_options[i] = new GameObject(_message_files[i].filename, 0, 0);
 		_options[i]->Initialize();
+		_options[i]->bounding_box_debug = false;
 		//_options[i]->visible = false;
 	}
 }

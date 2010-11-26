@@ -101,6 +101,7 @@ public:
 	Vec2 PlayerPosition();
 
 	bool show_boundingbox;
+	bool player_collide_debug;
 
 
 protected:

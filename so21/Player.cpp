@@ -66,6 +66,13 @@ void Player::Update(double delta_time)
 		acceleration = norm(acceleration) * accel;
 	}
 
+#ifdef BOUNDINGBOX_ALLOW
+	if(World::theWorld->player_collide_debug)
+		alpha = 0.5;
+	else
+		alpha = 1;
+#endif
+
 	GameObject::Update(delta_time);
 
 	if(!_notifiedPlayerLeftSpawn)

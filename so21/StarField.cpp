@@ -62,6 +62,7 @@ void StarField::Initialize()
 
 		GameObject *obj = new GameObject(starbitmap, wrand, hrand);
 		obj->Initialize();
+		obj->bounding_box_debug = false;
 		obj->scrollFactor = Vec2(scrollfactor, 0.0);
 		obj->alpha = alpha;
 		_starLayer.push_back(obj);
