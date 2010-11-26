@@ -65,7 +65,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>allegro-4.9.21-mt-debug.lib;allegro_font-4.9.21-mt-debug.lib;allegro_ttf-4.9.21-mt-debug.lib;allegro_image-4.9.21-mt-debug.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>allegro-4.9.21-mt-debug.lib;allegro_font-4.9.21-mt-debug.lib;allegro_ttf-4.9.21-mt-debug.lib;allegro_image-4.9.21-mt-debug.lib;allegro_primitives-4.9.21-mt-debug.lib;bass.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:\Projects\bass\c;D:\Projects\allegro\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>

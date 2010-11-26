@@ -1,6 +1,10 @@
 #include "GameObject.h"
 #include "World.h"
-#include <allegro5/allegro.h>
+#include <allegro5\allegro.h>
+
+#ifdef BOUNDINGBOX_ALLOW
+#include <allegro5\allegro_primitives.h>
+#endif
 
 GameObject::GameObject(double x, double y)
 {
@@ -113,6 +117,15 @@ void GameObject::Update(double delta_time)
 					al_draw_tinted_bitmap(the_bitmap, al_map_rgba_f(1.0, 1.0, 1.0, alpha),
 						_frame_rel_pos[0], _frame_rel_pos[1], 0);
 				}
+
+#ifdef BOUNDINGBOX_ALLOW
+				if(World::theWorld->show_boundingbox)
+				{
+					Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
+					al_draw_rectangle(bound_origin[0], bound_origin[1], bound_origin[0] + bounding_box.width, bound_origin[1] + bounding_box.height,
+							al_map_rgba_f(1.0, 0, 0, 0.5), 1);
+				}
+#endif
 			}
 		}
 	}

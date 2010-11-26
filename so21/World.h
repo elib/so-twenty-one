@@ -28,6 +28,25 @@
 
 #include "Title.h"
 
+#ifdef _DEBUG
+
+//when debugging, always show fps
+#ifndef SHOW_FPS
+#define SHOW_FPS
+#endif
+
+//when debugging, always debug recording
+#ifndef DEBUG_RECORDING
+#define DEBUG_RECORDING
+#endif
+
+//when debugging, always allow boundingbox view
+#ifndef BOUNDINGBOX_ALLOW
+#define BOUNDINGBOX_ALLOW
+#endif
+
+#endif
+
 #define EPSILON (1E-6)
 
 #define DISPLAY_WIDTH	640
@@ -80,6 +99,8 @@ public:
 	void Quit();
 
 	Vec2 PlayerPosition();
+
+	bool show_boundingbox;
 
 
 protected:

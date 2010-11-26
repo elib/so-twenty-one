@@ -12,19 +12,7 @@ ALLEGRO_DISPLAY* World::TheDisplay = NULL;
 
 #define TARGET_CAMERA_SPEED		(60)
 
-#ifdef _DEBUG
 
-//when debugging, always show fps
-#ifndef SHOW_FPS
-#define SHOW_FPS
-#endif
-
-//when debugging, always debug recording
-#ifndef DEBUG_RECORDING
-#define DEBUG_RECORDING
-#endif
-
-#endif
 
 World::World(void)
 {
@@ -75,6 +63,8 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_game_over = false;
 	_quitgame = false;
 	_screenFade.Initialize();
+
+	show_boundingbox = false;
 
 	Keys.Initialize();
 
@@ -166,6 +156,10 @@ bool World::Update()
 
 		//update map background
 		_map.Update(delta, MAP_BACKGROUND);
+#ifdef BOUNDINGBOX_ALLOW
+		if(Keys.keys_just_down[ALLEGRO_KEY_B])
+			show_boundingbox = !show_boundingbox;
+#endif
 
 		//update all subservient objects
 		for(i = 0; i < _gameObjects.size(); i++)

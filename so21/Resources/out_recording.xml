@@ -1,69 +1,32 @@
 <?xml version="1.0" ?>
 <events>
-    <event position="950916" type="3" />
-    <event position="1074400" type="3" />
     <event position="1081476" type="0" />
     <event position="1178492" type="0" />
     <event position="1278464" type="0" />
     <event position="1372580" type="0" />
-    <event position="1415456" type="3" />
-    <event position="1465436" type="3" />
     <event position="1472504" type="0" />
     <event position="1566584" type="0" />
     <event position="1666552" type="0" />
-    <event position="1715344" type="3" />
     <event position="1757700" type="0" />
-    <event position="1771212" type="3" />
-    <event position="1824148" type="3" />
     <event position="1854724" type="0" />
     <event position="1939984" type="0" />
     <event position="2042892" type="0" />
     <event position="2139912" type="0" />
     <event position="2239876" type="0" />
-    <event position="2262204" type="3" />
     <event position="2339840" type="0" />
-    <event position="2347472" type="3" />
-    <event position="2397448" type="3" />
     <event position="2436868" type="0" />
-    <event position="2441552" type="3" />
-    <event position="2479776" type="3" />
-    <event position="2506236" type="3" />
     <event position="2530948" type="0" />
-    <event position="2535636" type="3" />
-    <event position="2562096" type="3" />
-    <event position="2591496" type="3" />
-    <event position="2612076" type="3" />
     <event position="2625032" type="0" />
-    <event position="2638536" type="3" />
-    <event position="2685584" type="3" />
-    <event position="2706160" type="3" />
     <event position="2722064" type="0" />
-    <event position="2726740" type="3" />
     <event position="2820460" type="0" />
-    <event position="2903148" type="3" />
     <event position="2919052" type="0" />
     <event position="3013132" type="0" />
-    <event position="3014872" type="3" />
-    <event position="3106016" type="3" />
     <event position="3107216" type="0" />
     <event position="3198356" type="0" />
     <event position="3295384" type="0" />
     <event position="3392408" type="0" />
-    <event position="3655820" type="3" />
-    <event position="4008628" type="3" />
-    <event position="4096836" type="3" />
-    <event position="4302644" type="3" />
-    <event position="4334988" type="3" />
-    <event position="4358504" type="3" />
-    <event position="4379092" type="3" />
-    <event position="4402612" type="3" />
-    <event position="4429072" type="3" />
-    <event position="4446712" type="3" />
-    <event position="4555496" type="3" />
-    <event position="4828924" type="3" />
     <event position="4830500" type="1" />
     <event position="4927524" type="1" />
-    <event position="4931832" type="3" />
     <event position="5021624" type="1" />
     <event position="5122008" type="1" />
     <event position="5216052" type="1" />
@@ -77,282 +40,52 @@
     <event position="5980184" type="1" />
     <event position="6074184" type="1" />
     <event position="6168260" type="1" />
-    <event position="6175496" type="3" />
     <event position="6186216" type="2" />
     <event position="6274128" type="1" />
-    <event position="6325444" type="3" />
     <event position="6330284" type="2" />
     <event position="6374076" type="1" />
-    <event position="6396004" type="3" />
     <event position="6400844" type="2" />
     <event position="6468148" type="1" />
     <event position="6565172" type="1" />
-    <event position="6566528" type="3" />
     <event position="6568432" type="2" />
     <event position="6653696" type="2" />
     <event position="6659260" type="1" />
-    <event position="6666496" type="3" />
     <event position="6759224" type="1" />
     <event position="6847744" type="2" />
     <event position="6856284" type="1" />
-    <event position="6860548" type="3" />
     <event position="6947708" type="2" />
     <event position="6956212" type="1" />
-    <event position="6957564" type="3" />
     <event position="7050296" type="1" />
     <event position="7094716" type="2" />
-    <event position="7125156" type="3" />
     <event position="7150260" type="1" />
     <event position="7174096" type="2" />
-    <event position="7189836" type="3" />
     <event position="7238460" type="1" />
-    <event position="7336840" type="3" />
     <event position="7338744" type="2" />
     <event position="7429884" type="2" />
-    <event position="7436804" type="3" />
-    <event position="7624972" type="3" />
     <event position="7629816" type="2" />
     <event position="7720960" type="2" />
-    <event position="7721996" type="3" />
     <event position="7870904" type="2" />
-    <event position="7874888" type="3" />
     <event position="7947348" type="2" />
-    <event position="7951324" type="3" />
     <event position="8109056" type="2" />
-    <event position="8121856" type="3" />
     <event position="8200200" type="2" />
-    <event position="8210056" type="3" />
-    <event position="8392340" type="3" />
     <event position="8394240" type="2" />
-    <event position="8486424" type="3" />
     <event position="8488324" type="2" />
     <event position="8638272" type="2" />
-    <event position="8642252" type="3" />
     <event position="8711776" type="2" />
-    <event position="8715748" type="3" />
     <event position="8867604" type="2" />
-    <event position="8871580" type="3" />
     <event position="8961684" type="2" />
-    <event position="8977424" type="3" />
     <event position="9161616" type="2" />
-    <event position="9171472" type="3" />
-    <event position="9265560" type="3" />
     <event position="9267456" type="2" />
     <event position="9402704" type="2" />
-    <event position="9409624" type="3" />
     <event position="9482088" type="2" />
-    <event position="9494884" type="3" />
     <event position="9643792" type="2" />
-    <event position="9653648" type="3" />
     <event position="9743756" type="2" />
-    <event position="9747736" type="3" />
     <event position="9937804" type="2" />
-    <event position="9941780" type="3" />
     <event position="10031888" type="2" />
-    <event position="10038808" type="3" />
     <event position="10178896" type="2" />
-    <event position="10182872" type="3" />
     <event position="10258276" type="2" />
     <event position="10414104" type="2" />
     <event position="10505248" type="2" />
     <event position="10702232" type="2" />
     <event position="10799256" type="2" />
-    <event position="10809116" type="3" />
-    <event position="10859096" type="3" />
-    <event position="10947300" type="3" />
-    <event position="10994344" type="3" />
-    <event position="11094304" type="3" />
-    <event position="11188388" type="3" />
-    <event position="11238372" type="3" />
-    <event position="11338336" type="3" />
-    <event position="11391256" type="3" />
-    <event position="11482404" type="3" />
-    <event position="11579432" type="3" />
-    <event position="11623532" type="3" />
-    <event position="11723496" type="3" />
-    <event position="11773476" type="3" />
-    <event position="11864616" type="3" />
-    <event position="11955760" type="3" />
-    <event position="12002800" type="3" />
-    <event position="12032200" type="3" />
-    <event position="12058664" type="3" />
-    <event position="12102764" type="3" />
-    <event position="12155684" type="3" />
-    <event position="12246828" type="3" />
-    <event position="12349732" type="3" />
-    <event position="12396776" type="3" />
-    <event position="12493804" type="3" />
-    <event position="12540840" type="3" />
-    <event position="12631984" type="3" />
-    <event position="12737832" type="3" />
-    <event position="12778992" type="3" />
-    <event position="12876016" type="3" />
-    <event position="12923056" type="3" />
-    <event position="13020084" type="3" />
-    <event position="13117104" type="3" />
-    <event position="13161204" type="3" />
-    <event position="13264112" type="3" />
-    <event position="13314092" type="3" />
-    <event position="13408172" type="3" />
-    <event position="13496376" type="3" />
-    <event position="13543420" type="3" />
-    <event position="13646324" type="3" />
-    <event position="13693372" type="3" />
-    <event position="13790392" type="3" />
-    <event position="13881536" type="3" />
-    <event position="13931520" type="3" />
-    <event position="14031480" type="3" />
-    <event position="14075580" type="3" />
-    <event position="14172608" type="3" />
-    <event position="14269628" type="3" />
-    <event position="14343128" type="3" />
-    <event position="14369592" type="3" />
-    <event position="14416636" type="3" />
-    <event position="14463676" type="3" />
-    <event position="14490136" type="3" />
-    <event position="14513656" type="3" />
-    <event position="14560696" type="3" />
-    <event position="14651844" type="3" />
-    <event position="14698884" type="3" />
-    <event position="14719460" type="3" />
-    <event position="14745924" type="3" />
-    <event position="14795908" type="3" />
-    <event position="14848832" type="3" />
-    <event position="14875300" type="3" />
-    <event position="14898812" type="3" />
-    <event position="14945860" type="3" />
-    <event position="15039940" type="3" />
-    <event position="15084040" type="3" />
-    <event position="15113440" type="3" />
-    <event position="15136964" type="3" />
-    <event position="15181064" type="3" />
-    <event position="15231048" type="3" />
-    <event position="15251624" type="3" />
-    <event position="15281032" type="3" />
-    <event position="15328068" type="3" />
-    <event position="15428036" type="3" />
-    <event position="15475072" type="3" />
-    <event position="15498596" type="3" />
-    <event position="15525060" type="3" />
-    <event position="15566220" type="3" />
-    <event position="15616200" type="3" />
-    <event position="15642664" type="3" />
-    <event position="15666180" type="3" />
-    <event position="15713224" type="3" />
-    <event position="15804368" type="3" />
-    <event position="15851408" type="3" />
-    <event position="15877872" type="3" />
-    <event position="15904332" type="3" />
-    <event position="15948436" type="3" />
-    <event position="15998416" type="3" />
-    <event position="16027816" type="3" />
-    <event position="16051340" type="3" />
-    <event position="16098384" type="3" />
-    <event position="16186584" type="3" />
-    <event position="16236568" type="3" />
-    <event position="16263028" type="3" />
-    <event position="16286548" type="3" />
-    <event position="16330652" type="3" />
-    <event position="16380632" type="3" />
-    <event position="16404152" type="3" />
-    <event position="16433556" type="3" />
-    <event position="16477656" type="3" />
-    <event position="16571740" type="3" />
-    <event position="16645248" type="3" />
-    <event position="16671700" type="3" />
-    <event position="16718744" type="3" />
-    <event position="16768724" type="3" />
-    <event position="16792248" type="3" />
-    <event position="16818704" type="3" />
-    <event position="16862812" type="3" />
-    <event position="16956896" type="3" />
-    <event position="17056856" type="3" />
-    <event position="17153876" type="3" />
-    <event position="17250908" type="3" />
-    <event position="17344996" type="3" />
-    <event position="17442016" type="3" />
-    <event position="17492044" type="3" />
-    <event position="17544912" type="3" />
-    <event position="17630184" type="3" />
-    <event position="17736024" type="3" />
-    <event position="17771304" type="3" />
-    <event position="17800704" type="3" />
-    <event position="17824228" type="3" />
-    <event position="17871316" type="3" />
-    <event position="17921248" type="3" />
-    <event position="17947712" type="3" />
-    <event position="17968328" type="3" />
-    <event position="18018272" type="3" />
-    <event position="18115300" type="3" />
-    <event position="18165280" type="3" />
-    <event position="18188832" type="3" />
-    <event position="18215260" type="3" />
-    <event position="18262308" type="3" />
-    <event position="18312284" type="3" />
-    <event position="18338768" type="3" />
-    <event position="18365204" type="3" />
-    <event position="18406368" type="3" />
-    <event position="18494572" type="3" />
-    <event position="18541628" type="3" />
-    <event position="18644520" type="3" />
-    <event position="18691568" type="3" />
-    <event position="18791524" type="3" />
-    <event position="18891488" type="3" />
-    <event position="18935588" type="3" />
-    <event position="18962048" type="3" />
-    <event position="19035552" type="3" />
-    <event position="19085536" type="3" />
-    <event position="19176676" type="3" />
-    <event position="19264880" type="3" />
-    <event position="19308980" type="3" />
-    <event position="19338384" type="3" />
-    <event position="19364844" type="3" />
-    <event position="19414828" type="3" />
-    <event position="19461868" type="3" />
-    <event position="19491268" type="3" />
-    <event position="19514792" type="3" />
-    <event position="19561836" type="3" />
-    <event position="19647096" type="3" />
-    <event position="19694136" type="3" />
-    <event position="19723540" type="3" />
-    <event position="19750000" type="3" />
-    <event position="19802928" type="3" />
-    <event position="19849968" type="3" />
-    <event position="19879372" type="3" />
-    <event position="20038140" type="3" />
-    <event position="20135156" type="3" />
-    <event position="20235116" type="3" />
-    <event position="20326264" type="3" />
-    <event position="20426228" type="3" />
-    <event position="20520308" type="3" />
-    <event position="20617336" type="3" />
-    <event position="20717300" type="3" />
-    <event position="20817260" type="3" />
-    <event position="20911352" type="3" />
-    <event position="21011308" type="3" />
-    <event position="21096580" type="3" />
-    <event position="21190656" type="3" />
-    <event position="21287680" type="3" />
-    <event position="21381764" type="3" />
-    <event position="21481732" type="3" />
-    <event position="21581692" type="3" />
-    <event position="21672832" type="3" />
-    <event position="21772800" type="3" />
-    <event position="21863940" type="3" />
-    <event position="21960968" type="3" />
-    <event position="22057992" type="3" />
-    <event position="22149136" type="3" />
-    <event position="22249104" type="3" />
-    <event position="22343180" type="3" />
-    <event position="22440204" type="3" />
-    <event position="22537228" type="3" />
-    <event position="22637188" type="3" />
-    <event position="22731280" type="3" />
-    <event position="22822424" type="3" />
-    <event position="22922384" type="3" />
-    <event position="23022348" type="3" />
-    <event position="23116428" type="3" />
-    <event position="23213456" type="3" />
-    <event position="23304604" type="3" />
-    <event position="23401624" type="3" />
 </events>

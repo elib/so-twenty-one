@@ -11,6 +11,10 @@
 
 #include "World.h"
 
+#ifdef BOUNDINGBOX_ALLOW
+#include <allegro5\allegro_primitives.h>
+#endif
+
 struct Data
 {
 	ALLEGRO_DISPLAY *display;
@@ -102,6 +106,8 @@ int main(int argc, char *argv[])
 	al_register_event_source(data.queue, al_get_display_event_source(data.display));
 	al_register_event_source(data.queue, al_get_timer_event_source(data.timer));
 	al_start_timer(data.timer);
+
+	al_init_primitives_addon();
 
 	// Wait until the user presses escape
 	bool redraw = true;
