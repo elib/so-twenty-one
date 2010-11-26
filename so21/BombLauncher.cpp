@@ -49,9 +49,16 @@ void BombLauncher::Update(double delta_time)
 	}
 }
 
-void BombLauncher::Collide(GameObject *otherobj)
+bool BombLauncher::Collide(GameObject *otherobj)
 {
-
+	unsigned int i;
+	for ( i = 0; i < _bombs_in_play.size(); i++ )
+	{
+		//KILL
+		if(otherobj->Collide(_bombs_in_play[i]))
+			World::theWorld->LoseGame();
+	}
+	return false;
 }
 
 void BombLauncher::LaunchBomb()

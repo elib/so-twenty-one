@@ -25,7 +25,7 @@ public:
 	void Destroy();
 	void Update(double delta_time, int index);
 
-	void Collide(GameObject *otherobj);
+	bool Collide(GameObject *otherobj);
 
 	void OnHit();
 

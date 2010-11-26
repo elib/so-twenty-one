@@ -111,9 +111,9 @@ void Player::Update(double delta_time)
 }
 
 
-void Player::Collide(GameObject *otherobj)
+bool Player::Collide(GameObject *otherobj)
 {
-	GameObject::Collide(otherobj);
+	bool collision = GameObject::Collide(otherobj);
 
 	//after collision calculations, check where we stand
 	if(_frame_rel_pos[0] <= (-size[0] / 2))
@@ -121,4 +121,6 @@ void Player::Collide(GameObject *otherobj)
 		LOG_WRITE("KILL!!! KILL!!!!!");
 		World::theWorld->LoseGame();
 	}
+
+	return collision;
 }

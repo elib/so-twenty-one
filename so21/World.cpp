@@ -174,6 +174,9 @@ bool World::Update()
 		_map.Update(delta, MAP_FOREGROUND);
 		_map.Update(delta, MAP_FOREGROUND_COLLIDING);
 
+		_bomblauncher->Update(delta);
+		_laserlauncher->Update(delta);
+
 #ifndef BOUNDINGBOX_ALLOW
 		player_collide_debug = false;
 #endif
@@ -181,10 +184,11 @@ bool World::Update()
 		{
 			_map.Collide(_player);
 			_spawnpoint->Collide(_player);
+
+			_bomblauncher->Collide(_player);
 		}
 
-		_bomblauncher->Update(delta);
-		_laserlauncher->Update(delta);
+
 
 
 #ifdef DEBUG_RECORDING

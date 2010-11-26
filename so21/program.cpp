@@ -107,7 +107,9 @@ int main(int argc, char *argv[])
 	al_register_event_source(data.queue, al_get_timer_event_source(data.timer));
 	al_start_timer(data.timer);
 
+#ifdef BOUNDINGBOX_ALLOW
 	al_init_primitives_addon();
+#endif
 
 	// Wait until the user presses escape
 	bool redraw = true;

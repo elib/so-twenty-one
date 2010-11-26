@@ -13,7 +13,7 @@ public:
 	virtual void Initialize();
 	virtual ~SpawnPoint();
 	virtual void Update(double delta_time);
-	virtual void Collide(GameObject *otherobj);
+	virtual bool Collide(GameObject *otherobj);
 
 protected:
 	vector<GameObject*> _sub_colliders;

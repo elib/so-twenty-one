@@ -42,15 +42,18 @@ void SpawnPoint::Update(double delta_time)
 	}
 }
 
-void SpawnPoint::Collide(GameObject *otherobj)
+bool SpawnPoint::Collide(GameObject *otherobj)
 {
 	//does NOT call parent
 	//(otherwise we would collide with this object, which is the spawn container)
 
 	unsigned int i;
+	bool collision = false;
 	for(i = 0; i < _sub_colliders.size(); i++)
 	{
-		otherobj->Collide(_sub_colliders[i]);
+		collision |= otherobj->Collide(_sub_colliders[i]);
 	}
+
+	return collision;
 
 }

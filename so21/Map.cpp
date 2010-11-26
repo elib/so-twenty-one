@@ -39,6 +39,7 @@ void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
 				GameObject *obj = new GameObject(_availableBitmaps[index][gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
 				obj->Initialize();
+				//obj->bounding_box.x = 5;
 				if(index == MAP_BACKGROUND)
 				{
 					//make it lag 
@@ -216,11 +217,14 @@ void Map::Update(double delta_time, int index)
 	}
 }
 
-void Map::Collide(GameObject *otherobj)
+bool Map::Collide(GameObject *otherobj)
 {
 	unsigned int i;
+	bool collision = false;
 	for(i = 0; i < _tileObjects[MAP_FOREGROUND_COLLIDING].size(); i++)
 	{
-		otherobj->Collide(_tileObjects[MAP_FOREGROUND_COLLIDING][i]);
+		collision |= otherobj->Collide(_tileObjects[MAP_FOREGROUND_COLLIDING][i]);
 	}
+
+	return collision;
 }

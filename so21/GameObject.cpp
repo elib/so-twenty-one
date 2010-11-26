@@ -228,13 +228,13 @@ bool GameObject::LeftScreen()
 	return _leftscreen;
 }
 
-void GameObject::Collide(GameObject *otherobj)
+bool GameObject::Collide(GameObject *otherobj)
 {
 	Vec2 offset(otherobj->position - this->position);
 
 	//check proximity
 	if(sqrlen(offset) >  1.2 * MAX(this->sqrradius, otherobj->sqrradius))
-		return;
+		return false;
 
 	//copy rects for comfort
 	Rect a = this->bounding_box;
@@ -284,10 +284,15 @@ void GameObject::Collide(GameObject *otherobj)
 			}
 		}
 
-		this->position += correction;
-	
-		//LOG_WRITE("Collision at (%f, %f) - overlap is (%f, %f)", offset[0], offset[1], x_overlap, y_overlap);
+		if(sqrlen(correction) > 0)
+		{
+			this->position += correction;
+			return true;
+		}
+		
 	}
+
+	return false;
 }
 
 void GameObject::InitializeAnimation(int frame_width, int fps)

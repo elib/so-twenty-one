@@ -37,7 +37,7 @@ public:
 	bool LeftScreen();
 
 	//collisions and physical properties
-	virtual void Collide(GameObject *otherobj);
+	virtual bool Collide(GameObject *otherobj);
 	Vec2 size;
 	double sqrradius;
 	Rect bounding_box;

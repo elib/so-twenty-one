@@ -14,7 +14,7 @@ public:
 
 	virtual void Initialize();
 	virtual void Update(double delta_time);
-	virtual void Collide(GameObject *otherobj);
+	virtual bool Collide(GameObject *otherobj);
 protected:
 	Vec2 _starting_location;
 	bool _notifiedPlayerLeftSpawn;

@@ -32,7 +32,7 @@ public:
 
 	void LaunchBomb();
 
-	void Collide(GameObject *otherobj);
+	bool Collide(GameObject *otherobj);
 
 	Vec2 offset_position;
 
