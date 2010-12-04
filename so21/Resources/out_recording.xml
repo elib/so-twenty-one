@@ -1,5 +1,7 @@
 <?xml version="1.0" ?>
 <events>
+    <event position="495412" type="2" />
+    <event position="527884" type="2" />
     <event position="1081476" type="0" />
     <event position="1178492" type="0" />
     <event position="1278464" type="0" />

@@ -10,10 +10,10 @@ void Player::Initialize()
 	max_velocity = 160;
 	damping = 400;
 
-	bounding_box.x = -1;
-	bounding_box.y = 7;
-	bounding_box.width = 34;
-	bounding_box.height = 19;
+	bounding_box.x = 2;
+	bounding_box.y = 10;
+	bounding_box.width = 30;
+	bounding_box.height = 14;
 }
 
 

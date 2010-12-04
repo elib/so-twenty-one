@@ -2,7 +2,9 @@
 #include "World.h"
 #include "tinyxml.h"
 
-const char* Map::_mapSourceFile = "Resources/map.tmx";
+const char* Map::_mapSourceFile =
+	//"Resources/debug_collisions.tmx";
+	"Resources/map.tmx";
 const char* Map::_tileImageSourceFile[__MAP_TYPE_COUNT] = {
 					"Resources/tiles_background.png",
 					"Resources/tiles_foreground.png",
@@ -39,7 +41,6 @@ void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
 				LOG_WRITE("Adding tile gid: %d to location (%d,%d)", gid, i, j);
 				GameObject *obj = new GameObject(_availableBitmaps[index][gid - 1], i*(_tileWidth) + _offset[0], j*(_tileHeight) + _offset[1]);
 				obj->Initialize();
-				//obj->bounding_box.x = 5;
 				if(index == MAP_BACKGROUND)
 				{
 					//make it lag 

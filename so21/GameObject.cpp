@@ -83,7 +83,7 @@ void GameObject::Update(double delta_time)
 		return;
 
 	//blit
-	if(!_has_bitmap)
+	if(!_has_bitmap && !((bounding_box_debug && World::theWorld->show_boundingbox)))
 		return;
 
 	if(_bitmap != NULL)
@@ -117,8 +117,11 @@ void GameObject::Update(double delta_time)
 					al_draw_tinted_bitmap(the_bitmap, al_map_rgba_f(1.0, 1.0, 1.0, alpha),
 						_frame_rel_pos[0], _frame_rel_pos[1], 0);
 				}
+			}
+		}
+	}
 
-#ifdef BOUNDINGBOX_ALLOW
+	#ifdef BOUNDINGBOX_ALLOW
 				if(bounding_box_debug && World::theWorld->show_boundingbox)
 				{
 					Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
@@ -126,9 +129,6 @@ void GameObject::Update(double delta_time)
 							al_map_rgba_f(1.0, 0, 0, 0.5), 0);
 				}
 #endif
-			}
-		}
-	}
 }
 
 void GameObject::CalculatePhysics(double delta_time)
@@ -230,36 +230,37 @@ bool GameObject::LeftScreen()
 
 bool GameObject::Collide(GameObject *otherobj)
 {
-	Vec2 offset(otherobj->position - this->position);
+	//copy rects for comfort
+	Rect a = this->bounding_box;
+	Rect b = otherobj->bounding_box;
+
+	//move to center of bounding boxes
+	Vec2 bounding_a = this->position + Vec2(a.x, a.y) + Vec2(a.width/2, a.height/2);
+	Vec2 bounding_b = otherobj->position + Vec2(b.x, b.y) + Vec2(b.width/2, b.height/2);
+	
+	Vec2 offset(bounding_b - bounding_a);
 
 	//check proximity
 	if(sqrlen(offset) >  1.2 * MAX(this->sqrradius, otherobj->sqrradius))
 		return false;
 
-	//copy rects for comfort
-	Rect a = this->bounding_box;
-	Rect b = otherobj->bounding_box;
+	double totalwidth = (a.width + b.width)/2;
+	double totalheight = (a.height + b.height)/2;
 
-	//translate to origin of "a" bounding box
-	offset[0] -= a.x;
-	offset[1] -= a.y;
+	Vec2 absdiff = Vec2(fabs(offset[0]), fabs(offset[1]));
 
-	//translate "b" bounding box in terms of "a"
-	b.x -= offset[0];
-	b.y -= offset[1];
-
-	if((fabs(a.x - b.x) < (a.width + b.width) / 2) &&
-		(fabs(a.y - b.y) < (a.height + b.height) / 2))
+	if((absdiff[0] < totalwidth) &&
+		(absdiff[1] < totalheight))
 	{
-		double x_overlap = ((a.width + b.width) / 2) - fabs(a.x - b.x);
-		double y_overlap = ((a.height + b.height) / 2) - fabs(a.y - b.y);
+		double x_overlap = totalwidth - absdiff[0];
+		double y_overlap = totalheight - absdiff[1];
 
 		Vec2 correction = Vec2(0.0, 0.0);
 
 		if(x_overlap < y_overlap)
 		{
 			//determine if we're on left or right
-			if((b.x - a.x) > 0)
+			if((offset[0]) < 0)
 			{
 				//moving left moves away
 				correction[0] = x_overlap;
@@ -273,10 +274,10 @@ bool GameObject::Collide(GameObject *otherobj)
 		else //y overlap is lesser of the two
 		{
 			//determine if we're on top or bottom
-			if((b.y - a.y) > 0)
+			if((offset[1]) < 0)
 			{
 				//moving up moves away
-				correction[1] = y_overlap;
+				correction[1] = + y_overlap;
 			}
 			else
 			{

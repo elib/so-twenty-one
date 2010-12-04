@@ -5,6 +5,8 @@ void SpawnPoint::Initialize()
 {
 	GameObject::Initialize();
 
+	this->bounding_box_debug = false;
+
 	//top
 	GameObject *obj = new GameObject(position[0], position[1]);
 	obj->Initialize();
@@ -17,7 +19,8 @@ void SpawnPoint::Initialize()
 	obj = new GameObject(position[0], position[1]);
 	obj->Initialize();
 	obj->bounding_box.width = 2;
-	obj->bounding_box.x = 18;
+	obj->bounding_box.x = -3;
+	obj->bounding_box.y = 10;
 	_sub_colliders.push_back(obj);
 
 }

@@ -10,9 +10,9 @@ void FlashingBomb::Initialize()
 	size = Vec2(32, 32);
 	sqrradius = sqrlen(size);
 	bounding_box.x = 5;
-	bounding_box.y = 5;
-	bounding_box.height = 22;
-	bounding_box.width = 22;
+	bounding_box.y = 6;
+	bounding_box.height = 20;
+	bounding_box.width = 20;
 
 	_speed = 80;
 }
