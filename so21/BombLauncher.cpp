@@ -2,10 +2,10 @@
 #include "World.h"
 #include "Laser.h"
 
-BombLauncher::BombLauncher(LaunchableTypes launchedtype)
+BombLauncher::BombLauncher(LaunchableTypes launchedtype, Vec2 screen_position)
 {
 	//yay for perfect placements
-	offset_position = Vec2(DISPLAY_WIDTH, DISPLAY_HEIGHT/2 - 16);
+	offset_position = screen_position;
 
 	_type = launchedtype;
 }

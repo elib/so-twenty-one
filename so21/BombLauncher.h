@@ -23,7 +23,7 @@ typedef BombList::reverse_iterator BombListReverseIterator;
 class BombLauncher
 {
 public:
-	BombLauncher(LaunchableTypes launchedtype);
+	BombLauncher(LaunchableTypes launchedtype, Vec2 screen_position);
 	~BombLauncher(void);
 
 	void Initialize();

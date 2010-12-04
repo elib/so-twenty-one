@@ -14,7 +14,7 @@ void FlashingBomb::Initialize()
 	bounding_box.height = 20;
 	bounding_box.width = 20;
 
-	_speed = 80;
+	_speed = 85;
 }
 
 

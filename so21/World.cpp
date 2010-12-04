@@ -99,10 +99,10 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_spawnpoint->Initialize();
 	_gameObjects.push_back(_spawnpoint);
 
-	_bomblauncher = new BombLauncher(LAUNCHABLE_FLASHING_BOMB);
+	_bomblauncher = new BombLauncher(LAUNCHABLE_FLASHING_BOMB, Vec2(DISPLAY_WIDTH, DISPLAY_HEIGHT/2 - 16));
 	_bomblauncher->Initialize();
 	
-	_laserlauncher = new BombLauncher(LAUNCHABLE_LASER);
+	_laserlauncher = new BombLauncher(LAUNCHABLE_LASER, Vec2(DISPLAY_WIDTH, 3*DISPLAY_HEIGHT/4 - 16));
 	_laserlauncher->Initialize();
 
 	Title* title = new Title(_map.titleLocation[0], _map.titleLocation[1]);
@@ -186,12 +186,9 @@ bool World::Update()
 			_spawnpoint->Collide(_player);
 
 			_bomblauncher->Collide(_player);
+			_laserlauncher->Collide(_player);
 		}
 
-
-
-
-#ifdef DEBUG_RECORDING
 		for(i = 0; i < musicProvider.eventsForCurrentFrame.size(); i++)
 		{
 			unsigned int type = musicProvider.eventsForCurrentFrame[i].type;
@@ -211,6 +208,7 @@ bool World::Update()
 			}
 		}
 
+#ifdef DEBUG_RECORDING
 		//update all debug circles
 		for(i = 0; i < NUM_DEBUG_CIRCLES; i++)
 		{
