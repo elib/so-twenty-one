@@ -16,7 +16,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.0 r9654"
-   sodipodi:docname="tiles.svg"
+   sodipodi:docname="tiles-foreground-colliding.svg"
    inkscape:export-filename="D:\Projects\allegro\projects\so21\so21\Resources\tiles.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -408,6 +408,17 @@
        id="linearGradient6388"
        xlink:href="#linearGradient5990-8-7-2"
        inkscape:collect="always" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3879">
+      <rect
+         y="32"
+         x="160"
+         height="32"
+         width="32"
+         id="rect3881"
+         style="fill:#ae6cae;fill-opacity:1;stroke:none" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -416,16 +427,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="150.88756"
-     inkscape:cy="128.74924"
+     inkscape:zoom="7.9999999"
+     inkscape:cx="176.58898"
+     inkscape:cy="182.28443"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1280"
-     inkscape:window-height="972"
-     inkscape:window-x="-32000"
-     inkscape:window-y="-32000"
+     inkscape:window-height="962"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:snap-global="true"
      inkscape:snap-bbox="true">
@@ -436,8 +447,8 @@
        visible="true"
        enabled="true"
        snapvisiblegridlinesonly="true"
-       spacingx="4px"
-       spacingy="4px" />
+       spacingx="2px"
+       spacingy="2px" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -685,6 +696,27 @@
        style="fill:none;fill-opacity:1;stroke:#712a2a;stroke-opacity:1;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 64,224 -8,-16 -8,16"
        id="path6418"
+       inkscape:connector-curvature="0"
+       transform="translate(0,796.36217)" />
+    <rect
+       style="fill:#ae6cae;stroke:none;stroke-width:3;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;fill-opacity:1"
+       id="rect3863"
+       width="32"
+       height="32"
+       x="160"
+       y="32"
+       transform="translate(0,796.36217)" />
+    <path
+       style="fill:none;stroke:#7c2a7c;stroke-width:3;stroke-linecap:butt;stroke-linejoin:bevel;stroke-opacity:1;fill-opacity:1;fill-rule:nonzero;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       d="m 160,64 0,-32 32,0 0,32 -28,0 0,-28 24,0 0,24 -20,0 0,-20 16,0 0,16 -12,0 0,-12 8,0 0,8 -4,0 0,-4"
+       id="path3093"
+       inkscape:connector-curvature="0"
+       transform="translate(0,796.36217)"
+       clip-path="url(#clipPath3879)" />
+    <path
+       style="fill:none;stroke:#7c2a7c;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 162,96 0,-30 28,0 0,26 -24,0 0,-22 20,0 0,18 -16,0 0,-14 12,0 0,10 -8,0 0,-6 4,0"
+       id="path3887"
        inkscape:connector-curvature="0"
        transform="translate(0,796.36217)" />
   </g>
