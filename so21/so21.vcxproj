@@ -97,6 +97,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BombLauncher.cpp" />
+    <ClCompile Include="BombLauncherCollection.cpp" />
     <ClCompile Include="FlashingBomb.cpp" />
     <ClCompile Include="..\..\..\..\svl-1.5\src\Basics.cpp" />
     <ClCompile Include="..\..\..\..\svl-1.5\src\LibSVL.cpp" />
@@ -125,6 +126,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BombLauncher.h" />
+    <ClInclude Include="BombLauncherCollection.h" />
     <ClInclude Include="FlashingBomb.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Laser.h" />

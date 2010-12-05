@@ -24,7 +24,7 @@
 #include "SpawnPoint.h"
 #include "ScreenFade.h"
 
-#include "BombLauncher.h"
+#include "BombLauncherCollection.h"
 
 #include "Title.h"
 
@@ -136,6 +136,5 @@ protected:
 
 	ScreenFade _screenFade;
 
-	BombLauncher * _bomblauncher;
-	BombLauncher * _laserlauncher;
+	BombLauncherCollection _bombLauncherCollection;
 };

@@ -99,11 +99,7 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_spawnpoint->Initialize();
 	_gameObjects.push_back(_spawnpoint);
 
-	_bomblauncher = new BombLauncher(LAUNCHABLE_FLASHING_BOMB, Vec2(DISPLAY_WIDTH, DISPLAY_HEIGHT/2 - 16));
-	_bomblauncher->Initialize();
-	
-	_laserlauncher = new BombLauncher(LAUNCHABLE_LASER, Vec2(DISPLAY_WIDTH, 3*DISPLAY_HEIGHT/4 - 16));
-	_laserlauncher->Initialize();
+	_bombLauncherCollection.Inititalize();
 
 	Title* title = new Title(_map.titleLocation[0], _map.titleLocation[1]);
 	title->Initialize();
@@ -174,8 +170,8 @@ bool World::Update()
 		_map.Update(delta, MAP_FOREGROUND);
 		_map.Update(delta, MAP_FOREGROUND_COLLIDING);
 
-		_bomblauncher->Update(delta);
-		_laserlauncher->Update(delta);
+		_bombLauncherCollection.Update(delta);
+
 
 #ifndef BOUNDINGBOX_ALLOW
 		player_collide_debug = false;
@@ -184,28 +180,24 @@ bool World::Update()
 		{
 			_map.Collide(_player);
 			_spawnpoint->Collide(_player);
-
-			_bomblauncher->Collide(_player);
-			_laserlauncher->Collide(_player);
+			_bombLauncherCollection.Collide(_player);
 		}
+
+		
 
 		for(i = 0; i < musicProvider.eventsForCurrentFrame.size(); i++)
 		{
+
+#ifdef DEBUG_RECORDING
 			unsigned int type = musicProvider.eventsForCurrentFrame[i].type;
 			if(type < 10)
 			{
 				_debugCircles[type]->Pulse();
 			}
+#endif
 
-			switch(type)
-			{
-			case 2:
-				_bomblauncher->LaunchBomb();
-				break;
-			case 3:
-				_laserlauncher->LaunchBomb();
-				break;
-			}
+			_bombLauncherCollection.ConsumeEvent(musicProvider.eventsForCurrentFrame[i]);
+
 		}
 
 #ifdef DEBUG_RECORDING
