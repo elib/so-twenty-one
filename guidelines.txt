@@ -1,0 +1,6 @@
+spawn
+~35 seconds: flashing bombs
+~61 seconds: only lasers
+~80 seconds: mixing flashing bombs with lasers
+~115 seconds: cooldown - "phew"
+~148 seconds: event - something happens
