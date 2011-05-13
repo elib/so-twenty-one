@@ -4,6 +4,7 @@ Made using:
 	-- Allegro 4.9.21
 	-- MSVC 2008
 	-- Inkscape 0.49
+	-- Box2D
 
 
 All files provided "as-is".

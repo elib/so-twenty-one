@@ -23,9 +23,6 @@ struct Data
 } data;
 
 
-const float FPS = 60;
-
-
 int main(int argc, char *argv[])
 {
 
@@ -81,7 +78,7 @@ int main(int argc, char *argv[])
 
 	DWORD ticks = GetTickCount();
 
-	data.timer = al_create_timer(1.0 / FPS);
+	data.timer = al_create_timer(1.0 / FPS_DESIRED);
 	if(!data.timer)
 	{
 		LOG_WRITE("Timer failed!!");

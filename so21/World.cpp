@@ -32,12 +32,18 @@ World::World(void)
 	_camera_speed = 0;
 	_target_camera_speed_time = 0;
 	_camera_speed_start = 0;
+
+
+
+	box2dWorld = NULL;
 }
 
 World::~World(void)
 {
 	//player is in this list as well, no need to release
 	RemoveGameObjects();
+
+	delete box2dWorld;
 }
 
 void World::RemoveGameObjects()
@@ -63,6 +69,13 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	_game_over = false;
 	_quitgame = false;
 	_screenFade.Initialize();
+
+	box2dVelocityIterations = 10;
+	box2dPositionIterations = 10;
+
+	//initialize Box2D
+	b2Vec2 gravity(0,0);
+	box2dWorld = new b2World(gravity, true);
 
 	show_boundingbox = false;
 	player_collide_debug = false;
@@ -171,6 +184,10 @@ bool World::Update()
 		_map.Update(delta, MAP_FOREGROUND_COLLIDING);
 
 		_bombLauncherCollection.Update(delta);
+
+
+		//now box2d!
+		box2dWorld->Step(BOX2D_TIME_STEP, box2dVelocityIterations, box2dPositionIterations);
 
 
 #ifndef BOUNDINGBOX_ALLOW
@@ -311,4 +328,29 @@ void World::Quit()
 Vec2 World::PlayerPosition()
 {
 	return _player->position;
+}
+
+
+b2Vec2 World::ConvertPointToBox2D(double x, double y)
+{
+	b2Vec2 retval(x / BOX2D_PIXELS_PER_METER, y / BOX2D_PIXELS_PER_METER);
+	return retval;
+}
+
+b2Vec2 World::ConvertPointToBox2D(const Vec2 &point)
+{
+	return ConvertPointToBox2D(point[0], point[1]);
+}
+
+Vec2 World::ConvertBox2DToScreen(const b2Vec2 &pos)
+{
+	Vec2 wrld = ConvertBox2DToWorld(pos);
+	Vec2 scrn = TranslateToScreen(wrld, Vec2(1.0, 1.0));
+	return scrn;
+}
+
+Vec2 World::ConvertBox2DToWorld(const b2Vec2 &pos)
+{
+	Vec2 retval(pos.x * BOX2D_PIXELS_PER_METER, pos.y * BOX2D_PIXELS_PER_METER);
+	return retval;
 }

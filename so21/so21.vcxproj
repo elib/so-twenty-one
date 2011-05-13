@@ -54,7 +54,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>D:\Projects\bass\c;D:\Projects\allegro\include;D:\projects\svl-1.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Projects\bass\c;D:\Projects\allegro\include;D:\projects\svl-1.5\include;$(ProjectDir)\Box2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;__CMATH__;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -98,6 +98,41 @@
   <ItemGroup>
     <ClCompile Include="BombLauncher.cpp" />
     <ClCompile Include="BombLauncherCollection.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2BroadPhase.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2CollideCircle.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2CollidePolygon.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2Collision.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2Distance.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2DynamicTree.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\b2TimeOfImpact.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\Shapes\b2CircleShape.cpp" />
+    <ClCompile Include="Box2D\Box2D\Collision\Shapes\b2PolygonShape.cpp" />
+    <ClCompile Include="Box2D\Box2D\Common\b2BlockAllocator.cpp" />
+    <ClCompile Include="Box2D\Box2D\Common\b2Math.cpp" />
+    <ClCompile Include="Box2D\Box2D\Common\b2Settings.cpp" />
+    <ClCompile Include="Box2D\Box2D\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\b2Body.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\b2ContactManager.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\b2Fixture.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\b2Island.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\b2World.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\b2WorldCallbacks.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Contacts\b2CircleContact.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Contacts\b2Contact.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Contacts\b2ContactSolver.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Contacts\b2PolygonContact.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Contacts\b2TOISolver.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2DistanceJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2FrictionJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2GearJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2Joint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2LineJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2MouseJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2PulleyJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp" />
+    <ClCompile Include="Box2D\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="FlashingBomb.cpp" />
     <ClCompile Include="..\..\..\..\svl-1.5\src\Basics.cpp" />
     <ClCompile Include="..\..\..\..\svl-1.5\src\LibSVL.cpp" />

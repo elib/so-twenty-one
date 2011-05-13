@@ -1,6 +1,7 @@
 #pragma once
 
 #include <allegro5/allegro5.h>
+#include <Box2D\Box2D.h>
 
 #include "Fonts.h"
 #include <vector>
@@ -56,6 +57,11 @@
 
 #define LOG_WRITE(__msg_format, ...) { char __final_msg[1024]; sprintf_s(__final_msg, __msg_format "\r\n", __VA_ARGS__); World::theWorld->log.LogWrite(__final_msg); }
 
+#define BOX2D_PIXELS_PER_METER (15.0)
+
+#define FPS_DESIRED		(60.0f)
+#define BOX2D_TIME_STEP	(1.0f / FPS_DESIRED)
+
 using namespace std;
 
 class World
@@ -104,6 +110,12 @@ public:
 	bool player_collide_debug;
 
 
+	b2World *box2dWorld;
+	b2Vec2 ConvertPointToBox2D(double x, double y);
+	b2Vec2 ConvertPointToBox2D(const Vec2 &point);
+	Vec2 ConvertBox2DToScreen(const b2Vec2 &pos);
+	Vec2 ConvertBox2DToWorld(const b2Vec2 &pos);
+
 protected:
 
 	Player *_player;
@@ -137,4 +149,7 @@ protected:
 	ScreenFade _screenFade;
 
 	BombLauncherCollection _bombLauncherCollection;
+
+	int box2dVelocityIterations;
+	int box2dPositionIterations;
 };

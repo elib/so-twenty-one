@@ -13,6 +13,7 @@ GameObject::GameObject(double x, double y)
 	_has_bitmap = false;
 	strcpy_s(_filename, "[NO BITMAP]");
 	position = Vec2(x, y);
+	_collidingBody = NULL;
 }
 
 GameObject::GameObject(const char* filename, double x, double y)
@@ -21,6 +22,7 @@ GameObject::GameObject(const char* filename, double x, double y)
 	_has_bitmap = true;
 	strcpy_s(_filename, filename);
 	position = Vec2(x, y);
+	_collidingBody = NULL;
 }
 
 GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
@@ -29,6 +31,7 @@ GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
 	_has_bitmap = true;
 	strcpy_s(_filename, "[MEMORY]");
 	_bitmap = bitmap;
+	_collidingBody = NULL;
 }
 
 
@@ -124,7 +127,10 @@ void GameObject::Update(double delta_time)
 	#ifdef BOUNDINGBOX_ALLOW
 				if(bounding_box_debug && World::theWorld->show_boundingbox)
 				{
-					Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
+					//new: draw box2d shape, or something
+					b2Vec2 pos = _collidingBody->GetPosition();
+					Vec2 bound_origin = World::theWorld->ConvertBox2DToScreen(pos);
+					//Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
 					al_draw_rectangle(bound_origin[0], bound_origin[1], bound_origin[0] + bounding_box.width, bound_origin[1] + bounding_box.height,
 							al_map_rgba_f(1.0, 0, 0, 0.5), 0);
 				}
@@ -200,6 +206,15 @@ void GameObject::Initialize()
 	bounding_box.x = bounding_box.y = 0;
 	bounding_box.width = size[0];
 	bounding_box.height = size[1];
+
+	//initialize Box2D body
+	b2BodyDef def;
+	def.type = b2_staticBody;
+	def.active = true;
+	def.awake = true;
+	
+	def.position = World::theWorld->ConvertPointToBox2D(position);
+	_collidingBody = World::theWorld->box2dWorld->CreateBody(&def);
 }
 
 void GameObject::DestroyBitmap()

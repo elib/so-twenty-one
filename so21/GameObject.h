@@ -6,6 +6,8 @@
 
 #include "quickmax.h"
 
+#include "Box2D\Box2D.h"
+
 #include <vector>
 using namespace std;
 
@@ -55,6 +57,8 @@ protected:
 	bool _has_bitmap;
 
 	Vec2 _frame_rel_pos;
+
+	b2Body *_collidingBody;
 
 	//ANIMATION
 	bool _is_animated;
