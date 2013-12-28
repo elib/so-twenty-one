@@ -27,6 +27,7 @@ void BombLauncher::Initialize()
 		}
 
 		b->Initialize();
+		strcpy_s(b->prettyName, "Bomb");
 		_bombs_available.push_back(b);
 	}
 }

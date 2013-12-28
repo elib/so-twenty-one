@@ -14,8 +14,20 @@ void Player::Initialize()
 	bounding_box.y = 10;
 	bounding_box.width = 30;
 	bounding_box.height = 14;
+	_is_static = false;
+	strcpy_s(prettyName, "Player");
+	SetCollisionCategory(PLAYER_COLLISION_CATEGORY);
 }
 
+b2BodyDef Player::GetBodyDef()
+{
+	b2BodyDef def;
+	def.type = b2_dynamicBody;
+	def.active = true;
+	def.awake = true;
+	def.userData = this;
+	return def;
+}
 
 void Player::Update(double delta_time)
 {
@@ -108,6 +120,11 @@ void Player::Update(double delta_time)
 	_playermessage.UpdatePosition(position);
 
 	_playermessage.Update(delta_time);
+}
+
+void Player::OnCollide(GameObject *otherobj, b2Contact *contact)
+{
+
 }
 
 

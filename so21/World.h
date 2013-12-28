@@ -29,6 +29,8 @@
 
 #include "Title.h"
 
+#include "WorldContactListener.h"
+
 #ifdef _DEBUG
 
 //when debugging, always show fps
@@ -61,6 +63,8 @@
 
 #define FPS_DESIRED		(60.0f)
 #define BOX2D_TIME_STEP	(1.0f / FPS_DESIRED)
+
+#define PLAYER_COLLISION_CATEGORY (0x0004)
 
 using namespace std;
 
@@ -152,4 +156,6 @@ protected:
 
 	int box2dVelocityIterations;
 	int box2dPositionIterations;
+
+	WorldContactListener *_contactListener;
 };

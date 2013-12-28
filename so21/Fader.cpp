@@ -13,6 +13,7 @@ void Fader::Initialize()
 	GameObject::Initialize();
 	bounding_box_debug = false;
 	alpha = 0;
+	strcpy_s(prettyName, "Fader");
 }
 
 void Fader::Update(double delta_time)

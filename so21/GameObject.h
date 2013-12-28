@@ -44,7 +44,12 @@ public:
 	double sqrradius;
 	Rect bounding_box;
 
+	virtual void OnCollide(GameObject *otherobj, b2Contact *contact);
+	void SetCollisionCategory(unsigned short category);
+
 	bool bounding_box_debug;
+
+	char prettyName[100];
 
 protected:
 	void DestroyBitmap();
@@ -58,7 +63,7 @@ protected:
 
 	Vec2 _frame_rel_pos;
 
-	b2Body *_collidingBody;
+	bool _is_static;
 
 	//ANIMATION
 	bool _is_animated;
@@ -67,6 +72,13 @@ protected:
 	void InitializeAnimation(int frame_width, int fps);
 
 	ALLEGRO_BITMAP* GetCurrentAnimationFrame();
+
+
+	//BOX2D YEAH MAN
+	b2Body *_collidingBody;	
+	void InitializeCollisions();
+	virtual void SetFixtureDef();
+	virtual b2BodyDef GetBodyDef();
 
 private:
 	void CalculatePhysics(double delta_time);

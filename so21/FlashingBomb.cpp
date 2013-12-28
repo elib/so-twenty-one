@@ -15,6 +15,8 @@ void FlashingBomb::Initialize()
 	bounding_box.width = 20;
 
 	_speed = 85;
+	_is_static = false;
+	strcpy_s(prettyName, "FlashingBomb");
 }
 
 

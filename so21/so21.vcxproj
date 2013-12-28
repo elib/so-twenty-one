@@ -158,6 +158,7 @@
     <ClCompile Include="Fonts.cpp" />
     <ClCompile Include="TextLayer.cpp" />
     <ClCompile Include="MusicProvider.cpp" />
+    <ClCompile Include="WorldContactListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BombLauncher.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="SpawnPoint.h" />
     <ClInclude Include="StarField.h" />
     <ClInclude Include="MusicProvider.h" />
+    <ClInclude Include="WorldContactListener.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SoTwentyOne.rc" />

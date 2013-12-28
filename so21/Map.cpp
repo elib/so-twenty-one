@@ -46,13 +46,21 @@ void Map::LoadTilesForLayer(TiXmlElement *layer_element, int index)
 					//make it lag 
 					obj->scrollFactor[0] = 0.3;
 					obj->bounding_box_debug = false;
+					strcpy_s(obj->prettyName, "Map: BACKGROUND");
 				}
 				if(index == MAP_FOREGROUND)
 				{
 					//no non-colliding objects should show a box
 					obj->bounding_box_debug = false;
+					strcpy_s(obj->prettyName, "Map: FOREGROUND");
 				}
-				
+				if(index == MAP_FOREGROUND_COLLIDING)
+				{
+					obj->SetCollisionCategory(PLAYER_COLLISION_CATEGORY);
+					strcpy_s(obj->prettyName, "Map: COLLIDING FOREGROUND");
+				}
+
+			
 				_tileObjects[index].push_back(obj);
 			}
 			cur_element = cur_element->NextSiblingElement();

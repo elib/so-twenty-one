@@ -1,4 +1,5 @@
 #include "SpawnPoint.h"
+#include "World.h"
 
 
 void SpawnPoint::Initialize()
@@ -12,6 +13,8 @@ void SpawnPoint::Initialize()
 	obj->Initialize();
 	obj->bounding_box.height = 2;
 	obj->bounding_box.y = 9;
+	obj->SetCollisionCategory(PLAYER_COLLISION_CATEGORY);
+	strcpy_s(obj->prettyName, "Spawnpoint-1");
 	_sub_colliders.push_back(obj);
 
 
@@ -21,6 +24,8 @@ void SpawnPoint::Initialize()
 	obj->bounding_box.width = 2;
 	obj->bounding_box.x = 0;
 	obj->bounding_box.y = 10;
+	obj->SetCollisionCategory(PLAYER_COLLISION_CATEGORY);
+	strcpy_s(obj->prettyName, "Spawnpoint-2");
 	_sub_colliders.push_back(obj);
 
 	//bottom
@@ -28,6 +33,8 @@ void SpawnPoint::Initialize()
 	obj->Initialize();
 	obj->bounding_box.height = 2;
 	obj->bounding_box.y = 25;
+	obj->SetCollisionCategory(PLAYER_COLLISION_CATEGORY);
+	strcpy_s(obj->prettyName, "Spawnpoint-3");
 	_sub_colliders.push_back(obj);
 
 }

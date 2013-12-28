@@ -14,7 +14,10 @@ void Laser::Initialize()
 	bounding_box.width = 27;
 	bounding_box.height = 4;
 
+	strcpy_s(prettyName, "Laser");
+
 	_speed = 100;
+	_is_static = false;
 }
 
 

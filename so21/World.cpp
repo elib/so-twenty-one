@@ -76,6 +76,8 @@ bool World::Initialize(ALLEGRO_DISPLAY * display)
 	//initialize Box2D
 	b2Vec2 gravity(0,0);
 	box2dWorld = new b2World(gravity, true);
+	_contactListener = new WorldContactListener();
+	box2dWorld->SetContactListener(_contactListener);
 
 	show_boundingbox = false;
 	player_collide_debug = false;
@@ -188,6 +190,8 @@ bool World::Update()
 
 		//now box2d!
 		box2dWorld->Step(BOX2D_TIME_STEP, box2dVelocityIterations, box2dPositionIterations);
+		box2dWorld->ClearForces();
+		
 
 
 #ifndef BOUNDINGBOX_ALLOW

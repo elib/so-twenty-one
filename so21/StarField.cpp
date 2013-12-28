@@ -65,6 +65,7 @@ void StarField::Initialize()
 		obj->bounding_box_debug = false;
 		obj->scrollFactor = Vec2(scrollfactor, 0.0);
 		obj->alpha = alpha;
+		strcpy_s(obj->prettyName, "Star");
 		_starLayer.push_back(obj);
 	}
 

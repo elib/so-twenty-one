@@ -14,6 +14,8 @@ GameObject::GameObject(double x, double y)
 	strcpy_s(_filename, "[NO BITMAP]");
 	position = Vec2(x, y);
 	_collidingBody = NULL;
+	memset(prettyName, 0, sizeof(prettyName));
+	_is_static = true;
 }
 
 GameObject::GameObject(const char* filename, double x, double y)
@@ -23,6 +25,8 @@ GameObject::GameObject(const char* filename, double x, double y)
 	strcpy_s(_filename, filename);
 	position = Vec2(x, y);
 	_collidingBody = NULL;
+	memset(prettyName, 0, sizeof(prettyName));
+	_is_static = true;
 }
 
 GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
@@ -32,7 +36,10 @@ GameObject::GameObject(ALLEGRO_BITMAP *bitmap, double x, double y)
 	strcpy_s(_filename, "[MEMORY]");
 	_bitmap = bitmap;
 	_collidingBody = NULL;
+	memset(prettyName, 0, sizeof(prettyName));
+	_is_static = true;
 }
+
 
 
 void GameObject::Update(double delta_time)
@@ -40,7 +47,11 @@ void GameObject::Update(double delta_time)
 	_leftscreen = false;
 	_frame_rel_pos = Vec2(0.0,0.0);
 
-	CalculatePhysics(delta_time);
+	if(!_is_static)
+	{
+		CalculatePhysics(delta_time);
+		_collidingBody->SetTransform(World::theWorld->ConvertPointToBox2D(position), 0);
+	}
 
 	alpha = MAX(alpha, 0.0);
 	alpha = MIN(alpha, 1.0);
@@ -125,16 +136,16 @@ void GameObject::Update(double delta_time)
 	}
 
 	#ifdef BOUNDINGBOX_ALLOW
-				if(bounding_box_debug && World::theWorld->show_boundingbox)
-				{
-					//new: draw box2d shape, or something
-					b2Vec2 pos = _collidingBody->GetPosition();
-					Vec2 bound_origin = World::theWorld->ConvertBox2DToScreen(pos);
-					//Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
-					al_draw_rectangle(bound_origin[0], bound_origin[1], bound_origin[0] + bounding_box.width, bound_origin[1] + bounding_box.height,
-							al_map_rgba_f(1.0, 0, 0, 0.5), 0);
-				}
-#endif
+	if(bounding_box_debug && World::theWorld->show_boundingbox)
+	{
+		//new: draw box2d shape, or something
+		b2Vec2 pos = _collidingBody->GetPosition();
+		Vec2 bound_origin = World::theWorld->ConvertBox2DToScreen(pos);
+		//Vec2 bound_origin = Vec2(_frame_rel_pos[0] + bounding_box.x, _frame_rel_pos[1] + bounding_box.y);
+		al_draw_rectangle(bound_origin[0], bound_origin[1], bound_origin[0] + bounding_box.width, bound_origin[1] + bounding_box.height,
+				al_map_rgba_f(1.0, 0, 0, 0.5), 0);
+	}
+	#endif
 }
 
 void GameObject::CalculatePhysics(double delta_time)
@@ -207,14 +218,58 @@ void GameObject::Initialize()
 	bounding_box.width = size[0];
 	bounding_box.height = size[1];
 
-	//initialize Box2D body
+	InitializeCollisions();
+
+
+	strcpy_s(prettyName, "DUNNO");
+
+}
+
+void GameObject::InitializeCollisions()
+{
+	b2BodyDef def = GetBodyDef();
+	
+	def.position = World::theWorld->ConvertPointToBox2D(position);
+	_collidingBody = World::theWorld->box2dWorld->CreateBody(&def);
+	SetFixtureDef();
+}
+
+void GameObject::SetCollisionCategory(unsigned short category)
+{
+	b2Filter filter;
+	filter.categoryBits = category;
+	filter.maskBits = category;
+	//_collidingBody->GetFixtureList()[0].SetFilterData(filter);
+}
+
+void GameObject::SetFixtureDef()
+{
+	b2Vec2 box_dimensions = World::theWorld->ConvertPointToBox2D(bounding_box.width, bounding_box.height);
+
+	b2PolygonShape dynamicBox;
+	dynamicBox.SetAsBox(box_dimensions.x, box_dimensions.y, b2Vec2(0,0), 0);
+
+	b2FixtureDef fixture;
+	fixture.shape = &dynamicBox;
+	fixture.density = 1.0f;
+	fixture.friction = 0.3f;
+	_collidingBody->CreateFixture(&fixture);
+}
+
+b2BodyDef GameObject::GetBodyDef()
+{
 	b2BodyDef def;
 	def.type = b2_staticBody;
 	def.active = true;
 	def.awake = true;
-	
-	def.position = World::theWorld->ConvertPointToBox2D(position);
-	_collidingBody = World::theWorld->box2dWorld->CreateBody(&def);
+	def.userData = this;
+	return def;
+}
+
+void GameObject::OnCollide(GameObject *otherobj, b2Contact *contact)
+{
+	//do nothing by default.
+	return;
 }
 
 void GameObject::DestroyBitmap()
@@ -245,6 +300,7 @@ bool GameObject::LeftScreen()
 
 bool GameObject::Collide(GameObject *otherobj)
 {
+
 	//copy rects for comfort
 	Rect a = this->bounding_box;
 	Rect b = otherobj->bounding_box;
